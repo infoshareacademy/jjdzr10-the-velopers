@@ -11,6 +11,7 @@ public class MakeNewUser {
         System.out.println("Podaj nazwę użytkownika");
         String userName = scanner.nextLine();
         User newUser = new User(userName);
+        System.out.println("Witaj " + userName + "!");
         return newUser;
     }
 }
