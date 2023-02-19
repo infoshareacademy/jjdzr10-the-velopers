@@ -14,7 +14,6 @@ public class MenuService {
 
         try {
             menuOption = scanner.nextInt();
-            //todo walidacja i wyjatki
             switch (menuOption) {
                 case 1:
                     //nowa gra
@@ -48,7 +47,6 @@ public class MenuService {
         System.out.println("4 - powrót do menu");
         try {
             menuOption = scanner.nextInt();
-            //todo walidacja i wyjatki
             switch (menuOption) {
                 case 1:
                     //dodaj pytanie
