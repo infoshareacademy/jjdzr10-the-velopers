@@ -1,15 +1,15 @@
 package com.infoshareacademy;
 
 import com.infoshareacademy.model.User;
-import com.infoshareacademy.service.MakeNewUser;
 import com.infoshareacademy.service.MenuSelection;
+import com.infoshareacademy.service.UserService;
 
 public class App
 {
     public static void main( String[] args )
     {
         System.out.println( "The Velopers" );
-        User currentUser = MakeNewUser.createUser();
+        User currentUser = UserService.createUser();
         MenuSelection.mainMenu();
     }
 }

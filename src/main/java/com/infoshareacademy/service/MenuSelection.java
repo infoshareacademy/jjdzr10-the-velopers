@@ -9,7 +9,7 @@ public class MenuSelection {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz opcje:");
         System.out.println("1 - nowa gra");
-        System.out.println("2 - zarządzaj kategoriami");
+        System.out.println("2 - zarządzaj pytaniami");
         System.out.println("3 - wyjście");
         menuOption = scanner.nextInt();
         //todo walidacja i wyjatki
@@ -18,8 +18,8 @@ public class MenuSelection {
                 //nowa gra
                 break;
             case 2:
-                //menu kategorii
-                categoryMenu();
+                //zarządzaj pytaniami
+                editMenu();
                 break;
             case 3:
                 //wyjście
@@ -29,24 +29,28 @@ public class MenuSelection {
         }
     }
 
-    public static void categoryMenu(){
+    public static void editMenu(){
         int menuOption;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz opcje:");
-        System.out.println("1 - dodaj kategorię");
-        System.out.println("2 - usuń kategorię");
-        System.out.println("3 - powrót do menu");
+        System.out.println("1 - dodaj pytanie");
+        System.out.println("2 - usuń pytanie");
+        System.out.println("3 - edytuj pytanie");
+        System.out.println("4 - powrót do menu");
         menuOption = scanner.nextInt();
         //todo walidacja i wyjatki
         switch(menuOption){
             case 1:
-                //dodawanie kategorii
+                //dodaj pytanie
                 break;
             case 2:
-                //usuń kategorie
+                //usuń pytanie
                 break;
             case 3:
-                //wróc do menu głównego
+                //edytuj pytanie
+                break;
+            case 4:
+                //wróć do menu głównego
                 mainMenu();
                 break;
             default:
