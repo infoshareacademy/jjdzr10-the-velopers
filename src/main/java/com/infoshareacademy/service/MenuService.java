@@ -11,7 +11,6 @@ public class MenuService {
         System.out.println("1 - nowa gra");
         System.out.println("2 - zarządzaj pytaniami");
         System.out.println("3 - wyjście");
-
         try {
             menuOption = scanner.nextInt();
             switch (menuOption) {
@@ -27,13 +26,16 @@ public class MenuService {
                     System.out.println("Dzięki za wspólną zabawę!");
                     break;
                 default:
-                    System.out.println("Nieprawidłowa opcja!");
-                    mainMenu();
+                    mainMenuError();
             }
         } catch (Exception e) {
-            System.out.println("Nieprawidłowa opcja!");
-            mainMenu();
+            mainMenuError();
         }
+    }
+
+    static void mainMenuError() {
+        System.out.println("Nieprawidłowa opcja!");
+        mainMenu();
     }
 
 
@@ -62,13 +64,16 @@ public class MenuService {
                     mainMenu();
                     break;
                 default:
-                    System.out.println("Nieprawidłowa opcja!");
-                    editMenu();
+                    editMenuError();
             }
         } catch (Exception e) {
-            System.out.println("Nieprawidłowa opcja!");
-            editMenu();
+            editMenuError();
         }
+    }
+
+    static void editMenuError() {
+        System.out.println("Nieprawidłowa opcja!");
+        editMenu();
     }
 
 }
