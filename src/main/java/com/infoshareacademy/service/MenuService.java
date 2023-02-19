@@ -2,7 +2,7 @@ package com.infoshareacademy.service;
 
 import java.util.Scanner;
 
-public class MenuSelection {
+public class MenuService {
 
     public static void mainMenu() {
         int menuOption;
@@ -28,6 +28,8 @@ public class MenuSelection {
                     System.out.println("Dzięki za wspólną zabawę!");
                     break;
                 default:
+                    System.out.println("Nieprawidłowa opcja!");
+                    mainMenu();
             }
         } catch (Exception e) {
             System.out.println("Nieprawidłowa opcja!");
@@ -62,10 +64,12 @@ public class MenuSelection {
                     mainMenu();
                     break;
                 default:
+                    System.out.println("Nieprawidłowa opcja!");
+                    editMenu();
             }
         } catch (Exception e) {
             System.out.println("Nieprawidłowa opcja!");
-            mainMenu();
+            editMenu();
         }
     }
 
