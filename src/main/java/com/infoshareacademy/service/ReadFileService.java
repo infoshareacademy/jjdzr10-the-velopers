@@ -1,11 +1,14 @@
 package com.infoshareacademy.service;
 
 import com.google.gson.Gson;
+
+import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.model.Categories;
 import com.infoshareacademy.model.Questions;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,8 +19,8 @@ public class ReadFileService {
 
     private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"Questions.txt");
 
-    public static Questions[] loadQuestions(Categories categories) throws IOException {
-        Questions[] allQuestions = null;
+    public static List<Questions> loadQuestions(Categories categories) throws IOException {
+        List<Questions> allQuestions = null;
         try {
             // create Reader
             Reader reader = Files.newBufferedReader(pathQuestions);
@@ -25,18 +28,20 @@ public class ReadFileService {
             System.out.println(reader);
             // create Gson instance
             Gson gson = new Gson();
+            // for converting JSON array to a List, we need to use TypeToken class
+            Type userListType = new TypeToken<ArrayList<Questions>>(){}.getType();
             // get data from JSON file and convert to Question class
-            allQuestions = gson.fromJson(reader, Questions[].class);
+            allQuestions = gson.fromJson(reader, userListType);
             // close reader
             reader.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return getFiltredQuestions(allQuestions,categories);
+        return getFilteredQuestions(allQuestions,categories);
     }
 
-    public static Questions[] loadQuestions() throws IOException {
-        Questions[] allQuestions = null;
+    public static List<Questions> loadQuestions() throws IOException {
+        List<Questions> allQuestions = null;
         try {
             // create Reader
             Reader reader = Files.newBufferedReader(pathQuestions);
@@ -44,8 +49,10 @@ public class ReadFileService {
             System.out.println(reader);
             // create Gson instance
             Gson gson = new Gson();
+            // for converting such JSON array to a List, we need to use TypeToken class
+            Type userListType = new TypeToken<ArrayList<Questions>>(){}.getType();
             // get data from JSON file and convert to Question class
-            allQuestions = gson.fromJson(reader, Questions[].class);
+            allQuestions = gson.fromJson(reader, userListType);
             // close reader
             reader.close();
         } catch (Exception ex) {
@@ -54,15 +61,13 @@ public class ReadFileService {
         return allQuestions;
     }
 
-    private static Questions[] getFiltredQuestions(Questions[] questions, Categories categories){
-        Questions[] filtredQuestions;
-        List<Questions> listQuestions = new ArrayList<>();
-        for (int i=0; i<questions.length;i++){
-            if (questions[i].getCategories() == categories){
-                listQuestions.add(questions[i]);
+    private static List<Questions> getFilteredQuestions(List<Questions> questions, Categories categories){
+        List<Questions> filteredQuestions = new ArrayList<>();
+        for (int i=0; i<questions.size();i++){
+            if (questions.get(i).getCategories() == categories){
+                filteredQuestions.add(questions.get(i));
             }
         }
-        filtredQuestions = listQuestions.toArray(new Questions[listQuestions.size()]);
-        return filtredQuestions;
+        return filteredQuestions;
     }
 }

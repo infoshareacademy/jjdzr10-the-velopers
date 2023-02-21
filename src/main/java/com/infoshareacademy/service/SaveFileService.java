@@ -12,13 +12,13 @@ import java.util.List;
 public class SaveFileService {
     private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"Questions.txt");
 
-    public static void addQuestionsToFile(Questions[] questions) {
+    public static void addQuestionsToFile(List<Questions> questions) {
         try {
             // create Gson instance
             Gson gson = new Gson();
 
             // get questions from file
-            Questions[] allQuestions = ReadFileService.loadQuestions();
+            List<Questions> allQuestions = ReadFileService.loadQuestions();
 
             // add questions to questions from file
             List<Questions> questionsToFile = new ArrayList<>();
@@ -40,7 +40,7 @@ public class SaveFileService {
         }
 
     }
-    private static List<Questions> addQuestions(Questions[] questions, List<Questions> questionsList){
+    private static List<Questions> addQuestions(List<Questions> questions, List<Questions> questionsList){
         for (Questions quest:questions) {
             questionsList.add(quest);
         }
