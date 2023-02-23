@@ -11,12 +11,10 @@ import java.util.List;
 
 public class SaveFileService {
     private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"Questions.txt");
+    private static Gson gson = new Gson();
 
     public static void addQuestionsToFile(List<Questions> questions) {
         try {
-            // create Gson instance
-            Gson gson = new Gson();
-
             // get questions from file
             List<Questions> allQuestions = ReadFileService.loadQuestions();
 
