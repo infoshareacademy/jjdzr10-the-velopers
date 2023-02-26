@@ -11,17 +11,18 @@ import java.util.Scanner;
 public class QuestionService {
 
 
-    public void addQuestion() {
+    public static Questions addQuestion() {
         Questions question = new Questions();
         printCategory();
         question.setCategories(getCategory());
         Answers answer = new Answers();
-        question.setQuestionText(String.valueOf(getQuestionText()));
+        question.setQuestionText(getQuestionText());
         answer.setAnswers(getAnswers());
+        return question;
     }
 
 
-    private void printCategory() {
+    private static void printCategory() {
         System.out.println("Z której kategorii chcesz dodać pytanie?");
         Category[] categories = Category.values();
         for (Category category : categories) {
@@ -29,24 +30,23 @@ public class QuestionService {
         }
     }
 
-    private Category getCategory() {
+    private static Category getCategory() {
         Scanner scanner = new Scanner(System.in);
         String userCategory = scanner.nextLine();
-        Category.valueOf(userCategory);
         System.out.println(userCategory);
-        return null;
+        return Category.valueOf(userCategory);
 
     }
 
-    private Questions getQuestionText() {
+    private static String getQuestionText() {
         System.out.println("Wpisz pytanie");
         Scanner scanner = new Scanner(System.in);
         String userQuestionText = scanner.nextLine();
         System.out.println(userQuestionText);
-        return null;
+        return userQuestionText;
     }
 
-    private String[] getAnswers() {
+    private static String[] getAnswers() {
         Scanner scanner = new Scanner(System.in);
         String answers[] = new String[4];
         System.out.println("Wpisz odp. nr 1");

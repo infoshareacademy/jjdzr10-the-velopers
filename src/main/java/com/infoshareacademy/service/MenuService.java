@@ -56,8 +56,7 @@ public class MenuService {
             switch (menuOption) {
                 case 1:
                     //dodaj pytanie
-                    QuestionService addQuestion = new QuestionService();
-                    addQuestion.addQuestion();
+                    Questions newQuestion = QuestionService.addQuestion();
                     break;
                 case 2:
                     //usuń pytanie
