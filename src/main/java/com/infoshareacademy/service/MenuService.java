@@ -1,5 +1,9 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.model.Answers;
+import com.infoshareacademy.model.Category;
+import com.infoshareacademy.model.Questions;
+
 import java.util.Scanner;
 
 public class MenuService {
@@ -52,6 +56,8 @@ public class MenuService {
             switch (menuOption) {
                 case 1:
                     //dodaj pytanie
+                    QuestionService addQuestion = new QuestionService();
+                    addQuestion.addQuestion();
                     break;
                 case 2:
                     //usuń pytanie
