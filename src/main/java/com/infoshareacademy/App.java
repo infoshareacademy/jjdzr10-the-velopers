@@ -1,6 +1,7 @@
 package com.infoshareacademy;
 
 import com.infoshareacademy.model.User;
+import com.infoshareacademy.service.QuestionService;
 import com.infoshareacademy.service.MenuService;
 import com.infoshareacademy.service.UserService;
 
@@ -10,5 +11,6 @@ public class App
         System.out.println( "The Velopers" );
         User currentUser = UserService.createUser();
         MenuService.mainMenu();
+
     }
 }

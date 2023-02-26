@@ -9,14 +9,19 @@ public class Answers {
     }
 
     public void setAnswers(String[] answers) {
+
         this.answers = answers;
     }
 
     public boolean[] getCorrectAnswers() {
+
         return correctAnswers;
     }
 
     public void setCorrectAnswers(boolean[] correctAnswers) {
+
         this.correctAnswers = correctAnswers;
     }
+
+
 }
