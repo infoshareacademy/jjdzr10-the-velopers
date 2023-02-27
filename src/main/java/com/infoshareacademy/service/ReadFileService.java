@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ReadFileService {
 
-    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"Questions.txt");
+    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"src","main","resources","questions.json");
     static Gson gson = new Gson();
 
     public static List<Questions> loadQuestions(Categories categories) throws IOException {
