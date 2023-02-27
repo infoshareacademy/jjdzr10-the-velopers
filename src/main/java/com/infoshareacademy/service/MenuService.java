@@ -1,10 +1,17 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.model.Questions;
+import com.infoshareacademy.model.User;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuService {
 
+    private static User currentUser;
+
     public static void mainMenu() {
+        userMenu();
         int menuOption;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz opcje:");
@@ -16,6 +23,8 @@ public class MenuService {
             switch (menuOption) {
                 case 1:
                     //nowa gra
+                    List<Questions> questionsList = ReadFileService.loadQuestions();
+                    GameService.start(questionsList,currentUser);
                     break;
                 case 2:
                     //zarządzaj pytaniami
@@ -74,6 +83,10 @@ public class MenuService {
     static void editMenuError() {
         System.out.println("Nieprawidłowa opcja!");
         editMenu();
+    }
+
+    private static void userMenu(){
+        currentUser = UserService.createUser();
     }
 
 }
