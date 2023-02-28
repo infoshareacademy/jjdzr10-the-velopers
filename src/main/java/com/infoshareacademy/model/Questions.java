@@ -2,6 +2,7 @@ package com.infoshareacademy.model;
 
 public class Questions {
     private int idQuestion;
+
     private Category category;
     private Answers answer;
     private String questionText;
@@ -47,3 +48,4 @@ public class Questions {
         this.score = score;
     }
 }
+
