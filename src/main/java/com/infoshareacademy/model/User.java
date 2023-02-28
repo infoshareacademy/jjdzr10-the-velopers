@@ -1,7 +1,7 @@
 package com.infoshareacademy.model;
 
 public class User {
-    String userName;
+    private String userName;
     private Score userScore;
 
     public Score getUserScore() {

@@ -2,7 +2,7 @@ package com.infoshareacademy.model;
 
 public class Questions {
     private int idQuestion;
-    private Categories categories;
+    private Category category;
     private Answers answer;
     private String questionText;
     private int score;
@@ -15,12 +15,12 @@ public class Questions {
         this.idQuestion = idQuestion;
     }
 
-    public Categories getCategories() {
-        return categories;
+    public Category getCategories() {
+        return category;
     }
 
-    public void setCategories(Categories categories) {
-        this.categories = categories;
+    public void setCategories(Category category) {
+        this.category = category;
     }
 
     public Answers getAnswer() {

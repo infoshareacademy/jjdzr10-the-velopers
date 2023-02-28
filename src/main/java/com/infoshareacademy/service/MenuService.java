@@ -24,7 +24,7 @@ public class MenuService {
                 case 1:
                     //nowa gra
                     List<Questions> questionsList = ReadFileService.loadQuestions();
-                    GameService.start(questionsList,currentUser);
+                    new GameService(questionsList, currentUser);
                     break;
                 case 2:
                     //zarządzaj pytaniami

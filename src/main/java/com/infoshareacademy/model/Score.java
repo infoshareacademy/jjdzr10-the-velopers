@@ -1,7 +1,7 @@
 package com.infoshareacademy.model;
 
 public class Score {
-    int highestScore;
+    private int highestScore = 0;
 
     public int getHighestScore() {
         return highestScore;

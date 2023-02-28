@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.model.Game;
 import com.infoshareacademy.model.Questions;
+import com.infoshareacademy.model.Score;
 import com.infoshareacademy.model.User;
 
 import java.util.List;
@@ -9,46 +10,56 @@ import java.util.concurrent.TimeUnit;
 
 
 public class GameService {
-    private static Game game = new Game();
+    private static Game game;
+    static final String questSeparator = "%n--- Pytanie %s ---%n %s %n";
 
-    public static void start(List<Questions> questions, User user) throws InterruptedException {
+    public GameService(List<Questions> questions, User user) throws InterruptedException {
+        user.setUserScore(new Score());
+        game = new Game();
+        start(questions, user);
+    }
+
+    private static void start(List<Questions> questionsList, User user) throws InterruptedException {
         game.setUser(user);
-        game.setQuestions(questions);
+        game.setQuestions(questionsList);
+        // make clean array AllUserAnswers
+        game.setAllUserAnswers(new boolean[questionsList.size()][4]);
 
         System.out.println("START NEW GAME: ");
-        displayQuestions(questions);
-        finalResult(questions);
+        displayQuestions(questionsList);
+        finalResult(questionsList);
     }
 
     private static void displayQuestions(List<Questions> questionsList) throws InterruptedException {
-        int questionNumber = 0;
-        game.setAllUserAnswers(new boolean[questionsList.size()][4]);
-        for (Questions quest : questionsList) {
-            questionNumber++;
+
+        // display questions
+        for (int i = 0; i < questionsList.size(); i++) {
             // display the questions
-            System.out.println();
-            System.out.print(questionNumber + ". Pytanie: ");
-            System.out.println(quest.getQuestionText());
+            System.out.printf(questSeparator, i + 1, questionsList.get(i).getQuestionText());
             // view available answers
-            int intLetter = (65);
-            for (String ans : quest.getAnswer().getAnswers()) {
-                System.out.print(((char) intLetter) + " : ");
-                System.out.println(ans);
-                intLetter++;
-            }
+            showAvailableAnswers(questionsList.get(i));
             // retrieving responses from the player
             boolean[] userAnswers = QuestionService.getCorrectAnswer();
-            game.getAllUserAnswers()[(questionNumber - 1)] = userAnswers;
+            game.getAllUserAnswers()[(i)] = userAnswers;
             // checking the answer
-            boolean answeredCorrect = checkAnswer(quest.getAnswer().getCorrectAnswers(), userAnswers);
+            boolean answeredCorrect = checkAnswer(questionsList.get(i).getAnswer().getCorrectAnswers(), userAnswers);
             // assigning points for correct answers
             if (answeredCorrect) {
-                game.getUser().getUserScore().setHighestScore(game.getUser().getUserScore().getHighestScore() + quest.getScore());
+                game.getUser().getUserScore().setHighestScore(game.getUser().getUserScore().getHighestScore()
+                        + questionsList.get(i).getScore());
             }
             // next question delay [1 second]
             TimeUnit.SECONDS.sleep(1);
         }
+    }
 
+    private static void showAvailableAnswers(Questions question) {
+        int intLetter = (65);
+        for (String ans : question.getAnswer().getAnswers()) {
+            System.out.print(((char) intLetter) + " : ");
+            System.out.println(ans);
+            intLetter++;
+        }
     }
 
     private static boolean checkAnswer(boolean[] questionAnswers, boolean[] userAnswers) {
@@ -59,39 +70,44 @@ public class GameService {
                 break;
             }
         }
-        if (answeredCorrect) {
-            System.out.println("Twoja odpowiedź jest poprawna!!!");
-        } else {
-            System.out.println("Zła odpowiedź :(");
-        }
+        printMessage(answeredCorrect);
         return answeredCorrect;
     }
 
-    private static void finalResult(List<Questions> questions) {
-        System.out.println("\t+++\t");
-        System.out.println("Użytkowniku " + game.getUser().getUserName());
-        System.out.println("gratulujemy wyniku: " + game.getUser().getUserScore().getHighestScore() + " pkt");
-        System.out.println("Oto tabela wyników:");
-        System.out.println("Odpowiedzi użytkownika podane są w < > nawiasach,\n" +
+    private static void printMessage(boolean isCorrect) {
+        System.out.println(isCorrect ? "Twoja odpowiedź jest poprawna!!!" :
+                "To jest zła odpowiedź :(");
+    }
+
+    private static void finalResult(List<Questions> questionsList) {
+
+        System.out.printf("\t +++ \nUżytkowniku %s", game.getUser().getUserName());
+        System.out.printf("\ngratulujemy wyniku: %s pkt \n", game.getUser().getUserScore().getHighestScore());
+        System.out.println("Oto tabela wyników: \n " +
+                "Odpowiedzi użytkownika podane są w < > nawiasach,\n" +
                 "poprawne odpowiedzi podane są w ( ) nawiasach.");
+        showLeaderboard(questionsList);
+    }
 
-        int i = 0;
-        for (Questions question : questions) {
-            System.out.println(question.getQuestionText());
-            for (int j = 0; j < 4; j++) {
-                String out = question.getAnswer().getAnswers()[j];
-                if (question.getAnswer().getCorrectAnswers()[j]) {
-                    out = "(" + out + ")";
-                }
-                if (game.getAllUserAnswers()[i][j]) {
-                    out = "<" + out + ">";
-                }
-                out = out + " ";
-
-                System.out.print(out);
-            }
-            System.out.println("\n\t---\t");
-            i++;
+    private static void showLeaderboard(List<Questions> questionsList) {
+        for (int i = 0; i < questionsList.size(); i++) {
+            System.out.printf(questSeparator, i + 1, questionsList.get(i).getQuestionText());
+            // print designation answers
+            System.out.println(designationAnswer(questionsList.get(i), i));
         }
+    }
+
+    private static StringBuilder designationAnswer(Questions question, int i) {
+        StringBuilder builder = new StringBuilder();
+        for (int j = 0; j < 4; j++) {
+            String out = question.getAnswer().getAnswers()[j];
+            // designation correct answer
+            out = question.getAnswer().getCorrectAnswers()[j] ? "(" + out + ")" : out;
+            // designation user answer
+            out = game.getAllUserAnswers()[i][j] ? "<" + out + ">" : out;
+            builder.append(out + ", ");
+        }
+        builder.deleteCharAt(builder.lastIndexOf(","));
+        return builder;
     }
 }
