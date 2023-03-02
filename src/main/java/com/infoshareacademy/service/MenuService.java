@@ -11,7 +11,7 @@ public class MenuService {
     private static User currentUser;
 
     public static void mainMenu() {
-        userMenu();
+        if (currentUser == null) {userMenu();}
         int menuOption;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz opcje:");
@@ -25,6 +25,7 @@ public class MenuService {
                     //nowa gra
                     List<Questions> questionsList = ReadFileService.loadQuestions();
                     new GameService(questionsList, currentUser);
+                    mainMenu();
                     break;
                 case 2:
                     //zarządzaj pytaniami
