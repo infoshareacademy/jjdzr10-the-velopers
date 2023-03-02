@@ -63,7 +63,7 @@ public class QuestionService {
         answers[3] = userAnswer4;
         return answers;
     }
-    private static boolean[] getCorrectAnswer() {
+    static boolean[] getCorrectAnswer() {
         Scanner scanner = new Scanner(System.in);
         boolean userAnswerBoolean[] = new boolean[4];
 
