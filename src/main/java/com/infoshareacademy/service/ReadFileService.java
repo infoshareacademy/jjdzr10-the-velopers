@@ -3,7 +3,7 @@ package com.infoshareacademy.service;
 import com.google.gson.Gson;
 
 import com.google.gson.reflect.TypeToken;
-import com.infoshareacademy.model.Categories;
+import com.infoshareacademy.model.Category;
 import com.infoshareacademy.model.Questions;
 
 import java.io.IOException;
@@ -17,10 +17,10 @@ import java.util.List;
 
 public class ReadFileService {
 
-    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"Questions.txt");
+    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"src","main","resources","questions.json");
     static Gson gson = new Gson();
 
-    public static List<Questions> loadQuestions(Categories categories) throws IOException {
+    public static List<Questions> loadQuestions(Category category) throws IOException {
         List<Questions> allQuestions = new ArrayList<>();
         try {
             // create Reader
@@ -37,7 +37,7 @@ public class ReadFileService {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return getFilteredQuestions(allQuestions,categories);
+        return getFilteredQuestions(allQuestions, category);
     }
 
     public static List<Questions> loadQuestions() throws IOException {
@@ -46,7 +46,6 @@ public class ReadFileService {
             // create Reader
             Reader reader = Files.newBufferedReader(pathQuestions);
             System.out.println(pathQuestions);
-            System.out.println(reader);
             // create Gson instance
             Gson gson = new Gson();
             // for converting such JSON array to a List, we need to use TypeToken class
@@ -61,10 +60,10 @@ public class ReadFileService {
         return allQuestions;
     }
 
-    private static List<Questions> getFilteredQuestions(List<Questions> questions, Categories categories){
+    private static List<Questions> getFilteredQuestions(List<Questions> questions, Category category){
         List<Questions> filteredQuestions = new ArrayList<>();
         for (int i=0; i<questions.size();i++){
-            if (questions.get(i).getCategories() == categories){
+            if (questions.get(i).getCategories() == category){
                 filteredQuestions.add(questions.get(i));
             }
         }

@@ -1,8 +1,7 @@
 package com.infoshareacademy.model;
 
 public enum Category {
-    FIZYKA,
+    SZTUKA,
     BIOLOGIA,
-    HISTORIA;
-
+    HISTORIA
 }

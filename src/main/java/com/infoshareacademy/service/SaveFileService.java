@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaveFileService {
-    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"Questions.txt");
+    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"src","main","resources","questions.json");
     private static Gson gson = new Gson();
 
     public static void addQuestionsToFile(List<Questions> questions) {
