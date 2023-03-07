@@ -42,12 +42,12 @@ public class QuestionService {
 
     public static void editQuestion(List<Questions> questionsList) throws IOException, URISyntaxException {
         // show available questions
-        QuestionService.showAvailableQuestions(questionsList);
+        showAvailableQuestions(questionsList);
         // choose question to edit
-        Questions quest = QuestionService.chooseQuestion(questionsList);
-        QuestionService.showQuestion(quest);
+        Questions quest = chooseQuestion(questionsList);
+        showQuestion(quest);
         // make question
-        Questions editQuestion = QuestionService.formQuestion();
+        Questions editQuestion = formQuestion();
         // remove chosen question from questionList
         questionsList.remove(quest);
         // add new question to questionList
@@ -55,14 +55,13 @@ public class QuestionService {
         // save to file
         SaveFileService.saveQuestionsToFile(questionsList);
     }
-    public static List<Questions> removeQuestion(List<Questions> questionsList) throws IOException {
+    public static void removeQuestion(List<Questions> questionsList) throws IOException {
         // show available questions
-        QuestionService.showAvailableQuestions(questionsList);
+        showAvailableQuestions(questionsList);
         // choose question to edit
-        Questions questionToRemove = QuestionService.chooseQuestion(questionsList);
-        QuestionService.showQuestion(questionToRemove);
+        Questions questionToRemove = chooseQuestion(questionsList);
+        showQuestion(questionToRemove);
         questionsList.remove(questionToRemove);
-        return questionsList;
     }
 
     private static void showAvailableQuestions(List<Questions> questionsList){
@@ -126,15 +125,13 @@ public class QuestionService {
     private static Integer getFromUserQuestionNumber(){
         System.out.println("Podaj numer pytania: ");
         scanner = new Scanner(System.in);
-        Integer questionNumber = scanner.nextInt();
-        return questionNumber;
+        return scanner.nextInt();
     }
 
     private static Integer getFromUserQuestionScore(){
         System.out.println("Ile punktów za poprawną odpowiedź na to pytanie:");
         scanner = new Scanner(System.in);
-        Integer questionScore = scanner.nextInt();
-        return questionScore;
+        return scanner.nextInt();
     }
     private static String getFromUserQuestionText() {
         System.out.println("Wpisz pytanie");
@@ -155,7 +152,7 @@ public class QuestionService {
     }
     static boolean[] getFromUserCorrectAnswer() {
         scanner = new Scanner(System.in);
-        boolean userAnswerBoolean[] = new boolean[4];
+        boolean[] userAnswerBoolean = new boolean[4];
 
         System.out.print("Jaka jest poprawna odpowiedź?: ");
         boolean isCorecct = false;
