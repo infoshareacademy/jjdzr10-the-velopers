@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+</head>
+
+<body>
+<form action="#" th:action="@{/greetingForm}" th:object="${greetingForm}" method="post">
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+    <p><input type="submit" value="Submit" />
+</form>
+</body>
+</html>
