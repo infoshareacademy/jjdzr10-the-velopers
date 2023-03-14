@@ -21,6 +21,11 @@ public class DashboardController {
         return "register_form";
     }
 
+    @GetMapping("/new_game")
+    public String newGame() {
+        return "new_game";
+    }
+
     @GetMapping("/reset_pass")
     public String resetPass(Model model) {
         User user = new User();
