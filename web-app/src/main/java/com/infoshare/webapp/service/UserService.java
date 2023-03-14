@@ -14,7 +14,8 @@ public class UserService {
             System.out.println("Podaj nazwę użytkownika");
             String userName = scanner.nextLine();
             if (userName.length() > 0) {
-                newUser = new User(userName);
+                newUser = new User();
+                newUser.setUserName(userName);
                 return newUser;
             }
         }
