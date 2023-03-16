@@ -31,6 +31,11 @@ public class DashboardController {
         return "edit_questions";
     }
 
+    @GetMapping("/edit_question_id")
+    public String editQuestionId() {
+        return "edit_question_id";
+    }
+
     @GetMapping("/reset_pass")
     public String resetPass(Model model) {
         User user = new User();

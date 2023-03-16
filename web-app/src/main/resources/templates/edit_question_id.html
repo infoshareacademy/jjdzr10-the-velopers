@@ -58,23 +58,74 @@
 
 <div class="container">
     <h1 class="text-center">Edycja pytania</h1>
-    <form action="/edit_question_id" method="get">
-        <div class="row my-3">
-            <div class="col-12 text-center">
-                <label for="GameCategory">Wybierz id pytania:</label>
-                <select id="GameCategory">
-                    <option value=""></option>
-                    <option value="q1">1</option>
-                    <option value="q2">2</option>
-                    <option value="q3">3</option>
-                </select>
+    <form action="/edit_question_id" method="post">
+        <div class="row my-2">
+            <div class="col-2">
+                <label for="QuestionText">Treść pytania:</label>
             </div>
+            <div class="col-10">
+                <textarea class="w-100" id="QuestionText"></textarea>
+            </div>
+        </div>
 
+        <div class="row my-2">
+            <div class="col-2">
+                <label for="AnswerA">Odpowiedź A:</label>
+            </div>
+            <div class="col-10">
+                <textarea class="w-100" id="AnswerA"></textarea>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-2">
+                <label for="AnswerB">Odpowiedź B:</label>
+            </div>
+            <div class="col-10">
+                <textarea class="w-100" id="AnswerB"></textarea>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-2">
+                <label for="AnswerC">Odpowiedź C:</label>
+            </div>
+            <div class="col-10">
+                <textarea class="w-100" id="AnswerC"></textarea>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-2">
+                <label for="AnswerD">Odpowiedź D:</label>
+            </div>
+            <div class="col-10">
+                <textarea class="w-100" id="AnswerD"></textarea>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-6 text-center">
+                <label for="QuestionPoints">Ilość punktów:</label>
+                <input id="QuestionPoints" type="number">
+            </div>
+            <div class="col-6 text-center">
+                Prawidłowa odpowiedź:
+                <label for="CorrectAnserA">A</label>
+                <input id="CorrectAnserA" type="radio" name="CorrectAnswer">
+                <label for="CorrectAnserB">B</label>
+                <input id="CorrectAnserB" type="radio" name="CorrectAnswer">
+                <label for="CorrectAnserC">C</label>
+                <input id="CorrectAnserC" type="radio" name="CorrectAnswer">
+                <label for="CorrectAnserD">D</label>
+                <input id="CorrectAnserD" type="radio" name="CorrectAnswer">
+
+            </div>
         </div>
 
         <div class="row my-3">
             <div class="col-12 text-center">
-                <button class="btn text-white bg-primary w-auto" type="submit">Edytuj pytanie</button>
+                <button class="btn text-white bg-primary w-auto" type="submit">Zapisz zmiany</button>
             </div>
         </div>
 </div>

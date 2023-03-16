@@ -60,7 +60,7 @@
     <h1 class="text-center">Nowa gra</h1>
     <form>
         <div class="row my-3">
-            <div class="col-6 text-center">
+            <div class="col-12 text-center">
                 <label for="GameCategory">Wybierz kategorię:</label>
                 <select id="GameCategory">
                     <option value=""></option>
@@ -68,7 +68,21 @@
                     <option value="cat2">Kategoria 2</option>
                 </select>
             </div>
-            <div class="col-6 text-center">
+        </div>
+
+        <div class="row my-3">
+            <div class="col-12 text-center">
+                <label for="GameQuestionSNumber">Ilość pytań</label>
+                <input id="GameQuestionSNumber" type="number">
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-3 text-center offset-3">
+                <label for="GameTime">Gra na czas</label>
+                <input id="GameTime" type="checkbox">
+            </div>
+
+            <div class="col-3 text-center">
                 <label for="GamePlayers">Ilośc graczy:</label>
                 <select id="GamePlayers">
                     <option value="1">1</option>
@@ -76,16 +90,6 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-            </div>
-        </div>
-        <div class="row my-3">
-            <div class="col-6 text-center">
-                <label for="GameQuestionSNumber">Ilość pytań</label>
-                <input id="GameQuestionSNumber" type="number">
-            </div>
-            <div class="col-6 text-center">
-                <label for="GameTime">Gra na czas</label>
-                <input id="GameTime" type="checkbox">
             </div>
         </div>
         <div class="row my-3">
