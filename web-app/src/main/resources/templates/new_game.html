@@ -1,10 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Start</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
 </head>
 <body>
-new game
+
+<nav class="navbar sticky-top navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text">The Velopers</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/new_game">New game</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Modify quizzes
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Add new questions</a></li>
+                        <li><a class="dropdown-item" href="#">Edit questions</a></li>
+                        <li><a class="dropdown-item" href="#">Delete questions</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="">Load form file</a></li>
+                        <li><a class="dropdown-item" href="">Save to file</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Scoreboard</a>
+                </li>
+            </ul>
+
+            <form class="d-flex" role="none">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalLogin">Login
+                </button>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="text-center">Nowa gra</h1>
+    <form>
+        <div class="row my-3">
+            <div class="col-6 text-center">
+                <label for="GameCategory">Wybierz kategorię:</label>
+                <select id="GameCategory">
+                    <option value=""></option>
+                    <option value="cat1">Kategoria 1</option>
+                    <option value="cat2">Kategoria 2</option>
+                </select>
+            </div>
+            <div class="col-6 text-center">
+                <label for="GamePlayers">Ilośc graczy:</label>
+                <select id="GamePlayers">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-6 text-center">
+                <label for="GameQuestionSNumber">Ilość pytań</label>
+                <input id="GameQuestionSNumber" type="number">
+            </div>
+            <div class="col-6 text-center">
+                <label for="GameTime">Gra na czas</label>
+                <input id="GameTime" type="checkbox">
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-12 text-center">
+                <button class="btn text-white bg-primary w-auto" type="submit">Rozpocznij grę</button>
+            </div>
+        </div>
+</div>
+</form>
+
+</div>
+
+<!-- Modal Login-->
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex justify-content-center">
+        <div class="modal-content w-75">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="container">
+                    <form class="row px-4 py-3">
+                        <div class="mb-3">
+                            <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                                   placeholder="email@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleDropdownFormPassword1"
+                                   placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                    <div class="row">
+                        <a class="btn btn-outline-primary" href="/register" role="button">Sign up</a>
+                        <a class="btn btn-outline-warning" href="/reset_pass" role="button">Forgot password?</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>
