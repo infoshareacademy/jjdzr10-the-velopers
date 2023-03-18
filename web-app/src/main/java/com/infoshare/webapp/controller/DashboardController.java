@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DashboardController {
+
+    String pageTitle;
+
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("pageTitle", "Home");
         return "index";
     }
 
@@ -22,17 +26,20 @@ public class DashboardController {
     }
 
     @GetMapping("/new_game")
-    public String newGame() {
+    public String newGame(Model model) {
+        model.addAttribute("pageTitle", "New game");
         return "new_game";
     }
 
     @GetMapping("/edit_questions")
-    public String editQuestions() {
+    public String editQuestions(Model model) {
+        model.addAttribute("pageTitle", "Edit question");
         return "edit_questions";
     }
 
     @GetMapping("/edit_question_id")
-    public String editQuestionId() {
+    public String editQuestionId(Model model) {
+        model.addAttribute("pageTitle", "Edit question");
         return "edit_question_id";
     }
 
