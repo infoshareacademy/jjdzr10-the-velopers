@@ -26,6 +26,16 @@ public class DashboardController {
         return "new_game";
     }
 
+    @GetMapping("/edit_questions")
+    public String editQuestions() {
+        return "edit_questions";
+    }
+
+    @GetMapping("/edit_question_id")
+    public String editQuestionId() {
+        return "edit_question_id";
+    }
+
     @GetMapping("/reset_pass")
     public String resetPass(Model model) {
         User user = new User();
