@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DashboardController {
-
-    String pageTitle;
-
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("pageTitle", "Home");
@@ -29,6 +26,12 @@ public class DashboardController {
     public String newGame(Model model) {
         model.addAttribute("pageTitle", "New game");
         return "new_game";
+    }
+
+    @GetMapping("/add_question")
+    public String addQuestion(Model model) {
+        model.addAttribute("pageTitle", "Add question");
+        return "add_question";
     }
 
     @GetMapping("/edit_questions")
