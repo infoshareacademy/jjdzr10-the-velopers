@@ -11,22 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
-@RestController
+@Controller
 public class QuestionsController {
 
     private final QuestionService questionService;
     public QuestionsController(QuestionService questionService) {
         this.questionService = questionService;
     }
-    @GetMapping("/questions")
-    public List<Questions> getQuestions(Model model) {
+    @GetMapping("/questions_list")
+    public String getQuestions(Model model) {
         Questions emptyQuestion = new Questions();
         model.addAttribute("question", emptyQuestion);
 
-        List<Questions> cars = questionService.getAll();
-        model.addAttribute("question", cars);
-//        return "cars/car";
-        return cars;
+        List<Questions> questionsList = questionService.getAll();
+        model.addAttribute("question", questionsList);
+        return "questions_list";
     }
 
     @GetMapping("/add_question")

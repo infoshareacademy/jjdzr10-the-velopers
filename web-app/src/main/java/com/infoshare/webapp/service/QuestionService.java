@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 @Service
@@ -19,7 +20,8 @@ public class QuestionService {
 
     public QuestionService(ReadFileService readFileService) throws IOException {
         this.readFileService = readFileService;
-        List<Questions> questionList = readFileService.loadQuestions();
+        questionsList = new ArrayList<>();
+        List<Questions> questionList = ReadFileService.loadQuestions();
         questionsList.addAll(questionList);
     }
 
