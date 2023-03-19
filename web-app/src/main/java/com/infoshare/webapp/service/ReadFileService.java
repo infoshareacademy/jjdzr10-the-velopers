@@ -5,15 +5,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshare.webapp.model.Category;
 import com.infoshare.webapp.model.Questions;
 import com.infoshare.webapp.WebAppApplication;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class ReadFileService {
-    private static URL questionResource = WebAppApplication.class.getClassLoader().getResource("questions.json");
+
+    private static final URL questionResource = WebAppApplication.class.getClassLoader().getResource("questions.json");
+
+    public ReadFileService() {
+    }
+
     public static List<Questions> loadQuestions() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Questions> questionsList = objectMapper.readValue(questionResource, new TypeReference<List<Questions>>() {});

@@ -3,17 +3,29 @@ package com.infoshare.webapp.service;
 import com.infoshare.webapp.model.Answers;
 import com.infoshare.webapp.model.Category;
 import com.infoshare.webapp.model.Questions;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Scanner;
-
+@Service
 public class QuestionService {
 
     private static List<Integer> availableQuestionNumbers;
     private static Scanner scanner;
     private static List<Questions> questionsList;
+    private final ReadFileService readFileService;
+
+    public QuestionService(ReadFileService readFileService) throws IOException {
+        this.readFileService = readFileService;
+        List<Questions> questionList = readFileService.loadQuestions();
+        questionsList.addAll(questionList);
+    }
+
+    public List<Questions> getAll(){
+        return questionsList;
+    }
 
     private static Questions formQuestion(){
         Questions question = new Questions();
