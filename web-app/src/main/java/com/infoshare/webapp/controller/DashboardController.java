@@ -28,6 +28,12 @@ public class DashboardController {
         return "new_game";
     }
 
+    @GetMapping("/add_question")
+    public String addQuestion(Model model) {
+        model.addAttribute("pageTitle", "Add question");
+        return "add_question";
+    }
+
     @GetMapping("/edit_questions")
     public String editQuestions(Model model) {
         model.addAttribute("pageTitle", "Edit question");

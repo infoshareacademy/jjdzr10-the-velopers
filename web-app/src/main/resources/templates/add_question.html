@@ -5,14 +5,14 @@
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 
 <div class="container">
-    <h1 class="text-center">Edycja pytania</h1>
-    <form action="/edit_question_id" method="post">
+    <h1 class="text-center">Dodaj pytanie</h1>
+    <form>
         <div class="row my-2">
             <div class="col-2">
                 <label for="QuestionText">Treść pytania:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="QuestionText">Treść pytania</textarea>
+                <textarea class="w-100" id="QuestionText"></textarea>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                 <label for="AnswerA">Odpowiedź A:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerA">Odpowiedź A</textarea>
+                <textarea class="w-100" id="AnswerA"></textarea>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                 <label for="AnswerB">Odpowiedź B:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerB">Odpowiedź B</textarea>
+                <textarea class="w-100" id="AnswerB"></textarea>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <label for="AnswerC">Odpowiedź C:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerC">Odpowiedź C</textarea>
+                <textarea class="w-100" id="AnswerC"></textarea>
             </div>
         </div>
 
@@ -48,21 +48,21 @@
                 <label for="AnswerD">Odpowiedź D:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerD">Odpowiedź D</textarea>
+                <textarea class="w-100" id="AnswerD"></textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-4 text-center">
                 <p><label for="QuestionPoints">Ilość punktów:</label></p>
-                <input id="QuestionPoints" type="number" value="7">
+                <input id="QuestionPoints" type="number">
             </div>
             <div class="col-4 text-center">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
                 <input id="CorrectAnserA" type="radio" name="CorrectAnswer">
                 <label for="CorrectAnserB">B</label>
-                <input id="CorrectAnserB" type="radio" name="CorrectAnswer" checked="">
+                <input id="CorrectAnserB" type="radio" name="CorrectAnswer">
                 <label for="CorrectAnserC">C</label>
                 <input id="CorrectAnserC" type="radio" name="CorrectAnswer">
                 <label for="CorrectAnserD">D</label>
@@ -71,14 +71,15 @@
             <div class="col-4 text-center">
                 <p><label for="GameCategory">Wybierz kategorię:</label></p>
                 <select id="GameCategory">
+                    <option value=""></option>
                     <option value="cat1">Kategoria 1</option>
-                    <option value="cat2" selected="">Kategoria 2</option>
+                    <option value="cat2">Kategoria 2</option>
                 </select>
             </div>
         </div>
         <div class="row my-3">
             <div class="col-12 text-center">
-                <button class="btn text-white bg-primary w-auto" type="submit">Zapisz zmiany</button>
+                <button class="btn text-white bg-primary w-auto" type="submit">Dodaj pytanie</button>
             </div>
         </div>
     </form>
