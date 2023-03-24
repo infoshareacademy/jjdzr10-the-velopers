@@ -7,28 +7,44 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 @Service
 public class QuestionService {
 
-    private static List<Integer> availableQuestionNumbers;
+    private static List<Long> availableQuestionNumbers;
     private static Scanner scanner;
     private static List<Questions> questionsList;
     private final ReadFileService readFileService;
 
     public QuestionService(ReadFileService readFileService) throws IOException {
         this.readFileService = readFileService;
-        questionsList = new ArrayList<>();
-        List<Questions> questionList = ReadFileService.loadQuestions();
-        questionsList.addAll(questionList);
+        questionsList = this.readFileService.loadQuestions();
     }
-
     public List<Questions> getAll(){
         return questionsList;
     }
+    public void editQuestionById(Long id, Questions question) {
+        Questions questionToEdit = findById(id);
 
+        questionToEdit.setAnswer(question.getAnswer());
+        questionToEdit.setCategory(question.getCategory());
+        questionToEdit.setQuestionText(question.getQuestionText());
+        questionToEdit.setScore(question.getScore());
+    }
+    public Questions findById(Long id) {
+        return questionsList.stream()
+                .filter(question -> question.getIdQuestion() == id)
+                .findFirst()
+                .orElseThrow();
+    }
+    public void removeQuestionById(Long id) {
+        Questions foundQuestion = findById(id);
+        questionsList.remove(foundQuestion);
+    }
+    public void addQuestion(Questions question){
+        questionsList.add(question);
+    }
     private static Questions formQuestion(){
         Questions question = new Questions();
         Answers answer = new Answers();
@@ -98,21 +114,21 @@ public class QuestionService {
 
     private static Questions chooseQuestion(List<Questions> questions){
         System.out.println("Wybierz numer pytania: ");
-        Integer chosenIdQuestion;
+        Long chosenIdQuestion;
         while (true) {
             chosenIdQuestion = getValidateNumber();
             if (availableQuestionNumbers.contains(chosenIdQuestion)){break;}
             System.out.println("Wartość jest z poza zakresu. Podaj jeszcze raz.");
         }
-        Integer finalChosenIdQuestion = chosenIdQuestion;
+        Long finalChosenIdQuestion = chosenIdQuestion;
         Questions question = questions.stream().filter(q -> finalChosenIdQuestion.equals(q.getIdQuestion())).findFirst().get();
         return question;
     }
-    private static Integer getValidateNumber() {
-        Integer number;
+    private static Long getValidateNumber() {
+        Long number;
         while (true) {
             scanner = new Scanner(System.in);
-            number = scanner.nextInt();
+            number = scanner.nextLong();
             if (!(number == null) && number != 0) {
                 break;
             }
@@ -136,10 +152,10 @@ public class QuestionService {
         return Category.valueOf(userCategory.toUpperCase());
     }
 
-    private static Integer getFromUserQuestionNumber(){
+    private static Long getFromUserQuestionNumber(){
         System.out.println("Podaj numer pytania: ");
         scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return scanner.nextLong();
     }
 
     private static Integer getFromUserQuestionScore(){

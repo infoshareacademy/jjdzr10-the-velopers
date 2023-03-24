@@ -1,17 +1,17 @@
 package com.infoshare.webapp.model;
 
 public class Questions {
-    private int idQuestion;
+    private Long idQuestion;
     private Category category;
     private Answers answer;
     private String questionText;
     private int score;
 
-    public int getIdQuestion() {
+    public Long getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(int idQuestion) {
+    public void setIdQuestion(Long idQuestion) {
         this.idQuestion = idQuestion;
     }
 
