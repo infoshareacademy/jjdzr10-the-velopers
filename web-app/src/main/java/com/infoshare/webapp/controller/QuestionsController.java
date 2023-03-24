@@ -24,7 +24,7 @@ public class QuestionsController {
         model.addAttribute("question", emptyQuestion);
 
         List<Questions> questionsList = questionService.getAll();
-        model.addAttribute("question", questionsList);
+        model.addAttribute("questions", questionsList);
         return "questions_list";
     }
 
