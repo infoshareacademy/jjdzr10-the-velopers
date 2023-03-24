@@ -4,54 +4,66 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
-  <title>Cars</title>
+  <title>Questions</title>
 </head>
 <body>
 <table class="table table-striped">
   <thead>
   <tr>
     <th>#</th>
-    <th th:text="#{car.name}">Name</th>
-    <th th:text="#{car.color}">Color</th>
-    <th th:text="#{car.engine}">Engine</th>
-    <th th:text="#{car.is-available}">Available</th>
-    <th th:text="#{gui.actions}">Actions</th>
+    <th>Category</th>
+    <th>Question Text</th>
+    <th>Answers</th>
+    <th>CorrectAnswers</th>
+    <th>Score</th>
+    <th>Actions</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="car,iterStat: ${questions}">
+  <tr th:each="question,iterStat: ${questions}">
     <td th:text="${iterStat.count}"></td>
-    <td th:text="#{car.brand} + ': ' + ${car.name}"></td>
-    <td th:switch="${car.color.name()}">
-      <p th:case="'RED'" th:text="#{color.red}"></p>
-      <p th:case="'BLUE'" th:text="#{color.blue}"></p>
-      <p th:case="'GREEN'" th:text="#{color.green}"></p>
-      <p th:case="*" th:text="#{color.unknown}"></p>
+      <td th:switch="${question.category.name()}"><td>
+      <p th:case="'HISTORIA'">HISTORIA</p>
+      <p th:case="'BIOLOGIA'">BIOLOGIA</p>
+      <p th:case="'SZTUKA'">SZTUKA</p>
+      <p th:case="*">NIEZNANA</p>
     </td>
-    <td th:text="${car.engine}"></td>
-    <td>
-      <i th:if="${car.available}" class="fa fa-check" aria-hidden="true"></i>
-      <i th:unless="${car.available}" class="fa fa-times" aria-hidden="true"></i>
+    <td th:text="${question.questionText}"></td>
+
+
+    <td class="container">
+      <div class="row">
+        <p class="col" th:text="'A: '+${question.answer.answers[0]}"></p>
+        <p class="col" th:text="'B: '+${question.answer.answers[1]}"></p>
+      </div>
+      <div class="row">
+        <p class="col" th:text="'C: '+${question.answer.answers[2]}"></p>
+        <p class="col" th:text="'D: '+${question.answer.answers[3]}"></p>
+      </div>
     </td>
     <td>
-      <a th:href="@{/cars/delete-car/{id}(id=${car.id})}" class="btn btn-danger">
+      <i th:if="${question.answer.correctAnswers[0]}" class="fa fa-check" aria-hidden="true">A</i>
+      <i th:if="${question.answer.correctAnswers[1]}" class="fa fa-times" aria-hidden="true">B</i>
+      <i th:if="${question.answer.correctAnswers[2]}" class="fa fa-times" aria-hidden="true">C</i>
+      <i th:if="${question.answer.correctAnswers[3]}" class="fa fa-times" aria-hidden="true">D</i>
+    </td>
+    <td th:text="${question.score}"></td>
+
+
+      <a href="" class="btn btn-danger">
         DELETE
       </a>
-      <a th:href="@{/cars/{carId}(carId=${car.id})}" class="btn btn-primary">
+      <a href="" class="btn btn-primary">
         EDIT
       </a>
     </td>
   </tr>
   </tbody>
 </table>
-<a th:href="@{/cars/create}" class="btn btn-success">
-  CREATE NEW CAR
+<a href="" class="btn btn-success">
+  CREATE NEW QUESTION
 </a>
-<div>
-  <a th:href="@{/cars/get-error}" class="btn btn-dark">
-    GET ERROR PAGE
-  </a>
-</div>
+
 <th:block th:include="fragments/footer :: footer"></th:block>
 </body>
 </html>
