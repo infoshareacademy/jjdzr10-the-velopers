@@ -4,7 +4,7 @@
 <body>
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 <div class="container">
-    <a th:href="@{/add_question}" class="btn btn-success">
+    <a th:href="@{/questions/question}" class="btn btn-success">
         CREATE NEW QUESTION
     </a>
     <table class="table table-striped">
@@ -50,10 +50,10 @@
             <td class="col-1" th:text="${question.score}"></td>
 
             <td class="col-1">
-                <a th:href="@{questions_list/delete-question/{id}(id=${question.idQuestion})}" class="btn btn-danger">
+                <a th:href="@{questions/delete/{id}(id=${question.idQuestion})}" class="btn btn-danger">
                     DELETE
                 </a>
-                <a th:href="@{questions_list/{id}(id=${question.idQuestion})}" class="btn btn-primary">
+                <a th:href="@{questions/{id}(id=${question.idQuestion})}" class="btn btn-primary">
                     EDIT
                 </a>
             </td>

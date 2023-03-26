@@ -36,7 +36,7 @@ public class QuestionService {
         return questionsList.stream()
                 .filter(question -> question.getIdQuestion() == id)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalArgumentException("Not found question with given Id:  "  + id));
     }
     public void removeQuestionById(Long id) {
         Questions foundQuestion = findById(id);

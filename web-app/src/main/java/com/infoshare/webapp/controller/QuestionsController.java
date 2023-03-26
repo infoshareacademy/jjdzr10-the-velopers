@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-
 @Controller
 public class QuestionsController {
 
@@ -17,47 +14,43 @@ public class QuestionsController {
     public QuestionsController(QuestionService questionService) {
         this.questionService = questionService;
     }
-    @GetMapping("/questions_list")
+    @GetMapping("/questions")
     public String getQuestions(Model model) {
         model.addAttribute("pageTitle", "Questions List");
-        Questions emptyQuestion = new Questions();
-        model.addAttribute("question", emptyQuestion);
-
-        List<Questions> questionsList = questionService.getAll();
-        model.addAttribute("questions", questionsList);
+        model.addAttribute("questions", questionService.getAll());
         return "questions_list";
     }
-    @GetMapping("/add_question")
-    public String addQuestion(Model model) {
+    @GetMapping("/questions/question")
+    public String getFormQuestion(Model model) {
         model.addAttribute("question", new Questions());
         model.addAttribute("pageTitle", "Add question");
         return "add_question";
     }
-    @GetMapping("questions_list/delete-question/{idQuestion}")
+    @GetMapping("/questions/delete/{idQuestion}")
     public String deleteQuestion(@PathVariable long idQuestion) {
         questionService.removeQuestionById(idQuestion);
-        return "redirect:/questions_list";
+        return "redirect:/questions";
     }
-    @GetMapping("/edit_questions")
+    @GetMapping("/questions/edit")
     public String editQuestions(Model model) {
         model.addAttribute("pageTitle", "Edit question");
         return "edit_questions";
     }
-    @GetMapping("/questions_list/{idQuestion}")
+    @GetMapping("/questions/{idQuestion}")
     public String getQuestionById(@PathVariable("idQuestion") Long idQuestion, Model model) {
         model.addAttribute("pageTitle", "Edit question");
         Questions question = questionService.findById(idQuestion);
         model.addAttribute("question", question);
         return "edit_question_id";
     }
-    @PostMapping("/questions_list/{idQuestion}/edit_questions")
+    @PostMapping("/questions/edit/{idQuestion}")
     public String editQuestion(@PathVariable("idQuestion") Long idQuestion, Questions questions, Model model) {
         questionService.editQuestionById(idQuestion, questions);
-        return "redirect:/questions_list";
+        return "redirect:/questions";
     }
-    @PostMapping("/form_question")
-    public String formQuestion(@ModelAttribute Questions question){
+    @PostMapping("/questions/question")
+    public String addQuestion(@ModelAttribute Questions question){
         questionService.addQuestion(question);
-        return "redirect:/questions_list";
+        return "redirect:/questions";
     }
 }
