@@ -1,11 +1,16 @@
 package com.infoshare.webapp.controller;
 
 
+import com.infoshare.webapp.model.Category;
 import com.infoshare.webapp.model.Questions;
+import com.infoshare.webapp.service.CategoryService;
 import com.infoshare.webapp.service.QuestionService;
+import org.springframework.boot.autoconfigure.cache.CacheType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class QuestionsController {
@@ -37,6 +42,8 @@ public class QuestionsController {
         model.addAttribute("pageTitle", "Edit question");
         Questions question = questionService.findById(idQuestion);
         model.addAttribute("question", question);
+        List<Category> categories = CategoryService.getAll();
+        model.addAttribute("categories", categories);
         return "edit_question_id";
     }
     @PostMapping("/questions/edit/{idQuestion}")

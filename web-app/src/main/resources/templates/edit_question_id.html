@@ -60,19 +60,18 @@
             <div class="col-4 text-center">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
-                <input id="CorrectAnserA" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserA" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[0]}">
                 <label for="CorrectAnserB">B</label>
-                <input id="CorrectAnserB" type="radio" name="CorrectAnswer" checked="">
+                <input id="CorrectAnserB" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[1]}">
                 <label for="CorrectAnserC">C</label>
-                <input id="CorrectAnserC" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserC" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[2]}">
                 <label for="CorrectAnserD">D</label>
-                <input id="CorrectAnserD" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserD" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[3]}">
             </div>
             <div class="col-4 text-center">
                 <p><label for="GameCategory">Wybierz kategorię:</label></p>
-                <select id="GameCategory">
-                    <option value="cat1">Kategoria 1</option>
-                    <option value="cat2" selected="">Kategoria 2</option>
+                <select id="GameCategory" th:field="${question.category}">
+                       <option th:each="i : ${categories}" th:value="${i}" th:text="${i}"></option>
                 </select>
             </div>
         </div>
