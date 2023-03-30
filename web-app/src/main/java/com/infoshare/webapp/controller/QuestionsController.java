@@ -31,12 +31,8 @@ public class QuestionsController {
         questionService.removeQuestionById(idQuestion);
         return "redirect:/questions";
     }
-    @GetMapping("/questions/edit")
-    public String editQuestions(Model model) {
-        model.addAttribute("pageTitle", "Edit question");
-        return "edit_questions";
-    }
-    @GetMapping("/questions/{idQuestion}")
+
+    @GetMapping("/questions/edit/{idQuestion}")
     public String getQuestionById(@PathVariable("idQuestion") Long idQuestion, Model model) {
         model.addAttribute("pageTitle", "Edit question");
         Questions question = questionService.findById(idQuestion);
