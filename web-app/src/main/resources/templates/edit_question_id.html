@@ -6,7 +6,7 @@
 
 <div class="container">
     <h1 class="text-center">Edycja pytania <span th:text="${question.idQuestion}"></span></h1>
-    <form action="/edit_question_id" method="post">
+    <form th:action="@{/questions/edit/{id}(id=${question.idQuestion})}  " method="post">
         <div class="row my-2">
             <div class="col-2">
                 <label for="QuestionText">Treść pytania:</label>
@@ -60,13 +60,13 @@
             <div class="col-4 text-center">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
-                <input id="CorrectAnserA" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[0]}">
+                <input id="CorrectAnserA" type="checkbox" th:field="${question.answer.correctAnswers[0]}" th:checked="${question.answer.correctAnswers[0]}">
                 <label for="CorrectAnserB">B</label>
-                <input id="CorrectAnserB" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[1]}">
+                <input id="CorrectAnserB" type="checkbox" th:field="${question.answer.correctAnswers[1]}" th:checked="${question.answer.correctAnswers[1]}">
                 <label for="CorrectAnserC">C</label>
-                <input id="CorrectAnserC" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[2]}">
+                <input id="CorrectAnserC" type="checkbox" th:field="${question.answer.correctAnswers[2]}" th:checked="${question.answer.correctAnswers[2]}">
                 <label for="CorrectAnserD">D</label>
-                <input id="CorrectAnserD" type="checkbox" name="CorrectAnswer" th:checked="${question.answer.correctAnswers[3]}">
+                <input id="CorrectAnserD" type="checkbox" th:field="${question.answer.correctAnswers[3]}" th:checked="${question.answer.correctAnswers[3]}">
             </div>
             <div class="col-4 text-center">
                 <p><label for="GameCategory">Wybierz kategorię:</label></p>

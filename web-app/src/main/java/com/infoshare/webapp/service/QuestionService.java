@@ -24,9 +24,9 @@ public class QuestionService {
     public List<Questions> getAll(){
         return questionsList;
     }
+
     public void editQuestionById(Long id, Questions question) {
         Questions questionToEdit = findById(id);
-
         questionToEdit.setAnswer(question.getAnswer());
         questionToEdit.setCategory(question.getCategory());
         questionToEdit.setQuestionText(question.getQuestionText());
