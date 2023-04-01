@@ -43,6 +43,41 @@
     </div>
     <!-- Modal -->
 
+    <!-- Modal upload file -->
+    <div class="modal" tabindex="-1" id="modalUpload">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload file</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="my-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 mx-auto">
+                                    <h2>Upload File</h2>
+                                    <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+                                    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <input type="file" name="file" class="form-control-file">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Upload File</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Upload File</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal -->
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
             crossorigin="anonymous"></script>
