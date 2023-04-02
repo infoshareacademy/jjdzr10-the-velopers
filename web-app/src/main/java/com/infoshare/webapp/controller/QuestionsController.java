@@ -23,7 +23,7 @@ public class QuestionsController {
     @GetMapping("/questions")
     public String getQuestions(Model model) {
         model.addAttribute("pageTitle", "Questions List");
-        model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("questions", questionService.getAllQuestions());
         return "questions_list";
     }
 
@@ -45,14 +45,14 @@ public class QuestionsController {
         model.addAttribute("pageTitle", "Edit question");
         Questions question = questionService.findById(idQuestion);
         model.addAttribute("question", question);
-        List<Category> categories = CategoryService.getAll();
+        List<Category> categories = CategoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "edit_question_id";
+        return "edit_question";
     }
 
     @PostMapping("/questions/edit/{idQuestion}")
     public String editQuestion(@PathVariable("idQuestion") Long idQuestion, Questions questions, Model model) {
-        questionService.editQuestionById(idQuestion, questions);
+        questionService.editQuestion(idQuestion, questions);
         return "redirect:/questions";
     }
 

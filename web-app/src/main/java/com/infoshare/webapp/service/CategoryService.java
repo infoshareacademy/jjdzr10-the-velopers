@@ -8,7 +8,7 @@ import java.util.List;
 public class CategoryService {
     private static List<Category> categoryList = Arrays.asList(Category.values());
 
-    public static List<Category> getAll() {
+    public static List<Category> getAllCategories() {
         return categoryList;
     }
 

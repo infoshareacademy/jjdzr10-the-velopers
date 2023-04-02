@@ -1,5 +1,6 @@
 package com.infoshare.webapp.service;
 
+import com.infoshare.webapp.exception.QuestionsNotFoundException;
 import com.infoshare.webapp.model.Answers;
 import com.infoshare.webapp.model.Category;
 import com.infoshare.webapp.model.Questions;
@@ -23,11 +24,11 @@ public class QuestionService {
         questionsList = this.readFileService.loadQuestions();
     }
 
-    public List<Questions> getAll() {
+    public List<Questions> getAllQuestions() {
         return questionsList;
     }
 
-    public void editQuestionById(Long id, Questions question) {
+    public void editQuestion(Long id, Questions question) {
         Questions questionToEdit = findById(id);
         questionToEdit.setAnswer(question.getAnswer());
         questionToEdit.setCategory(question.getCategory());
@@ -39,7 +40,7 @@ public class QuestionService {
         return questionsList.stream()
                 .filter(question -> question.getIdQuestion() == id)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Not found question with given Id:  " + id));
+                .orElseThrow(() -> new QuestionsNotFoundException(String.format("Not found question with given Id:  %S", id)));
     }
 
     public void removeQuestionById(Long id) {
@@ -78,7 +79,7 @@ public class QuestionService {
 
     public static void editQuestion(List<Questions> questionsList) throws IOException, URISyntaxException {
         // show available questions
-        showAvailableQuestions(questionsList);
+        availableQuestions(questionsList);
         // choose question to edit
         Questions quest = chooseQuestion(questionsList);
         showQuestion(quest);
@@ -94,14 +95,14 @@ public class QuestionService {
 
     public static void removeQuestion(List<Questions> questionsList) throws IOException {
         // show available questions
-        showAvailableQuestions(questionsList);
+        availableQuestions(questionsList);
         // choose question to edit
         Questions questionToRemove = chooseQuestion(questionsList);
         showQuestion(questionToRemove);
         questionsList.remove(questionToRemove);
     }
 
-    private static void showAvailableQuestions(List<Questions> questionsList) {
+    private static void availableQuestions(List<Questions> questionsList) {
         for (Category cat : Category.values()) {
             System.out.println("Kategoria: " + cat);
             System.out.print("Dostępne numery pytań: ");
