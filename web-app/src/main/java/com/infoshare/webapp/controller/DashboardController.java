@@ -14,13 +14,16 @@ public class DashboardController {
         return "index";
     }
 
-
-
     @GetMapping("/new_game")
     public String newGame(Model model) {
         model.addAttribute("pageTitle", "New game");
         return "new_game";
     }
+//    @GetMapping("/new_question")
+//    public String newQuestion(Model model) {
+//        model.addAttribute("pageTitle", "New question");
+//        return "new_question";
+//    }
 
 
 
