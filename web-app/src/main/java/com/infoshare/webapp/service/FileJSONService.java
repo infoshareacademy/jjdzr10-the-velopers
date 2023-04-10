@@ -15,8 +15,12 @@ import java.util.Objects;
 
 @Service
 public class FileJSONService {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
     private List<Questions> questions;
+
+    public FileJSONService(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     public void loadFile(MultipartFile file) throws IOException {
         if (Objects.equals(file.getContentType(), "application/json")) {
@@ -24,12 +28,6 @@ public class FileJSONService {
         }
     }
 
-    public List<Questions> getQuestions() {
-        return questions;
-    }
-    public void setQuestions(List<Questions> questions){
-        this.questions = questions;
-    }
     public void saveFile(List<Questions> questions, String filePath) throws IOException {
         String questionsAsString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(questions);
         Files.writeString(Path.of(filePath), questionsAsString);

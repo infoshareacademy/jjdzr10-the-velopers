@@ -22,25 +22,28 @@ import java.util.Objects;
 @Controller
 public class UploadController {
 
-    @Autowired
-    FileJSONService fileJSONService;
+    private final FileJSONService fileJSONService;
+
+    public UploadController(FileJSONService fileJSONService) {
+        this.fileJSONService = fileJSONService;
+    }
 
     @PostMapping("/upload")
     public String loadFile(Model model, @RequestParam("file") MultipartFile file, RedirectAttributes attributes) throws IOException {
         // check if file is empty
-        if (file.isEmpty() && Objects.equals(file.getContentType(), "application/json")) {
+        if (file == null || file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
             return "redirect:/";
-        } else if (Objects.equals(file.getContentType(), "application/json")) {
-            fileJSONService.loadFile(file);
-            model.addAttribute("file", file);
-            attributes.addFlashAttribute("message", "You successfully uploaded " + file.getName() + '!');
-            return "redirect:/";
         }
-        else {
+        final String JSON_CONTENT_TYPE = "application/json";
+        if (!Objects.equals(file.getContentType(), JSON_CONTENT_TYPE)) {
             attributes.addFlashAttribute("message", "Please select a file type JSON.");
             return "redirect:/";
         }
+        fileJSONService.loadFile(file);
+        model.addAttribute("file", file);
+        attributes.addFlashAttribute("message", "You successfully uploaded " + file.getName() + '!');
+        return "redirect:/";
     }
 
 }
