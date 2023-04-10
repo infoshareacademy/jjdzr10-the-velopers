@@ -12,45 +12,30 @@
 <body>
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 <div class="container">
-    <h1 class="text-center">Pytanie nr</h1>
+    <h1 class="text-center">Pytanie nr <td th:text="${question.idQuestion}"></td></h1>
     <tbody>
-    <tr th:each="question,iterStat: ${questions}">
-        <td class="col-0.5" th:text="${iterStat.count}"></td>
-        <td class="col-1" th:switch="${question.category.name()}">
-            <p th:case="'HISTORIA'">HISTORIA</p>
-            <p th:case="'BIOLOGIA'">BIOLOGIA</p>
-            <p th:case="'SZTUKA'">SZTUKA</p>
-            <p th:case="*">NIEZNANA</p>
-        </td>
-        <td th:text="${question.questionText}"></td>
+<tr>
+    <td class="col-1" th:switch="${question.category.name()}">
+        <p th:case="'HISTORIA'">HISTORIA</p>
+        <p th:case="'BIOLOGIA'">BIOLOGIA</p>
+        <p th:case="'SZTUKA'">SZTUKA</p>
+        <p th:case="*">NIEZNANA</p>
+    </td>
 
-        <td class="col container">
-            <div class="row">
-            </div>
-        </td>
+    <td th:text="${question.questionText}"></td>
 
-        <td class="col container">
-        <a th:href="@{questions/{id}(id=${question.idQuestion})}" class="btn btn-primary">
-            <p th:text="'A: '+${question.answer.answers[0]}"></p>
-        </a>
+    <td class="col container">
+        <div class="row">
+        </div>
+    </td>
 
-        <a th:href="@{questions/{id}(id=${question.idQuestion})}" class="btn btn-primary">
-            <p th:text="'A: '+${question.answer.answers[1]}"></p>
-        </a>
-        <a th:href="@{questions/delete/{id}(id=${question.idQuestion})}" class="btn btn-primary">
-            <p th:text="'A: '+${question.answer.answers[2]}"></p>
-        </a>
-        <a th:href="@{questions/delete/{id}(id=${question.idQuestion})}" class="btn btn-primary">
-            <p th:text="'A: '+${question.answer.answers[3]}"></p>
-        </a>
-        </td>
-        <td class="col container">
-            <div class="row">
-            </div>
-        </td>
-
-
-
+    <td class="col container">
+        <p class="btn btn-primary" th:text="'A: '+${question.answer.answers[0]}"></p>
+        <p class="btn btn-primary" th:text="'B: '+${question.answer.answers[1]}"></p>
+        <p class="btn btn-primary" th:text="'C: '+${question.answer.answers[2]}"></p>
+        <p class="btn btn-primary" th:text="'D: '+${question.answer.answers[3]}"></p>
+    </td>
+</tr>
     </tbody>
 
 

@@ -45,9 +45,9 @@ public class QuestionsController {
     }
 
     @GetMapping("/id")
-    public String getQuestion(Model model) {
+    public String getSingleQuestion( Model model) {
         model.addAttribute("pageTitle", "single question");
-        model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("question", questionService.findById(1L));
         return "question";
     }
     @PostMapping("/questions/edit/{idQuestion}")
