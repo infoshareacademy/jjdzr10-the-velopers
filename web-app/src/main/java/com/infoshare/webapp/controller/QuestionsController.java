@@ -31,6 +31,8 @@ public class QuestionsController {
     public String getFormQuestion(Model model) {
         model.addAttribute("question", new Questions());
         model.addAttribute("pageTitle", "Add question");
+        List<Category> categories = CategoryService.getAllCategories();
+        model.addAttribute("categories", categories);
         return "add_question";
     }
 
