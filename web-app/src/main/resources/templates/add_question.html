@@ -57,16 +57,16 @@
                 <p><label for="QuestionPoints">Ilość punktów:</label></p>
                 <input id="QuestionPoints" type="number" value="7" th:field="${question.score}" th:required="required" th:min="1">
             </div>
-            <div class="col-4 text-center">
+            <div class="col-4 text-center checkboxValidator">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
-                <input id="CorrectAnserA" type="checkbox" th:field="${question.answer.correctAnswers[0]}">
+                <input id="CorrectAnserA" type="checkbox" th:field="${question.answer.correctAnswers[0]}" th:required="required">
                 <label for="CorrectAnserB">B</label>
-                <input id="CorrectAnserB" type="checkbox" th:field="${question.answer.correctAnswers[1]}">
+                <input id="CorrectAnserB" type="checkbox" th:field="${question.answer.correctAnswers[1]}" th:required="required">
                 <label for="CorrectAnserC">C</label>
-                <input id="CorrectAnserC" type="checkbox" th:field="${question.answer.correctAnswers[2]}">
+                <input id="CorrectAnserC" type="checkbox" th:field="${question.answer.correctAnswers[2]}" th:required="required">
                 <label for="CorrectAnserD">D</label>
-                <input id="CorrectAnserD" type="checkbox" th:field="${question.answer.correctAnswers[3]}">
+                <input id="CorrectAnserD" type="checkbox" th:field="${question.answer.correctAnswers[3]}" th:required="required">
             </div>
             <div class="col-4 text-center">
                 <p><label for="GameCategory">Wybierz kategorię:</label></p>
