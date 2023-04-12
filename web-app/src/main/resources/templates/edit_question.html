@@ -5,14 +5,14 @@
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 
 <div class="container">
-    <h1 class="text-center">Edycja pytania</h1>
-    <form action="/edit_question_id" method="post">
+    <h1 class="text-center">Edycja pytania <span th:text="${question.idQuestion}"></span></h1>
+    <form th:action="@{/questions/edit/{id}(id=${question.idQuestion})}  " method="post">
         <div class="row my-2">
             <div class="col-2">
                 <label for="QuestionText">Treść pytania:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="QuestionText">Treść pytania</textarea>
+                <textarea class="w-100" id="QuestionText" th:field="${question.questionText}">Treść pytania</textarea>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                 <label for="AnswerA">Odpowiedź A:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerA">Odpowiedź A</textarea>
+                <textarea class="w-100" id="AnswerA" th:field="${question.answer.answers[0]}">Odpowiedź A</textarea>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                 <label for="AnswerB">Odpowiedź B:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerB">Odpowiedź B</textarea>
+                <textarea class="w-100" id="AnswerB" th:field="${question.answer.answers[1]}">Odpowiedź B</textarea>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <label for="AnswerC">Odpowiedź C:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerC">Odpowiedź C</textarea>
+                <textarea class="w-100" id="AnswerC" th:field="${question.answer.answers[2]}">Odpowiedź C</textarea>
             </div>
         </div>
 
@@ -48,31 +48,34 @@
                 <label for="AnswerD">Odpowiedź D:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerD">Odpowiedź D</textarea>
+                <textarea class="w-100" id="AnswerD" th:field="${question.answer.answers[3]}">Odpowiedź D</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-4 text-center">
                 <p><label for="QuestionPoints">Ilość punktów:</label></p>
-                <input id="QuestionPoints" type="number" value="7">
+                <input id="QuestionPoints" type="number" value="7" th:field="${question.score}">
             </div>
             <div class="col-4 text-center">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
-                <input id="CorrectAnserA" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserA" type="checkbox" th:field="${question.answer.correctAnswers[0]}"
+                       th:checked="${question.answer.correctAnswers[0]}">
                 <label for="CorrectAnserB">B</label>
-                <input id="CorrectAnserB" type="radio" name="CorrectAnswer" checked="">
+                <input id="CorrectAnserB" type="checkbox" th:field="${question.answer.correctAnswers[1]}"
+                       th:checked="${question.answer.correctAnswers[1]}">
                 <label for="CorrectAnserC">C</label>
-                <input id="CorrectAnserC" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserC" type="checkbox" th:field="${question.answer.correctAnswers[2]}"
+                       th:checked="${question.answer.correctAnswers[2]}">
                 <label for="CorrectAnserD">D</label>
-                <input id="CorrectAnserD" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserD" type="checkbox" th:field="${question.answer.correctAnswers[3]}"
+                       th:checked="${question.answer.correctAnswers[3]}">
             </div>
             <div class="col-4 text-center">
                 <p><label for="GameCategory">Wybierz kategorię:</label></p>
-                <select id="GameCategory">
-                    <option value="cat1">Kategoria 1</option>
-                    <option value="cat2" selected="">Kategoria 2</option>
+                <select id="GameCategory" th:field="${question.category}">
+                    <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
                 </select>
             </div>
         </div>
@@ -83,6 +86,7 @@
         </div>
     </form>
 </div>
+
 
 <th:block th:include="fragments/footer :: footer"></th:block>
 </body>

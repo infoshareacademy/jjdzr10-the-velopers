@@ -1,5 +1,6 @@
 package com.infoshare.webapp.service;
 
+import com.infoshare.webapp.exception.QuestionsNotFoundException;
 import com.infoshare.webapp.model.Answers;
 import com.infoshare.webapp.model.Category;
 import com.infoshare.webapp.model.Questions;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Scanner;
+
 @Service
 public class QuestionService {
 
@@ -21,31 +23,36 @@ public class QuestionService {
         this.readFileService = readFileService;
         questionsList = this.readFileService.loadQuestions();
     }
-    public List<Questions> getAll(){
+
+    public List<Questions> getAllQuestions() {
         return questionsList;
     }
-    public void editQuestionById(Long id, Questions question) {
-        Questions questionToEdit = findById(id);
 
+    public void editQuestion(Long id, Questions question) {
+        Questions questionToEdit = findById(id);
         questionToEdit.setAnswer(question.getAnswer());
         questionToEdit.setCategory(question.getCategory());
         questionToEdit.setQuestionText(question.getQuestionText());
         questionToEdit.setScore(question.getScore());
     }
+
     public Questions findById(Long id) {
         return questionsList.stream()
                 .filter(question -> question.getIdQuestion() == id)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Not found question with given Id:  "  + id));
+                .orElseThrow(() -> new QuestionsNotFoundException(String.format("Not found question with given Id:  %S", id)));
     }
+
     public void removeQuestionById(Long id) {
         Questions foundQuestion = findById(id);
         questionsList.remove(foundQuestion);
     }
-    public void addQuestion(Questions question){
+
+    public void addQuestion(Questions question) {
         questionsList.add(question);
     }
-    private static Questions formQuestion(){
+
+    private static Questions formQuestion() {
         Questions question = new Questions();
         Answers answer = new Answers();
         // category
@@ -72,7 +79,7 @@ public class QuestionService {
 
     public static void editQuestion(List<Questions> questionsList) throws IOException, URISyntaxException {
         // show available questions
-        showAvailableQuestions(questionsList);
+        availableQuestions(questionsList);
         // choose question to edit
         Questions quest = chooseQuestion(questionsList);
         showQuestion(quest);
@@ -85,45 +92,49 @@ public class QuestionService {
         // save to file
         SaveFileService.saveQuestionsToFile(questionsList);
     }
+
     public static void removeQuestion(List<Questions> questionsList) throws IOException {
         // show available questions
-        showAvailableQuestions(questionsList);
+        availableQuestions(questionsList);
         // choose question to edit
         Questions questionToRemove = chooseQuestion(questionsList);
         showQuestion(questionToRemove);
         questionsList.remove(questionToRemove);
     }
 
-    private static void showAvailableQuestions(List<Questions> questionsList){
-        for (Category cat: Category.values()) {
+    private static void availableQuestions(List<Questions> questionsList) {
+        for (Category cat : Category.values()) {
             System.out.println("Kategoria: " + cat);
             System.out.print("Dostępne numery pytań: ");
             StringBuilder stringBuilder = new StringBuilder();
 
-            questionsList.stream().filter(c -> c.getCategory().equals(cat)).forEach(s -> stringBuilder.append(s.getIdQuestion()+", "));
+            questionsList.stream().filter(c -> c.getCategory().equals(cat)).forEach(s -> stringBuilder.append(s.getIdQuestion() + ", "));
             System.out.println(stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(",")));
         }
         // return all possible number question to choose
         availableQuestionNumbers = questionsList.stream().map(Questions::getIdQuestion).toList();
     }
 
-    private static void showQuestion(Questions questions){
+    private static void showQuestion(Questions questions) {
         System.out.println("Wybrałeś pytanie: ");
         System.out.println(questions.toString());
     }
 
-    private static Questions chooseQuestion(List<Questions> questions){
+    private static Questions chooseQuestion(List<Questions> questions) {
         System.out.println("Wybierz numer pytania: ");
         Long chosenIdQuestion;
         while (true) {
             chosenIdQuestion = getValidateNumber();
-            if (availableQuestionNumbers.contains(chosenIdQuestion)){break;}
+            if (availableQuestionNumbers.contains(chosenIdQuestion)) {
+                break;
+            }
             System.out.println("Wartość jest z poza zakresu. Podaj jeszcze raz.");
         }
         Long finalChosenIdQuestion = chosenIdQuestion;
         Questions question = questions.stream().filter(q -> finalChosenIdQuestion.equals(q.getIdQuestion())).findFirst().get();
         return question;
     }
+
     private static Long getValidateNumber() {
         Long number;
         while (true) {
@@ -152,17 +163,18 @@ public class QuestionService {
         return Category.valueOf(userCategory.toUpperCase());
     }
 
-    private static Long getFromUserQuestionNumber(){
+    private static Long getFromUserQuestionNumber() {
         System.out.println("Podaj numer pytania: ");
         scanner = new Scanner(System.in);
         return scanner.nextLong();
     }
 
-    private static Integer getFromUserQuestionScore(){
+    private static Integer getFromUserQuestionScore() {
         System.out.println("Ile punktów za poprawną odpowiedź na to pytanie:");
         scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+
     private static String getFromUserQuestionText() {
         System.out.println("Wpisz pytanie");
         scanner = new Scanner(System.in);
@@ -174,12 +186,13 @@ public class QuestionService {
     private static String[] getFromUserAnswers() {
         scanner = new Scanner(System.in);
         String answers[] = new String[4];
-        for (int i = 0; i< answers.length; i++) {
-            System.out.print("Podaj odpowiedź " + ((char) (i+65)) + " : ");
+        for (int i = 0; i < answers.length; i++) {
+            System.out.print("Podaj odpowiedź " + ((char) (i + 65)) + " : ");
             answers[i] = scanner.nextLine();
         }
         return answers;
     }
+
     static boolean[] getFromUserCorrectAnswer() {
         scanner = new Scanner(System.in);
         boolean[] userAnswerBoolean = new boolean[4];
@@ -199,10 +212,10 @@ public class QuestionService {
         return userAnswerBoolean;
     }
 
-    private static boolean[] convertAnswer(String userAnswer){
-        String[] splitUserAnswers = userAnswer.split(",",4);
-        boolean[] booleansAnswers = {false,false,false,false};
-        for (int i=0;i<splitUserAnswers.length;i++) {
+    private static boolean[] convertAnswer(String userAnswer) {
+        String[] splitUserAnswers = userAnswer.split(",", 4);
+        boolean[] booleansAnswers = {false, false, false, false};
+        for (int i = 0; i < splitUserAnswers.length; i++) {
             switch (splitUserAnswers[i]) {
                 case "A":
                     booleansAnswers[0] = true;
@@ -217,7 +230,8 @@ public class QuestionService {
                     booleansAnswers[3] = true;
                     break;
             }
-        } return booleansAnswers;
+        }
+        return booleansAnswers;
     }
 }
 
