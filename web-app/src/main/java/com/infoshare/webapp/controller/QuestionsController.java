@@ -60,6 +60,8 @@ public class QuestionsController {
 
     @PostMapping("/questions/question")
     public String addQuestion(@ModelAttribute Questions question) {
+        Long questionID = questionService.getLastQuestionId() + 1;
+        question.setIdQuestion(questionID);
         questionService.addQuestion(question);
         return "redirect:/questions";
     }
