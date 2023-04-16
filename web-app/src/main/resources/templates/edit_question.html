@@ -55,7 +55,7 @@
         <div class="row my-2">
             <div class="col-4 text-center">
                 <p><label for="QuestionPoints">Ilość punktów:</label></p>
-                <input id="QuestionPoints" type="number" value="7" th:field="${question.score}" th:required="required" th:min="1">
+                <input id="QuestionPoints" type="number" value="7" th:field="${question.score}" th:required="required" th:min="1" th:max="100">
             </div>
             <div class="col-4 text-center checkboxValidator">
                 <p>Prawidłowa odpowiedź:</p>
