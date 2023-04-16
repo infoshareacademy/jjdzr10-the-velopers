@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class AccountController {
     @GetMapping("/reset_pass")
@@ -17,9 +19,9 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String submitForm(@ModelAttribute("user") User user){
+    public String submitForm(@Valid @ModelAttribute("user") User user){
         System.out.println(user);
-        return "start";
+        return "index";
     }
 
     @GetMapping("/register")
