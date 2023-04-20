@@ -19,16 +19,16 @@
         <div class="row mb-3">
             <div class="col-sm-6 col-12">
                 <label for="InputName" class="form-label">User name</label>
-                <input type="text" th:field="*{userName}" class="form-control col-md-6" id="InputName">
+                <input type="text" th:field="${userName}" class="form-control col-md-6" id="InputName">
 
             </div>
             <div class="col-sm-6 col-12">
                 <label for="InputPassword" class="form-label">Password</label>
-                <input type="password" th:field="*{password}" class="form-control col-md-6" id="InputPassword">
+                <input type="password" th:field="${password}" class="form-control col-md-6" id="InputPassword">
             </div>
             <div class="col-sm-6 col-12">
                 <label for="InputEmail" class="form-label">E-mail</label>
-                <input type="email" th:field="*{email}" class="form-control col-md-6" id="InputEmail"
+                <input type="email" th:field="${email}" class="form-control col-md-6" id="InputEmail"
                        aria-describedby="emailHelp">
                 <!--              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
             </div>
@@ -41,8 +41,8 @@
                 <a class="btn btn-outline-primary" href="/" role="button">Back</a>
             </div>
         </div>
-        <ul th:if="${#fields.hasErrors('*')}">
-            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+        <ul th:if="${fields.hasErrors('*')}">
+            <li th:each="err : ${fields.errors('*')}" th:text="${err}"/>
         </ul>
 
 

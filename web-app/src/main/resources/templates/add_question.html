@@ -81,6 +81,9 @@
             <div class="col-12 text-center">
                 <button class="btn text-white bg-primary w-auto" type="submit">Dodaj pytanie</button>
             </div>
+            <ul th:if="${#fields.hasErrors('*')}">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
         </div>
     </form>
 </div>
