@@ -7,8 +7,10 @@ import com.infoshare.webapp.service.CategoryService;
 import com.infoshare.webapp.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -57,8 +59,11 @@ public class QuestionsController {
     }
 
     @PostMapping("/questions/question")
-    public String addQuestion(@ModelAttribute Questions question) {
+    public String addQuestion(@Valid @ModelAttribute Questions question, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "questions/question";
+        }
         questionService.addQuestion(question);
-        return "redirect:/questions";
+        return "redirect:/questions/";
     }
 }

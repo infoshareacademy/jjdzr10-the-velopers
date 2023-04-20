@@ -1,8 +1,10 @@
 package com.infoshare.webapp.controller;
 
 import com.infoshare.webapp.model.User;
+import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +21,11 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String submitForm(@Valid @ModelAttribute("user") User user){
-        System.out.println(user);
+    public String submitForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+       // System.out.println(user);
+        if (bindingResult.hasErrors()) {
+            return "redirect:/register";
+        }
         return "index";
     }
 

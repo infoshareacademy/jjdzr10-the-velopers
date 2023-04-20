@@ -1,9 +1,12 @@
 package com.infoshare.webapp.model;
 
+import javax.validation.constraints.NotEmpty;
+
 public class Questions {
     private Long idQuestion;
     private Category category;
     private Answers answer;
+    @NotEmpty(message = "The question text cannot be empty")
     private String questionText;
     private int score;
 

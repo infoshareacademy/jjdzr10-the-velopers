@@ -2,6 +2,7 @@ package com.infoshare.webapp.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,12 +10,14 @@ import javax.validation.constraints.Size;
 
 public class User {
 
-    @NotEmpty(message = "Nazwa użytkownika nie może być pusta")
-    @Size(min=2, max=20, message = "Nazwa użytkownika powinna zawierać od 2 do 20 znaków")
+    @NotEmpty(message = "The username cannot be empty")
+    @Size(min=2, max=20, message = "The username should contain between 2 and 20 characters")
     private String userName;
     private Score userScore;
-
+    @NotEmpty(message = "The username cannot be empty")
+    @Size(min=2, max=10, message = "The username should contain between 2 and 10 characters")
     private String password;
+    @Email(message = "Email should be valid")
     private String email;
 
     public void setUserName(String userName) {
