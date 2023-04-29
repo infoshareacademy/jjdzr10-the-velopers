@@ -1,0 +1,39 @@
+<th:block th:fragment="question">
+    <h4 class="col text-start" th:text="${question.category.name()}">category_name_default</h4>
+    <div class="row pt-4 pb-4">
+        <div class="col-3 text-end" th:text="'# '+${question.idQuestion}"></div>
+
+        <div class="col-6 border border-bottom-0 border-1 rounded-top shadow-sm">
+            <p class="row p-3 overflow-auto" style="text-align: justify;" th:text="${question.questionText}"></p>
+            <div class="d-grid gap-2 d-md-flex justify-content-center pb-2">
+                <form action="#" th:action="@{/game/{idQuestion}(idQuestion=${question.idQuestion})}"
+                      th:object="${userAnswer}" method="post">
+                    <tr class="col" th:each="answer,itemStat: ${question.answer.answers}">
+                        <td>
+                            <input type="radio" class="btn-check" th:id="'answer_'+${itemStat.index}"
+                                   th:field="*{correctAnswers[__${itemStat.index}__]}" th:value="true"
+                                   th:disabled="${userAnswer.correctAnswers.contains(true)}">
+                            <label class="btn btn-outline-success" th:for="'answer_'+${itemStat.index}"
+                                   th:text="${answer}">answer</label>
+                        </td>
+                    </tr>
+                    <div id="button-group" class="col pt-3 btn-group d-md-flex justify-content-md-center" role="group">
+                        <input type="submit" class="btn btn-outline-primary" value="Check answer"
+                               th:unless="${userAnswer.correctAnswers.contains(true)}"/>
+                        <input type="reset" class="btn btn-outline-danger" value="Reset"
+                               th:unless="${userAnswer.correctAnswers.contains(true)}"/>
+                    </div>
+                    <div class="text-center" th:if="${userAnswer.correctAnswers.contains(true)}">
+                        <div th:if="${correction}">CORRECT</div>
+                        <div th:if="${correction == false}">WRONG</div>
+                        <div th:unless="${correction}"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-3 row text-start">
+            <a class="col" href="https://wikipedia.pl">(?)</a>
+            <p class="col text-end">timer_placeholder</p>
+        </div>
+    </div>
+</th:block>

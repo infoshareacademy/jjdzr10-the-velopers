@@ -14,7 +14,13 @@ public class GameService {
     public GameService(Game game){
         this.game = game;
     }
-
+    public List<Questions> getAllQuestions() {
+        return game.getQuestions();
+    }
+    public Answers getUserAnswer(Questions question) {
+        int questionIndex = game.getQuestions().indexOf(question);
+        return game.getAllUserAnswers().get(questionIndex);
+    }
     public void settingsGame(Game newGame) {
         game.setUser(newGame.getUser());
         game.setAllUserAnswers(new ArrayList<>());
