@@ -4,7 +4,6 @@ import com.infoshare.webapp.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class GameService {
@@ -20,6 +19,24 @@ public class GameService {
     public Answers getUserAnswer(Questions question) {
         int questionIndex = game.getQuestions().indexOf(question);
         return game.getAllUserAnswers().get(questionIndex);
+    }
+    public void setUserAnswer(Questions question, Answers userAnswer) {
+        int questionIndex = game.getQuestions().indexOf(question);
+        game.getAllUserAnswers().set(questionIndex, userAnswer);
+    }
+    public Boolean compareAnswers(Answers answers, Answers userAnswers) {
+        return answers.getCorrectAnswers().equals(userAnswers.getCorrectAnswers());
+    }
+    public List<Boolean> makeListUserAnswers(Answers answers, List<Boolean> booleansAnswers) {
+        List<Boolean> userAnswers = new ArrayList<>(Collections.nCopies(answers.getCorrectAnswers().size(), false));
+        if (booleansAnswers != null) {
+            for (int i = 0; i < booleansAnswers.size(); i++) {
+                if (booleansAnswers.get(i) != null) {
+                    userAnswers.set(i, booleansAnswers.get(i));
+                }
+            }
+        }
+        return userAnswers;
     }
     public void settingsGame(Game newGame) {
         game.setUser(newGame.getUser());

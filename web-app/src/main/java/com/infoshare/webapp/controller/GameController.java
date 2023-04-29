@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -46,4 +47,34 @@ public class GameController {
         model.addAttribute("userAnswer",answers);
         return "/game_play";
     }
+    @GetMapping("/game/{idQuestion}")
+    public String showQuestion(@PathVariable("idQuestion") Long idQuestion, Model model){
+        List<Questions> questions = gameService.getAllQuestions();
+        model.addAttribute("questions", questions);
+
+        Questions question = questionService.findById(idQuestion);
+        LOGGER.info("Loaded question {}", question);
+        model.addAttribute("question", question);
+
+        Answers answers = gameService.getUserAnswer(question);
+        LOGGER.info("GET user answers from list : {}", answers.getCorrectAnswers());
+        model.addAttribute("userAnswer", answers);
+        boolean correction = gameService.compareAnswers(question.getAnswer(), answers);
+        model.addAttribute("correction", correction);
+        return "/game_play";
+    }
+    @PostMapping("/game/{idQuestion}")
+    public String sendAnswer(@ModelAttribute Answers userAnswer, @PathVariable Long idQuestion){
+        Questions question = questionService.findById(idQuestion);
+        LOGGER.info("GET User input: {}", userAnswer.getCorrectAnswers());
+        List<Boolean> userListAnswers = gameService.makeListUserAnswers(question.getAnswer(),userAnswer.getCorrectAnswers());
+        Answers userAnswers = new Answers();
+        userAnswers.setCorrectAnswers(userListAnswers);
+        LOGGER.info("Converted answers: {}", userAnswers.getCorrectAnswers());
+        Boolean isCorrectAnswer = gameService.compareAnswers(question.getAnswer(), userAnswers);
+        LOGGER.info("Check user answer: {}", isCorrectAnswer);
+        gameService.setUserAnswer(question, userAnswers);
+        return "redirect:/game/{idQuestion}";
+    }
+
 }
