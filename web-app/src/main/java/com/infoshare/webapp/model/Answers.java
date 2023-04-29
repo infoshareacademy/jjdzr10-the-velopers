@@ -1,27 +1,24 @@
 package com.infoshare.webapp.model;
 
-public class Answers {
-    private String[] answers = new String[4];
-    private boolean[] correctAnswers = new boolean[4];
+import java.util.List;
 
-    public String[] getAnswers() {
+public class Answers {
+    private List<String> answers;
+    private List<Boolean> correctAnswers;
+
+    public List<String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(String[] answers) {
-
+    public void setAnswers(List<String> answers) {
         this.answers = answers;
     }
 
-    public boolean[] getCorrectAnswers() {
-
+    public List<Boolean> getCorrectAnswers() {
         return correctAnswers;
     }
 
-    public void setCorrectAnswers(boolean[] correctAnswers) {
-
+    public void setCorrectAnswers(List<Boolean> correctAnswers) {
         this.correctAnswers = correctAnswers;
     }
-
-
 }
