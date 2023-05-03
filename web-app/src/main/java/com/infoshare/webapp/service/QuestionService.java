@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 @Service
 public class QuestionService {
@@ -26,6 +25,14 @@ public class QuestionService {
 
     public List<Questions> getAllQuestions() {
         return questionsList;
+    }
+
+    public Long getLastQuestionId() {
+        Long lastQuestionId = 0L;
+        if (!questionsList.isEmpty()) {
+            lastQuestionId = questionsList.stream().max(Comparator.comparing(Questions::getIdQuestion)).get().getIdQuestion();
+        }
+        return lastQuestionId;
     }
 
     public void editQuestion(Long id, Questions question) {

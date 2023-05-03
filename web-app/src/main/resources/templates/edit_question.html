@@ -12,7 +12,7 @@
                 <label for="QuestionText">Treść pytania:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="QuestionText" th:field="${question.questionText}">Treść pytania</textarea>
+                <textarea class="w-100" id="QuestionText" th:field="${question.questionText}" th:required="required">Treść pytania</textarea>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                 <label for="AnswerA">Odpowiedź A:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerA" th:field="${question.answer.answers[0]}">Odpowiedź A</textarea>
+                <textarea class="w-100" id="AnswerA" th:field="${question.answer.answers[0]}" th:required="required">Odpowiedź A</textarea>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                 <label for="AnswerB">Odpowiedź B:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerB" th:field="${question.answer.answers[1]}">Odpowiedź B</textarea>
+                <textarea class="w-100" id="AnswerB" th:field="${question.answer.answers[1]}" th:required="required">Odpowiedź B</textarea>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <label for="AnswerC">Odpowiedź C:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerC" th:field="${question.answer.answers[2]}">Odpowiedź C</textarea>
+                <textarea class="w-100" id="AnswerC" th:field="${question.answer.answers[2]}" th:required="required">Odpowiedź C</textarea>
             </div>
         </div>
 
@@ -48,16 +48,16 @@
                 <label for="AnswerD">Odpowiedź D:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerD" th:field="${question.answer.answers[3]}">Odpowiedź D</textarea>
+                <textarea class="w-100" id="AnswerD" th:field="${question.answer.answers[3]}" th:required="required">Odpowiedź D</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-4 text-center">
                 <p><label for="QuestionPoints">Ilość punktów:</label></p>
-                <input id="QuestionPoints" type="number" value="7" th:field="${question.score}">
+                <input id="QuestionPoints" type="number" value="7" th:field="${question.score}" th:required="required" th:min="1" th:max="100">
             </div>
-            <div class="col-4 text-center">
+            <div class="col-4 text-center checkboxValidator">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
                 <input id="CorrectAnserA" type="checkbox" th:field="${question.answer.correctAnswers[0]}"
