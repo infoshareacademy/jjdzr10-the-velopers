@@ -1,0 +1,35 @@
+package com.infoshare.webapp.service;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infoshare.webapp.model.Questions;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Objects;
+
+@Service
+public class FileJSONService {
+    private final ObjectMapper objectMapper;
+    private List<Questions> questions;
+
+    public FileJSONService(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    public void loadFile(MultipartFile file) throws IOException {
+        if (Objects.equals(file.getContentType(), "application/json")) {
+            questions = objectMapper.readValue(new InputStreamReader(file.getInputStream()), new TypeReference<List<Questions>>() {});
+        }
+    }
+
+    public void saveFile(List<Questions> questions, String filePath) throws IOException {
+        String questionsAsString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(questions);
+        Files.writeString(Path.of(filePath), questionsAsString);
+    }
+}
