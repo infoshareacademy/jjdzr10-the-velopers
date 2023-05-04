@@ -53,6 +53,13 @@ public class QuestionsController {
         return "edit_question";
     }
 
+    @GetMapping("questions/{idQuestion}")
+    public String getSingleQuestion(@PathVariable("idQuestion") Long idQuestion, Model model) {
+        model.addAttribute("pageTitle", "Single question");
+        model.addAttribute("question", questionService.findById(idQuestion));
+        return "question";
+    }
+
     @PostMapping("/questions/edit/{idQuestion}")
     public String editQuestion(@PathVariable("idQuestion") Long idQuestion, Questions questions, Model model) {
         questionService.editQuestion(idQuestion, questions);
