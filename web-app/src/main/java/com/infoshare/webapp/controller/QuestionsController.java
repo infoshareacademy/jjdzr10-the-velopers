@@ -8,6 +8,7 @@ import com.infoshare.webapp.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -38,8 +39,10 @@ public class QuestionsController {
     }
 
     @GetMapping("/questions/delete/{idQuestion}")
-    public String deleteQuestion(@PathVariable long idQuestion) {
+    public String deleteQuestion(@PathVariable long idQuestion, RedirectAttributes attributes) {
         questionService.removeQuestionById(idQuestion);
+        attributes.addFlashAttribute("message", "You delete question! (Question id: " + idQuestion + " )");
+        attributes.addFlashAttribute("messageType","danger");
         return "redirect:/questions";
     }
 
@@ -61,14 +64,18 @@ public class QuestionsController {
     }
 
     @PostMapping("/questions/edit/{idQuestion}")
-    public String editQuestion(@PathVariable("idQuestion") Long idQuestion, Questions questions, Model model) {
+    public String editQuestion(@PathVariable("idQuestion") Long idQuestion, Questions questions, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("message", "You edit question! (Question Id: " + idQuestion + " )");
+        attributes.addFlashAttribute("messageType","success");
         questionService.editQuestion(idQuestion, questions);
         return "redirect:/questions";
     }
 
     @PostMapping("/questions/question")
-    public String addQuestion(@ModelAttribute Questions question) {
-        Long questionID = questionService.getLastQuestionId() + 1;
+    public String addQuestion(@ModelAttribute Questions question, RedirectAttributes attributes) {
+        long questionID = questionService.getLastQuestionId() + 1;
+        attributes.addFlashAttribute("message", "You added new question! (Question Id: " + questionID + " )");
+        attributes.addFlashAttribute("messageType","success");
         question.setIdQuestion(questionID);
         questionService.addQuestion(question);
         return "redirect:/questions";
