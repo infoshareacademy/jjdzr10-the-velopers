@@ -7,11 +7,11 @@ public class Questions {
     private String questionText;
     private int score;
 
-    public Long getIdQuestion() {
+    public long getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(Long idQuestion) {
+    public void setIdQuestion(long idQuestion) {
         this.idQuestion = idQuestion;
     }
 

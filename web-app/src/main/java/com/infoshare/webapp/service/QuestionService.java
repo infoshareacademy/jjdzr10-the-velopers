@@ -11,8 +11,6 @@ import java.util.Scanner;
 @Service
 public class QuestionService {
 
-    private static List<Long> availableQuestionNumbers;
-    private static Scanner scanner;
     private static List<Questions> questionsList;
     private final ReadFileService readFileService;
 
@@ -25,7 +23,7 @@ public class QuestionService {
         return questionsList;
     }
 
-    public void editQuestion(Long id, Questions question) {
+    public void editQuestion(long id, Questions question) {
         Questions questionToEdit = findById(id);
         questionToEdit.setAnswer(question.getAnswer());
         questionToEdit.setCategory(question.getCategory());
@@ -33,14 +31,14 @@ public class QuestionService {
         questionToEdit.setScore(question.getScore());
     }
 
-    public Questions findById(Long id) {
+    public Questions findById(long id) {
         return questionsList.stream()
                 .filter(question -> question.getIdQuestion() == id)
                 .findFirst()
                 .orElseThrow(() -> new QuestionsNotFoundException(String.format("Not found question with given Id:  %S", id)));
     }
 
-    public void removeQuestionById(Long id) {
+    public void removeQuestionById(long id) {
         Questions foundQuestion = findById(id);
         questionsList.remove(foundQuestion);
     }

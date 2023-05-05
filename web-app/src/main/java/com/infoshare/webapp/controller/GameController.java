@@ -48,7 +48,7 @@ public class GameController {
         return "/game_play";
     }
     @GetMapping("/game/{idQuestion}")
-    public String showQuestion(@PathVariable("idQuestion") Long idQuestion, Model model){
+    public String showQuestion(@PathVariable("idQuestion") long idQuestion, Model model){
         List<Questions> questions = gameService.getAllQuestions();
         model.addAttribute("questions", questions);
 
@@ -64,7 +64,7 @@ public class GameController {
         return "/game_play";
     }
     @PostMapping("/game/{idQuestion}")
-    public String sendAnswer(@ModelAttribute Answers userAnswer, @PathVariable Long idQuestion){
+    public String sendAnswer(@ModelAttribute Answers userAnswer, @PathVariable long idQuestion){
         Questions question = questionService.findById(idQuestion);
         LOGGER.info("GET User input: {}", userAnswer.getCorrectAnswers());
         List<Boolean> userListAnswers = gameService.makeListUserAnswers(question.getAnswer(),userAnswer.getCorrectAnswers());
