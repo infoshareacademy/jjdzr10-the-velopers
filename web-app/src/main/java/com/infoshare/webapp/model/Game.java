@@ -1,10 +1,11 @@
 package com.infoshare.webapp.model;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Controller
+@Component
 public class Game {
     private User user;
     private List<Questions> questions;
