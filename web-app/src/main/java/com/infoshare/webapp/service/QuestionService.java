@@ -5,6 +5,8 @@ import com.infoshare.webapp.model.Questions;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,10 +27,19 @@ public class QuestionService {
 
     public void editQuestion(long id, Questions question) {
         Questions questionToEdit = findById(id);
-        questionToEdit.setAnswer(question.getAnswer());
+        questionToEdit.getAnswer().setCorrectAnswers(editAnswer(questionToEdit.getAnswer().getCorrectAnswers(), question.getAnswer().getCorrectAnswers()));
         questionToEdit.setCategory(question.getCategory());
         questionToEdit.setQuestionText(question.getQuestionText());
         questionToEdit.setScore(question.getScore());
+    }
+    public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer){
+        ArrayList<Boolean> booleans = new ArrayList<>(Collections.nCopies(answerToEdit.size(), false));
+        for (int i=0; i<userAnswer.size(); i++) {
+            if (userAnswer.get(i) != null) {
+                booleans.set(i, userAnswer.get(i));
+            }
+        }
+        return booleans;
     }
 
     public Questions findById(long id) {
