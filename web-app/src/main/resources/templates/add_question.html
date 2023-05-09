@@ -21,7 +21,7 @@
                 <label for="AnswerA">Odpowiedź A:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerA" th:field="${question.answer.answers[0]}" th:required="required">Odpowiedź A</textarea>
+                <textarea class="w-100" id="AnswerA" th:field="${question.answers[0].answer}" th:required="required">Odpowiedź A</textarea>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                 <label for="AnswerB">Odpowiedź B:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerB" th:field="${question.answer.answers[1]}" th:required="required">Odpowiedź B</textarea>
+                <textarea class="w-100" id="AnswerB" th:field="${question.answers[1].answer}" th:required="required">Odpowiedź B</textarea>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <label for="AnswerC">Odpowiedź C:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerC" th:field="${question.answer.answers[2]}" th:required="required">Odpowiedź C</textarea>
+                <textarea class="w-100" id="AnswerC" th:field="${question.answers[2].answer}" th:required="required">Odpowiedź C</textarea>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
                 <label for="AnswerD">Odpowiedź D:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerD" th:field="${question.answer.answers[3]}" th:required="required">Odpowiedź D</textarea>
+                <textarea class="w-100" id="AnswerD" th:field="${question.answers[3].answer}" th:required="required">Odpowiedź D</textarea>
             </div>
         </div>
 
@@ -60,13 +60,13 @@
             <div class="col-4 text-center checkboxValidator">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
-                <input id="CorrectAnserA" type="checkbox" th:field="${question.answer.correctAnswers[0]}" th:required="required">
+                <input id="CorrectAnserA" type="checkbox" th:field="${question.answers[0].correct}" th:required="required">
                 <label for="CorrectAnserB">B</label>
-                <input id="CorrectAnserB" type="checkbox" th:field="${question.answer.correctAnswers[1]}" th:required="required">
+                <input id="CorrectAnserB" type="checkbox" th:field="${question.answers[1].correct}" th:required="required">
                 <label for="CorrectAnserC">C</label>
-                <input id="CorrectAnserC" type="checkbox" th:field="${question.answer.correctAnswers[2]}" th:required="required">
+                <input id="CorrectAnserC" type="checkbox" th:field="${question.answers[2].correct}" th:required="required">
                 <label for="CorrectAnserD">D</label>
-                <input id="CorrectAnserD" type="checkbox" th:field="${question.answer.correctAnswers[3]}" th:required="required">
+                <input id="CorrectAnserD" type="checkbox" th:field="${question.answers[3].correct}" th:required="required">
             </div>
             <div class="col-4 text-center">
                 <p><label for="GameCategory">Wybierz kategorię:</label></p>

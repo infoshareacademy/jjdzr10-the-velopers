@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Game {
     private User user;
-    private List<Questions> questions;
+    private List<Question> questions;
     private boolean allUserAnswers[][];
     private Integer amountQuestions;
     private boolean mixQuestions;
@@ -43,11 +43,11 @@ public class Game {
         this.level = level;
     }
 
-    public List<Questions> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<Questions> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 

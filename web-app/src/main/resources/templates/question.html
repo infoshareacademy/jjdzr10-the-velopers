@@ -25,10 +25,10 @@
     </td>
 
     <td class="col container">
-      <p class="btn btn-outline-primary btn-lg" th:text="'A: '+${question.answer.answers[0]}"></p>
-      <p class="btn btn-outline-primary btn-lg" th:text="'B: '+${question.answer.answers[1]}"></p>
-      <p class="btn btn-outline-primary btn-lg" th:text="'C: '+${question.answer.answers[2]}"></p>
-      <p class="btn btn-outline-primary btn-lg" th:text="'D: '+${question.answer.answers[3]}"></p>
+      <p class="btn btn-outline-primary btn-lg" th:text="'A: '+${question.answers[0].answer}"></p>
+      <p class="btn btn-outline-primary btn-lg" th:text="'B: '+${question.answers[1].answer}"></p>
+      <p class="btn btn-outline-primary btn-lg" th:text="'C: '+${question.answers[2].answer}"></p>
+      <p class="btn btn-outline-primary btn-lg" th:text="'D: '+${question.answers[3].answer}"></p>
     </td>
   </tr>
 </div>

@@ -1,0 +1,52 @@
+[
+   {
+      "idQuestion":1,
+      "category":"HISTORIA",
+      "answers":
+      [
+	{
+	"answer":"966",
+      	"correct": true
+      	},
+      	{
+	"answer":"578",
+      	"correct": false
+      	},
+      	{
+	"answer":"1021",
+      	"correct": false
+      	},
+      	{
+	"answer":"1350",
+      	"correct": false
+      	}
+      	],
+      "questionText":"W którym roku był chrzest Polski?",
+      "score":1
+   },
+   {
+      "idQuestion":2,
+      "category":"HISTORIA",
+      "answers":
+      [
+	{
+	"answer":"Mieszko I",
+      	"correct": false
+      	},
+      	{
+	"answer":"Bolesław Chrobry",
+      	"correct": true
+      	},
+      	{
+	"answer":"Zygmunt Stary",
+      	"correct": false
+      	},
+      	{
+	"answer":"Zygmunt August",
+      	"correct": false
+      	}
+      	],
+      "questionText":"Jak nazywał się pierwszy król Polski?",
+      "score":1
+   }
+]

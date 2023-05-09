@@ -3,7 +3,7 @@ package com.infoshare.webapp.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshare.webapp.model.Category;
-import com.infoshare.webapp.model.Questions;
+import com.infoshare.webapp.model.Question;
 import com.infoshare.webapp.WebAppApplication;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +15,22 @@ import java.util.List;
 @Service
 public class ReadFileService {
 
-    private static final URL questionResource = WebAppApplication.class.getClassLoader().getResource("questions.json");
+    private static final URL questionResource = WebAppApplication.class.getClassLoader().getResource("questions2.json");
 
     public ReadFileService() {
     }
 
-    public static List<Questions> loadQuestions() throws IOException {
+    public static List<Question> loadQuestions() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Questions> questionsList = objectMapper.readValue(questionResource, new TypeReference<List<Questions>>() {});
-        return questionsList;
+        return objectMapper.readValue(questionResource, new TypeReference<List<Question>>() {});
     }
 
-    public static List<Questions> loadQuestions(Category category) throws IOException {
+    public static List<Question> loadQuestions(Category category) throws IOException {
         return getFilteredQuestions(loadQuestions(),category);
     }
 
-    private static List<Questions> getFilteredQuestions(List<Questions> questions, Category category){
-        List<Questions> filteredQuestions = new ArrayList<>();
+    private static List<Question> getFilteredQuestions(List<Question> questions, Category category){
+        List<Question> filteredQuestions = new ArrayList<>();
         for (int i=0; i<questions.size();i++){
             if (questions.get(i).getCategory() == category){
                 filteredQuestions.add(questions.get(i));
