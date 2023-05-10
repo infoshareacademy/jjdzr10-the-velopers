@@ -59,9 +59,9 @@ public class QuestionsController {
     }
 
     @PostMapping("/questions/question")
-    public String addQuestion(@Valid @ModelAttribute Questions question, BindingResult bindingResult) {
+    public String addQuestion(@Valid @ModelAttribute("question") Questions question, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "questions/question";
+            return "add_question";
         }
         questionService.addQuestion(question);
         return "redirect:/questions/";

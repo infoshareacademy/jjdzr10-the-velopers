@@ -6,13 +6,13 @@
 
 <div class="container">
     <h1 class="text-center">Dodaj pytanie</h1>
-    <form>
+    <form action="#" th:action="@{/questions/question}" method="post" th:object="${question}">
         <div class="row my-2">
             <div class="col-2">
                 <label for="QuestionText">Treść pytania:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="QuestionText"></textarea>
+                <textarea class="w-100" id="QuestionText" th:field="*{questionText}" >Treść pytania</textarea>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                 <label for="AnswerA">Odpowiedź A:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerA"></textarea>
+                <textarea class="w-100" id="AnswerA" th:field="*{answer.answers[0]}" th:required="required">Odpowiedź A</textarea>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                 <label for="AnswerB">Odpowiedź B:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerB"></textarea>
+                <textarea class="w-100" id="AnswerB" th:field="*{answer.answers[1]}" th:required="required">Odpowiedź B</textarea>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <label for="AnswerC">Odpowiedź C:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerC"></textarea>
+                <textarea class="w-100" id="AnswerC" th:field="*{answer.answers[2]}" th:required="required">Odpowiedź C</textarea>
             </div>
         </div>
 
@@ -48,42 +48,45 @@
                 <label for="AnswerD">Odpowiedź D:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerD"></textarea>
+                <textarea class="w-100" id="AnswerD" th:field="*{answer.answers[3]}" th:required="required">Odpowiedź D</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-4 text-center">
                 <p><label for="QuestionPoints">Ilość punktów:</label></p>
-                <input id="QuestionPoints" type="number">
+                <input id="QuestionPoints" type="number" value="7" th:field="*{score}" th:required="required" th:min="1" th:max="100">
             </div>
-            <div class="col-4 text-center">
+            <div class="col-4 text-center checkboxValidator">
                 <p>Prawidłowa odpowiedź:</p>
                 <label for="CorrectAnserA">A</label>
-                <input id="CorrectAnserA" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserA" type="checkbox" th:field="*{answer.correctAnswers[0]}" th:required="required">
                 <label for="CorrectAnserB">B</label>
-                <input id="CorrectAnserB" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserB" type="checkbox" th:field="*{answer.correctAnswers[1]}" th:required="required">
                 <label for="CorrectAnserC">C</label>
-                <input id="CorrectAnserC" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserC" type="checkbox" th:field="*{answer.correctAnswers[2]}" >
                 <label for="CorrectAnserD">D</label>
-                <input id="CorrectAnserD" type="radio" name="CorrectAnswer">
+                <input id="CorrectAnserD" type="checkbox" th:field="*{answer.correctAnswers[3]}" >
             </div>
             <div class="col-4 text-center">
                 <p><label for="GameCategory">Wybierz kategorię:</label></p>
-                <select id="GameCategory">
-                    <option value=""></option>
-                    <option value="cat1">Kategoria 1</option>
-                    <option value="cat2">Kategoria 2</option>
+                <select id="GameCategory" th:field="*{category}">
+                    <option th:each="category : ${T(com.infoshare.webapp.model.Category).values()}" th:value="${category}" th:text="${category}"></option>
                 </select>
             </div>
         </div>
         <div class="row my-3">
             <div class="col-12 text-center">
-                <button class="btn text-white bg-primary w-auto" type="submit">Dodaj pytanie</button>
+                <button class="btn text-white bg-primary w-auto" type="submit">Zapisz zmiany</button>
             </div>
-            <ul th:if="${#fields.hasErrors('*')}">
-                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
-            </ul>
+        </div>
+        <div th:if="${#fields.hasAnyErrors()}" class="card text-bg-warning p-3">
+            <div class="card-header h6">Errors:</div>
+            <div class="card-body">
+                <ul>
+                    <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+                </ul>
+            </div>
         </div>
     </form>
 </div>
