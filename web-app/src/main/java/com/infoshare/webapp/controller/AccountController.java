@@ -21,10 +21,9 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String submitForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-       // System.out.println(user);
+    public String submitForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/register";
+            return "register_form";
         }
         return "index";
     }

@@ -41,9 +41,14 @@
                 <a class="btn btn-outline-primary" href="/" role="button">Back</a>
             </div>
         </div>
-        <ul th:if="${fields.hasErrors('*')}">
-            <li th:each="err : ${fields.errors('*')}" th:text="${err}"/>
-        </ul>
+        <div th:if="${#fields.hasAnyErrors()}" class="card text-bg-warning p-3">
+            <div class="card-header h6">Errors:</div>
+            <div class="card-body">
+                <ul>
+                    <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
 
 
     </form>
