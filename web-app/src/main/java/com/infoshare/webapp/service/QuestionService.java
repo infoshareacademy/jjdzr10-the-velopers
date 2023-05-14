@@ -5,10 +5,9 @@ import com.infoshare.webapp.model.Questions;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.net.URISyntaxException;
+import java.util.*;
+
 
 @Service
 public class QuestionService {
@@ -25,7 +24,15 @@ public class QuestionService {
         return questionsList;
     }
 
-    public void editQuestion(long id, Questions question) {
+    public Long getLastQuestionId() {
+        Long lastQuestionId = 0L;
+        if (!questionsList.isEmpty()) {
+            lastQuestionId = questionsList.stream().max(Comparator.comparing(Questions::getIdQuestion)).get().getIdQuestion();
+        }
+        return lastQuestionId;
+    }
+
+    public void editQuestion(Long id, Questions question) {
         Questions questionToEdit = findById(id);
         questionToEdit.getAnswer().setCorrectAnswers(editAnswer(questionToEdit.getAnswer().getCorrectAnswers(), question.getAnswer().getCorrectAnswers()));
         questionToEdit.setCategory(question.getCategory());

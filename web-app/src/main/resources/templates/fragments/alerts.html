@@ -1,0 +1,26 @@
+<th:block th:fragment="alert">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div th:if="${message ne null}">
+            <div th:if="${messageType == 'success'}" class="alert alert-success alert-dismissible fade show"
+                 role="alert">
+                <th:block th:include="fragments/alerts :: message"></th:block>
+            </div>
+            <div th:if="${messageType == 'danger'}" class="alert alert-danger alert-dismissible fade show"
+                 role="alert">
+                <th:block th:include="fragments/alerts :: message"></th:block>
+            </div>
+            <div th:if="${messageType == 'warning'}" class="alert alert-warning alert-dismissible fade show"
+                 role="alert">
+                <th:block th:include="fragments/alerts :: message"></th:block>
+            </div>
+            <div th:if="${messageType == 'info'}" class="alert alert-info alert-dismissible fade show"
+                 role="alert">
+                <th:block th:include="fragments/alerts :: message"></th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block th:fragment="message">
+    <p th:text="${message}"></p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</th:block>

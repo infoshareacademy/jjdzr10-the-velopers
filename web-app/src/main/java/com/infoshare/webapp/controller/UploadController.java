@@ -33,16 +33,18 @@ public class UploadController {
         // check if file is empty
         if (file == null || file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
+            attributes.addFlashAttribute("messageType","danger");
             return "redirect:/";
         }
         final String JSON_CONTENT_TYPE = "application/json";
         if (!Objects.equals(file.getContentType(), JSON_CONTENT_TYPE)) {
             attributes.addFlashAttribute("message", "Please select a file type JSON.");
+            attributes.addFlashAttribute("messageType","warning");
             return "redirect:/";
         }
         fileJSONService.loadFile(file);
-        model.addAttribute("file", file);
         attributes.addFlashAttribute("message", "You successfully uploaded " + file.getName() + '!');
+        attributes.addFlashAttribute("messageType","success");
         return "redirect:/";
     }
 
