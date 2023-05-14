@@ -1,15 +1,52 @@
 package com.infoshare.webapp.model;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
 import java.util.List;
 
+@Component
 public class Game {
     private User user;
     private List<Questions> questions;
-    private boolean allUserAnswers[][];
+    private Category category;
+    private List<Answers> allUserAnswers;
     private Integer amountQuestions;
     private boolean mixQuestions;
     private boolean mixAnswers;
     private Integer level;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Questions> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Questions> questions) {
+        this.questions = questions;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Answers> getAllUserAnswers() {
+        return allUserAnswers;
+    }
+
+    public void setAllUserAnswers(List<Answers> allUserAnswers) {
+        this.allUserAnswers = allUserAnswers;
+    }
 
     public Integer getAmountQuestions() {
         return amountQuestions;
@@ -34,36 +71,17 @@ public class Game {
     public void setMixAnswers(boolean mixAnswers) {
         this.mixAnswers = mixAnswers;
     }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    public List<Questions> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Questions> questions) {
-        this.questions = questions;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public boolean[][] getAllUserAnswers() {
-        return allUserAnswers;
-    }
-
-    public void setAllUserAnswers(boolean[][] allUserAnswers) {
-        this.allUserAnswers = allUserAnswers;
+    @Override
+    public String toString() {
+        return "Game{" +
+                "user=" + user +
+                ", questions=" + questions +
+                ", category=" + category +
+                ", allUserAnswers=" + allUserAnswers +
+                ", amountQuestions=" + amountQuestions +
+                ", mixQuestions=" + mixQuestions +
+                ", mixAnswers=" + mixAnswers +
+                ", level=" + level +
+                '}';
     }
 }

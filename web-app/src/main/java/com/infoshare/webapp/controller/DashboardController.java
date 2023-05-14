@@ -1,6 +1,7 @@
 package com.infoshare.webapp.controller;
 
 
+import com.infoshare.webapp.model.Game;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class DashboardController {
     @GetMapping("/new_game")
     public String newGame(Model model) {
         model.addAttribute("pageTitle", "New game");
+        model.addAttribute("game", new Game());
         return "new_game";
     }
 
