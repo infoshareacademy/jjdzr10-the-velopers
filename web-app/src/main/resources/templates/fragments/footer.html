@@ -12,6 +12,13 @@
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
+
+            $(".btn.btn-outline-success").on("click", function (event) {
+                if ($("#" + $(this).attr("for")).is(':checked')) {
+                    event.preventDefault();
+                    $("#" + $(this).attr("for")).prop('checked', false);
+}
+            });
             $(".checkboxValidator").on("click", function () {
                 let i = 0;
                 $(this).children('input:checked').each(function () {
@@ -21,6 +28,7 @@
                     $(this).children('input').prop('required',true);
                 } else {
                     $(this).children('input').prop('required',false);
+
                 }
             });
         </script>

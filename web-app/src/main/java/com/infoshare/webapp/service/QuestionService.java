@@ -37,6 +37,15 @@ public class QuestionService {
         questionToEdit.setQuestionText(question.getQuestionText());
         questionToEdit.setScore(question.getScore());
     }
+    public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer){
+        ArrayList<Boolean> booleans = new ArrayList<>(Collections.nCopies(answerToEdit.size(), false));
+        for (int i=0; i<userAnswer.size(); i++) {
+            if (userAnswer.get(i) != null) {
+                booleans.set(i, userAnswer.get(i));
+            }
+        }
+        return booleans;
+    }
 
     public Question findById(long id) {
         return questions.stream()
