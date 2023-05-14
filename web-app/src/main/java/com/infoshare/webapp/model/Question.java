@@ -1,9 +1,11 @@
 package com.infoshare.webapp.model;
 
-public class Questions {
-    private Long idQuestion;
+import java.util.List;
+
+public class Question {
+    private long idQuestion;
     private Category category;
-    private Answers answer;
+    private List<Answer> answers;
     private String questionText;
     private int score;
 
@@ -23,12 +25,12 @@ public class Questions {
         this.category = category;
     }
 
-    public Answers getAnswer() {
-        return answer;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setAnswer(Answers answer) {
-        this.answer = answer;
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     public String getQuestionText() {
@@ -49,10 +51,10 @@ public class Questions {
 
     @Override
     public String toString() {
-        return "Questions{" +
+        return "Question{" +
                 "idQuestion=" + idQuestion +
-                ", category='" + category + '\'' +
-                ", answer=" + answer +
+                ", category=" + category +
+                ", answers=" + answers +
                 ", questionText='" + questionText + '\'' +
                 ", score=" + score +
                 '}';

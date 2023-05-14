@@ -2,7 +2,7 @@ package com.infoshare.webapp.controller;
 
 
 import com.infoshare.webapp.model.Category;
-import com.infoshare.webapp.model.Questions;
+import com.infoshare.webapp.model.Question;
 import com.infoshare.webapp.service.CategoryService;
 import com.infoshare.webapp.service.QuestionService;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class QuestionsController {
 
     @GetMapping("/questions/question")
     public String getFormQuestion(Model model) {
-        model.addAttribute("question", new Questions());
+        model.addAttribute("question", new Question());
         model.addAttribute("pageTitle", "Add question");
         List<Category> categories = CategoryService.getAllCategories();
         model.addAttribute("categories", categories);
@@ -47,9 +47,9 @@ public class QuestionsController {
     }
 
     @GetMapping("/questions/edit/{idQuestion}")
-    public String getQuestionById(@PathVariable("idQuestion") Long idQuestion, Model model) {
+    public String getQuestionById(@PathVariable("idQuestion") long idQuestion, Model model) {
         model.addAttribute("pageTitle", "Edit question");
-        Questions question = questionService.findById(idQuestion);
+        Question question = questionService.findById(idQuestion);
         model.addAttribute("question", question);
         List<Category> categories = CategoryService.getAllCategories();
         model.addAttribute("categories", categories);
@@ -57,22 +57,22 @@ public class QuestionsController {
     }
 
     @GetMapping("questions/{idQuestion}")
-    public String getSingleQuestion(@PathVariable("idQuestion") Long idQuestion, Model model) {
+    public String getSingleQuestion(@PathVariable("idQuestion") long idQuestion, Model model) {
         model.addAttribute("pageTitle", "Single question");
         model.addAttribute("question", questionService.findById(idQuestion));
         return "question";
     }
 
     @PostMapping("/questions/edit/{idQuestion}")
-    public String editQuestion(@PathVariable("idQuestion") Long idQuestion, Questions questions, RedirectAttributes attributes) {
+    public String editQuestion(@PathVariable("idQuestion") long idQuestion, Question question, RedirectAttributes attributes) {
         attributes.addFlashAttribute("message", "You edit question! (Question Id: " + idQuestion + " )");
         attributes.addFlashAttribute("messageType","success");
-        questionService.editQuestion(idQuestion, questions);
+        questionService.editQuestion(idQuestion, question);
         return "redirect:/questions";
     }
 
     @PostMapping("/questions/question")
-    public String addQuestion(@ModelAttribute Questions question, RedirectAttributes attributes) {
+    public String addQuestion(@ModelAttribute Question question, RedirectAttributes attributes) {
         long questionID = questionService.getLastQuestionId() + 1;
         attributes.addFlashAttribute("message", "You added new question! (Question Id: " + questionID + " )");
         attributes.addFlashAttribute("messageType","success");

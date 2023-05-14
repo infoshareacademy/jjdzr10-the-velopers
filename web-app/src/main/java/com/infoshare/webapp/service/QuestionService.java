@@ -1,40 +1,38 @@
 package com.infoshare.webapp.service;
 
 import com.infoshare.webapp.exception.QuestionsNotFoundException;
-import com.infoshare.webapp.model.Questions;
+import com.infoshare.webapp.model.Question;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.*;
-
 
 @Service
 public class QuestionService {
 
-    private static List<Questions> questionsList;
+    private static List<Question> questions;
     private final ReadFileService readFileService;
 
     public QuestionService(ReadFileService readFileService) throws IOException {
         this.readFileService = readFileService;
-        questionsList = this.readFileService.loadQuestions();
+        questions = this.readFileService.loadQuestions();
     }
 
-    public List<Questions> getAllQuestions() {
-        return questionsList;
+    public List<Question> getAllQuestions() {
+        return questions;
     }
 
-    public Long getLastQuestionId() {
-        Long lastQuestionId = 0L;
-        if (!questionsList.isEmpty()) {
-            lastQuestionId = questionsList.stream().max(Comparator.comparing(Questions::getIdQuestion)).get().getIdQuestion();
+    public long getLastQuestionId() {
+        long lastQuestionId = 0L;
+        if (!questions.isEmpty()) {
+            lastQuestionId = questions.stream().max(Comparator.comparing(Question::getIdQuestion)).get().getIdQuestion();
         }
         return lastQuestionId;
     }
 
-    public void editQuestion(Long id, Questions question) {
-        Questions questionToEdit = findById(id);
-        questionToEdit.getAnswer().setCorrectAnswers(editAnswer(questionToEdit.getAnswer().getCorrectAnswers(), question.getAnswer().getCorrectAnswers()));
+    public void editQuestion(long id, Question question) {
+        Question questionToEdit = findById(id);
+        questionToEdit.setAnswers(question.getAnswers());
         questionToEdit.setCategory(question.getCategory());
         questionToEdit.setQuestionText(question.getQuestionText());
         questionToEdit.setScore(question.getScore());
@@ -49,22 +47,21 @@ public class QuestionService {
         return booleans;
     }
 
-    public Questions findById(long id) {
-        return questionsList.stream()
+    public Question findById(long id) {
+        return questions.stream()
                 .filter(question -> question.getIdQuestion() == id)
                 .findFirst()
                 .orElseThrow(() -> new QuestionsNotFoundException(String.format("Not found question with given Id:  %S", id)));
     }
 
     public void removeQuestionById(long id) {
-        Questions foundQuestion = findById(id);
-        questionsList.remove(foundQuestion);
+        Question foundQuestion = findById(id);
+        questions.remove(foundQuestion);
     }
 
-    public void addQuestion(Questions question) {
-        questionsList.add(question);
+    public void addQuestion(Question question) {
+        questions.add(question);
     }
-
 }
 
 

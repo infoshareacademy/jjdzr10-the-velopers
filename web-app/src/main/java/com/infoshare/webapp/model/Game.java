@@ -8,7 +8,7 @@ import java.util.List;
 @Component
 public class Game {
     private User user;
-    private List<Questions> questions;
+    private List<Question> questions;
     private Category category;
     private List<Answers> allUserAnswers;
     private Integer amountQuestions;
@@ -24,20 +24,19 @@ public class Game {
         this.user = user;
     }
 
-    public List<Questions> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Questions> questions) {
-        this.questions = questions;
-    }
-
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public List<Answers> getAllUserAnswers() {
