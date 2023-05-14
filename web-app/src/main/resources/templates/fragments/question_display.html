@@ -8,25 +8,18 @@
             <div class="d-grid gap-2 d-md-flex justify-content-center pb-2">
                 <form action="#" th:action="@{/game/{idQuestion}(idQuestion=${question.idQuestion})}"
                       th:object="${userAnswer}" method="post">
-                    <tr class="col" th:each="answer,itemStat: ${question.answer.answers}">
+                    <tr class="col" th:each="answer,itemStat: ${userAnswer.answers}">
                         <td>
                             <input type="radio" class="btn-check" th:id="'answer_'+${itemStat.index}"
-                                   th:field="*{correctAnswers[__${itemStat.index}__]}" th:value="true"
-                                   th:disabled="${userAnswer.correctAnswers.contains(true)}">
+                                   th:field="*{answers[__${itemStat.index}__].correct}"
+                                   th:value=true>
                             <label class="btn btn-outline-success" th:for="'answer_'+${itemStat.index}"
-                                   th:text="${answer}">answer</label>
+                                   th:text="${question.answers[__${itemStat.index}__].answer}">answer</label>
                         </td>
                     </tr>
+
                     <div id="button-group" class="col pt-3 btn-group d-md-flex justify-content-md-center" role="group">
-                        <input type="submit" class="btn btn-outline-primary" value="Check answer"
-                               th:unless="${userAnswer.correctAnswers.contains(true)}"/>
-                        <input type="reset" class="btn btn-outline-danger" value="Reset"
-                               th:unless="${userAnswer.correctAnswers.contains(true)}"/>
-                    </div>
-                    <div class="text-center" th:if="${userAnswer.correctAnswers.contains(true)}">
-                        <div th:if="${correction}">CORRECT</div>
-                        <div th:if="${correction == false}">WRONG</div>
-                        <div th:unless="${correction}"></div>
+                        <input type="submit" class="btn btn-outline-primary" value="Save answer"/>
                     </div>
                 </form>
             </div>

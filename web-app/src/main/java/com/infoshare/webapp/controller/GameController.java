@@ -1,8 +1,8 @@
 package com.infoshare.webapp.controller;
 
-import com.infoshare.webapp.model.Answers;
+import com.infoshare.webapp.Dto.AnswerDto;
 import com.infoshare.webapp.model.Game;
-import com.infoshare.webapp.model.Questions;
+import com.infoshare.webapp.model.Question;
 import com.infoshare.webapp.service.GameService;
 import com.infoshare.webapp.service.QuestionService;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -28,52 +29,43 @@ public class GameController {
         this.gameService = gameService;
     }
     @PostMapping("/create_new_game")
-    public String createNewGame(@ModelAttribute Game game, Model model){
+    public String createNewGame(@ModelAttribute Game game, Model model, RedirectAttributes redirectAttributes){
         game.setQuestions(questionService.getAllQuestions());
         gameService.settingsGame(game);
         LOGGER.info("Loaded game settings: {}", game);
-        return "redirect:/game";
+        long idQuestion = gameService.getFirstQuestionId();
+        if (idQuestion<=0){
+            redirectAttributes.addFlashAttribute("message", "Question list is empty!");
+            redirectAttributes.addFlashAttribute("messageType","danger");
+            return "redirect:/new_game";
+        }
+        redirectAttributes.addAttribute("idQuestion",idQuestion);
+        return "redirect:/game/{idQuestion}";
     }
-    @GetMapping("/game")
-    public String gamePlay(Model model){
-        List<Questions> questions = gameService.getAllQuestions();
-        model.addAttribute("questions", questions);
 
-        Questions question = questions.iterator().next();
-        LOGGER.info("Find first question to display : {} ", question);
-
-        model.addAttribute("question", question);
-        Answers answers = gameService.getUserAnswer(question);
-        model.addAttribute("userAnswer",answers);
-        return "/game_play";
-    }
     @GetMapping("/game/{idQuestion}")
     public String showQuestion(@PathVariable("idQuestion") long idQuestion, Model model){
-        List<Questions> questions = gameService.getAllQuestions();
+        List<Question> questions = gameService.getAllQuestions();
         model.addAttribute("questions", questions);
 
-        Questions question = questionService.findById(idQuestion);
-        LOGGER.info("Loaded question {}", question);
+        Question question = questionService.findById(idQuestion);
+        LOGGER.info("Loaded question : {} ", question);
         model.addAttribute("question", question);
 
-        Answers answers = gameService.getUserAnswer(question);
-        LOGGER.info("GET user answers from list : {}", answers.getCorrectAnswers());
-        model.addAttribute("userAnswer", answers);
-        boolean correction = gameService.compareAnswers(question.getAnswer(), answers);
+
+        AnswerDto answer = gameService.getUserAnswer(question);
+
+        model.addAttribute("userAnswer",answer);
+        boolean correction = true;
         model.addAttribute("correction", correction);
         return "/game_play";
     }
     @PostMapping("/game/{idQuestion}")
-    public String sendAnswer(@ModelAttribute Answers userAnswer, @PathVariable long idQuestion){
-        Questions question = questionService.findById(idQuestion);
-        LOGGER.info("GET User input: {}", userAnswer.getCorrectAnswers());
-        List<Boolean> userListAnswers = gameService.makeListUserAnswers(question.getAnswer(),userAnswer.getCorrectAnswers());
-        Answers userAnswers = new Answers();
-        userAnswers.setCorrectAnswers(userListAnswers);
-        LOGGER.info("Converted answers: {}", userAnswers.getCorrectAnswers());
-        Boolean isCorrectAnswer = gameService.compareAnswers(question.getAnswer(), userAnswers);
-        LOGGER.info("Check user answer: {}", isCorrectAnswer);
-        gameService.setUserAnswer(question, userAnswers);
+    public String sendAnswer(@ModelAttribute AnswerDto userAnswer, @PathVariable long idQuestion){
+        Question question = questionService.findById(idQuestion);
+        LOGGER.info("GET User input: {}", userAnswer.getAnswers());
+        gameService.setUserAnswer(question, userAnswer);
+
         return "redirect:/game/{idQuestion}";
     }
 
