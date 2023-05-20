@@ -1,5 +1,6 @@
 package com.infoshare.webapp.service;
 
+import com.infoshare.webapp.Dao.QuestionDao;
 import com.infoshare.webapp.exception.QuestionsNotFoundException;
 import com.infoshare.webapp.model.Question;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,19 @@ import java.util.*;
 public class QuestionService {
 
     private static List<Question> questions;
-    private final ReadFileService readFileService;
+    private final QuestionDao questionDao;
 
-    public QuestionService(ReadFileService readFileService) throws IOException {
-        this.readFileService = readFileService;
-        questions = this.readFileService.loadQuestions();
+    public QuestionService(QuestionDao questionDao) throws IOException {
+        //questions = this.readFileService.loadQuestions();
+        this.questionDao = questionDao;
+
+        questions = questionDao.findAll();
+
+
+        //questions.forEach(question -> questionDao.save(question));
     }
+
+
 
     public List<Question> getAllQuestions() {
         return questions;
@@ -36,6 +44,7 @@ public class QuestionService {
         questionToEdit.setCategory(question.getCategory());
         questionToEdit.setQuestionText(question.getQuestionText());
         questionToEdit.setScore(question.getScore());
+        questionDao.update(questionToEdit);
     }
     public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer){
         ArrayList<Boolean> booleans = new ArrayList<>(Collections.nCopies(answerToEdit.size(), false));
@@ -56,10 +65,12 @@ public class QuestionService {
 
     public void removeQuestionById(long id) {
         Question foundQuestion = findById(id);
+        questionDao.deleteById(id);
         questions.remove(foundQuestion);
     }
 
     public void addQuestion(Question question) {
+        questionDao.save(question);
         questions.add(question);
     }
 }
