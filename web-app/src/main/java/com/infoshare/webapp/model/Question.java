@@ -1,10 +1,23 @@
 package com.infoshare.webapp.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
+@Entity
+@NoArgsConstructor
+@Setter
+@Getter
 public class Question {
+    @Id
     private long idQuestion;
     private Category category;
+    @OneToMany
     private List<Answer> answers;
     private String questionText;
     private int score;
