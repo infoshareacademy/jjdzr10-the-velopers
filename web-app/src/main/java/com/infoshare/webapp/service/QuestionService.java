@@ -28,7 +28,7 @@ public class QuestionService {
 
 
     public List<Question> getAllQuestions() {
-        return questions;
+        return questions = questionDao.findAll();
     }
 
     public long getLastQuestionId() {
@@ -65,14 +65,13 @@ public class QuestionService {
     }
 
     public void removeQuestionById(long id) {
-        Question foundQuestion = findById(id);
         questionDao.deleteById(id);
-        questions.remove(foundQuestion);
+        questions = questionDao.findAll();
     }
 
     public void addQuestion(Question question) {
         questionDao.save(question);
-        questions.add(question);
+        questions = questionDao.findAll();
     }
 }
 
