@@ -12,16 +12,17 @@ import java.util.*;
 public class QuestionService {
 
     private static List<Question> questions;
+    private final ReadFileService readFileService;
     private final QuestionDao questionDao;
 
-    public QuestionService(QuestionDao questionDao) throws IOException {
-        //questions = this.readFileService.loadQuestions();
+    public QuestionService(ReadFileService readFileService,QuestionDao questionDao) throws IOException {
+        this.readFileService = readFileService;
+        List<Question> questionsFromFile = readFileService.loadQuestions();
+
         this.questionDao = questionDao;
+        questionsFromFile.forEach(questionDao::save);
 
         questions = questionDao.findAll();
-
-
-        //questions.forEach(question -> questionDao.save(question));
     }
 
 

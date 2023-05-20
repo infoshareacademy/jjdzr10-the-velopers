@@ -39,6 +39,7 @@ public class QuestionDao {
         return question;
     }
 
+
     public List<Question> findAll() {
         TypedQuery<Question> query = this.entityManager.createQuery("select q from Question q", Question.class);
         return query.getResultList();
