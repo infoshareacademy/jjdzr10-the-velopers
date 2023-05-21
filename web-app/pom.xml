@@ -57,6 +57,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.26</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

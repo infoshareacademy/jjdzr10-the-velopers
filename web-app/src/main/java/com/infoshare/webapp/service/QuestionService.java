@@ -1,8 +1,8 @@
 package com.infoshare.webapp.service;
 
-import com.infoshare.webapp.Dao.QuestionDao;
 import com.infoshare.webapp.exception.QuestionsNotFoundException;
 import com.infoshare.webapp.model.Question;
+import com.infoshare.webapp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,22 +13,18 @@ public class QuestionService {
 
     private static List<Question> questions;
     private final ReadFileService readFileService;
-    private final QuestionDao questionDao;
 
-    public QuestionService(ReadFileService readFileService,QuestionDao questionDao) throws IOException {
+    private final QuestionRepository questionRepository;
+
+    public QuestionService(ReadFileService readFileService, QuestionRepository questionRepository) throws IOException {
         this.readFileService = readFileService;
+        this.questionRepository = questionRepository;
         List<Question> questionsFromFile = readFileService.loadQuestions();
-
-        this.questionDao = questionDao;
-        questionsFromFile.forEach(questionDao::save);
-
-        questions = questionDao.findAll();
+        questionRepository.saveAll(questionsFromFile);
     }
 
-
-
     public List<Question> getAllQuestions() {
-        return questions = questionDao.findAll();
+        return questionRepository.findAll();
     }
 
     public long getLastQuestionId() {
@@ -45,7 +41,7 @@ public class QuestionService {
         questionToEdit.setCategory(question.getCategory());
         questionToEdit.setQuestionText(question.getQuestionText());
         questionToEdit.setScore(question.getScore());
-        questionDao.update(questionToEdit);
+        questionRepository.save(questionToEdit);
     }
     public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer){
         ArrayList<Boolean> booleans = new ArrayList<>(Collections.nCopies(answerToEdit.size(), false));
@@ -65,13 +61,11 @@ public class QuestionService {
     }
 
     public void removeQuestionById(long id) {
-        questionDao.deleteById(id);
-        questions = questionDao.findAll();
+        questionRepository.deleteById(id);
     }
 
     public void addQuestion(Question question) {
-        questionDao.save(question);
-        questions = questionDao.findAll();
+        questionRepository.save(question);
     }
 }
 
