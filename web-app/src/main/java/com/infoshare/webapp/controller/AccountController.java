@@ -2,6 +2,8 @@ package com.infoshare.webapp.controller;
 
 import com.infoshare.webapp.Dto.UserDto;
 import com.infoshare.webapp.exception.UserAlreadyExistException;
+import com.infoshare.webapp.exception.UserNotCompareToEmailException;
+import com.infoshare.webapp.exception.UserNotExistException;
 import com.infoshare.webapp.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,11 +23,31 @@ public class AccountController {
         this.userService = userService;
     }
 
-    @GetMapping("/reset_pass")
-    public String resetPass(Model model) {
+    @GetMapping("/reset_password")
+    public String resetPasswordForm(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "reset_password";
+    }
+
+    @PostMapping("/reset_password")
+    public String resetPassword(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) {
+        try {
+            userService.resetPassword(userDto);
+            redirectAttributes.addFlashAttribute("message", "We send e-mail to reset your password. Check your mail.");
+            redirectAttributes.addFlashAttribute("messageType","success");
+            return "redirect:/";
+        }
+        catch (UserNotExistException e){
+            redirectAttributes.addFlashAttribute("message", "Used e-mail do not exist!");
+            redirectAttributes.addFlashAttribute("messageType","danger");
+            return "redirect:/reset_password";
+        }
+        catch (UserNotCompareToEmailException e){
+            redirectAttributes.addFlashAttribute("message", "This email address: "+ userDto.getEmail() + " does not match to user name!");
+            redirectAttributes.addFlashAttribute("messageType","warning");
+            return "redirect:/reset_password";
+        }
     }
 
     @PostMapping("/register")
@@ -33,12 +55,11 @@ public class AccountController {
         try {
             userService.registerNewUserAccount(userDto);
             LOGGER.info("Register new user: {}", userDto.getUsername());
+        } catch (UserAlreadyExistException e) {
+            redirectAttributes.addFlashAttribute("message", "Used e-mail already exist!");
+            redirectAttributes.addFlashAttribute("messageType", "danger");
+            return "redirect:/register";
         }
-            catch (UserAlreadyExistException e){
-                redirectAttributes.addFlashAttribute("message", "Used e-mail already exist!");
-                redirectAttributes.addFlashAttribute("messageType","danger");
-                return "redirect:/register";
-            }
         return "index";
     }
 
@@ -51,6 +72,6 @@ public class AccountController {
 
     @GetMapping("/login")
     public String login() {
-            return "login";
+        return "login";
     }
 }
