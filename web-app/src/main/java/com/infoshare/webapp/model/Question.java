@@ -1,24 +1,25 @@
 package com.infoshare.webapp.model;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
-public class Questions {
-    private Long idQuestion;
+public class Question {
+    private long idQuestion;
     private Category category;
-    private Answers answer;
     @NotEmpty(message = "The question text cannot be empty")
     @NotBlank(message = "The question text cannot be blank")
     @Size(min=10, max=200, message = "The question text should contain between 10 and 200 characters")
+    private List<Answer> answers;
     private String questionText;
     @Positive(message = "You can't enter a negative value")
     @Max(value = 20, message = "The maximum number of points you can enter is 20")
     private int score;
 
-    public Long getIdQuestion() {
+    public long getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(Long idQuestion) {
+    public void setIdQuestion(long idQuestion) {
         this.idQuestion = idQuestion;
     }
 
@@ -30,12 +31,12 @@ public class Questions {
         this.category = category;
     }
 
-    public Answers getAnswer() {
-        return answer;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setAnswer(Answers answer) {
-        this.answer = answer;
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     public String getQuestionText() {
@@ -56,10 +57,10 @@ public class Questions {
 
     @Override
     public String toString() {
-        return "Questions{" +
+        return "Question{" +
                 "idQuestion=" + idQuestion +
-                ", category='" + category + '\'' +
-                ", answer=" + answer +
+                ", category=" + category +
+                ", answers=" + answers +
                 ", questionText='" + questionText + '\'' +
                 ", score=" + score +
                 '}';

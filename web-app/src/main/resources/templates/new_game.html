@@ -3,17 +3,16 @@
 <th:block th:include="fragments/header :: header"></th:block>
 <body>
 <th:block th:include="fragments/navigation :: navigation"></th:block>
-
 <div class="container">
     <h1 class="text-center">Nowa gra</h1>
-    <form>
+    <form action="#" th:action="@{/create_new_game}" th:object="${game}" method="post">
         <div class="row my-3">
             <div class="col-12 text-center">
                 <label for="GameCategory">Wybierz kategorię:</label>
-                <select id="GameCategory">
-                    <option value=""></option>
-                    <option value="cat1">Kategoria 1</option>
-                    <option value="cat2">Kategoria 2</option>
+                <select id="GameCategory" th:field="*{category}">
+                    <option th:value="null" th:text="ALL"></option>
+                    <option th:each="category: ${T(com.infoshare.webapp.model.Category).values()}"
+                            th:value="${category}" th:text="${category}"></option>
                 </select>
             </div>
         </div>
@@ -21,18 +20,29 @@
         <div class="row my-3">
             <div class="col-12 text-center">
                 <label for="GameQuestionSNumber">Ilość pytań</label>
-                <input id="GameQuestionSNumber" type="number">
+                <input id="GameQuestionSNumber" type="number" th:field="*{amountQuestions}" >
             </div>
         </div>
+
         <div class="row my-3">
             <div class="col-3 text-center offset-3">
-                <label for="GameTime">Gra na czas</label>
-                <input id="GameTime" type="checkbox">
+                <div class="d-md-flex justify-content-end">
+                    <label class="mx-2" for="GameTime">Gra na czas</label>
+                    <input id="GameTime" type="checkbox" disabled>
+                </div>
+                <div class="d-md-flex justify-content-end">
+                    <label class="mx-2" for="mixedQuestions">Wymieszać pytania?</label>
+                    <input id="mixedQuestions" type="checkbox" th:field="*{mixQuestions}" th:value="true">
+                </div>
+                <div class="d-md-flex justify-content-end">
+                    <label class="mx-2" for="mixedAnswers">Wymieszać odpowiedzi?</label>
+                    <input id="mixedAnswers" type="checkbox" th:field="*{mixAnswers}" th:value="true">
+                </div>
             </div>
 
             <div class="col-3 text-center">
                 <label for="GamePlayers">Ilośc graczy:</label>
-                <select id="GamePlayers">
+                <select id="GamePlayers" disabled>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

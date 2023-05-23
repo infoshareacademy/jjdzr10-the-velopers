@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="fragments/header :: header"></th:block>
+
+<body>
+<th:block th:include="fragments/navigation :: navigation"></th:block>
+<div class="container">
+  <h2 class="text-left">Pytanie <td th:text="${question.idQuestion}"></td></h2>
+  <tr>
+    <h5 class="text-left">
+      <td class="col-1" th:switch="${question.category.name()}">
+        <p th:case="'HISTORIA'">HISTORIA</p>
+        <p th:case="'BIOLOGIA'">BIOLOGIA</p>
+        <p th:case="'SZTUKA'">SZTUKA</p>
+        <p th:case="*">NIEZNANA</p>
+      </td>
+    </h5>
+
+    <h5 class="text-left"><td th:text="${question.questionText}"></td></h5>
+
+
+    <td class="col container">
+      <div class="row">
+      </div>
+    </td>
+
+    <td class="col container">
+      <p class="btn btn-outline-primary btn-lg" th:text="'A: '+${question.answers[0].answer}"></p>
+      <p class="btn btn-outline-primary btn-lg" th:text="'B: '+${question.answers[1].answer}"></p>
+      <p class="btn btn-outline-primary btn-lg" th:text="'C: '+${question.answers[2].answer}"></p>
+      <p class="btn btn-outline-primary btn-lg" th:text="'D: '+${question.answers[3].answer}"></p>
+    </td>
+  </tr>
+</div>
+
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+</body>
+</html>

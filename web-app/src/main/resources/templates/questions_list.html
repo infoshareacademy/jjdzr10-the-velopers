@@ -33,19 +33,19 @@
 
             <td class="col-3 container">
                 <div class="row">
-                    <p class="col" th:text="'A: '+${question.answer.answers[0]}"></p>
-                    <p class="col" th:text="'B: '+${question.answer.answers[1]}"></p>
+                    <p class="col" th:text="'A: '+${question.answers[0].answer}"></p>
+                    <p class="col" th:text="'B: '+${question.answers[1].answer}"></p>
                 </div>
                 <div class="row">
-                    <p class="col" th:text="'C: '+${question.answer.answers[2]}"></p>
-                    <p class="col" th:text="'D: '+${question.answer.answers[3]}"></p>
+                    <p class="col" th:text="'C: '+${question.answers[2].answer}"></p>
+                    <p class="col" th:text="'D: '+${question.answers[3].answer}"></p>
                 </div>
             </td>
             <td class="col-1">
-                <i th:if="${question.answer.correctAnswers[0]}" aria-hidden="true">A</i>
-                <i th:if="${question.answer.correctAnswers[1]}" aria-hidden="true">B</i>
-                <i th:if="${question.answer.correctAnswers[2]}" aria-hidden="true">C</i>
-                <i th:if="${question.answer.correctAnswers[3]}" aria-hidden="true">D</i>
+                <i th:if="${question.answers[0].correct}" aria-hidden="true">A</i>
+                <i th:if="${question.answers[1].correct}" aria-hidden="true">B</i>
+                <i th:if="${question.answers[2].correct}" aria-hidden="true">C</i>
+                <i th:if="${question.answers[3].correct}" aria-hidden="true">D</i>
             </td>
             <td class="col-1" th:text="${question.score}"></td>
 
@@ -55,6 +55,10 @@
                 </a>
                 <a th:href="@{questions/edit/{id}(id=${question.idQuestion})}" class="btn btn-primary">
                     EDIT
+                </a>
+
+                <a th:href="@{questions/{id}(id=${question.idQuestion})}" class="btn btn-light">
+                    SINGLE QUESTION
                 </a>
             </td>
         </tr>
