@@ -12,7 +12,7 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/game">New game</a>
+                    <a class="nav-link" href="/new_game">New game</a>
                 </li>
 
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item">
@@ -48,5 +48,4 @@
         </div>
     </div>
 </nav>
-    <th:block th:include="fragments/alerts :: alert"></th:block>
 </th:block>
