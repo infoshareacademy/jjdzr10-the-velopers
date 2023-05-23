@@ -1,11 +1,15 @@
 package com.infoshare.webapp.controller;
 
 import com.infoshare.webapp.model.User;
+import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class AccountController {
@@ -17,9 +21,12 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String submitForm(@ModelAttribute("user") User user){
-        System.out.println(user);
-        return "start";
+    public String submitForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "register_form";
+        }
+        // TODO add UserService adding new User
+        return "index";
     }
 
     @GetMapping("/register")

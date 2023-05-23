@@ -78,6 +78,15 @@
         <div class="row my-3">
             <div class="col-12 text-center">
                 <button class="btn text-white bg-primary w-auto" type="submit">Zapisz zmiany</button>
+                <button class="btn text-white bg-primary w-auto" type="submit">Zapisz zmiany</button>
+            </div>
+        </div>
+        <div th:if="${#fields.hasAnyErrors()}" class="card text-bg-warning p-3">
+            <div class="card-header h6">Errors:</div>
+            <div class="card-body">
+                <ul>
+                    <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+                </ul>
             </div>
         </div>
     </form>

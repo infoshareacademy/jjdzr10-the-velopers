@@ -1,0 +1,202 @@
+[
+   {
+      "idQuestion":1,
+      "category":"HISTORIA",
+      "answer":{
+         "answers":[
+            "966",
+            "578",
+            "1021",
+            "1350"
+         ],
+         "correctAnswers":[
+            true,
+            false,
+            false,
+            false
+         ]
+      },
+      "questionText":"W którym roku był chrzest Polski?",
+      "score":1
+   },
+   {
+      "idQuestion":2,
+      "category":"HISTORIA",
+      "answer":{
+         "answers":[
+            "Mieszko I",
+            "Bolesław Chrobry",
+            "Zygmunt Stary",
+            "Zygmunt August"
+         ],
+         "correctAnswers":[
+            false,
+            true,
+            false,
+            false
+         ]
+      },
+      "questionText":"Jak nazywał się pierwszy król Polski?",
+      "score":1
+   },
+   {
+      "idQuestion":3,
+      "category":"HISTORIA",
+      "answer":{
+         "answers":[
+            "XII",
+            "XIII",
+            "XIV",
+            "XV"
+         ],
+         "correctAnswers":[
+            false,
+            false,
+            true,
+            false
+         ]
+      },
+      "questionText":"W którym wieku powstał Uniwersytet Jagielloński?",
+      "score":1
+   },
+   {
+      "idQuestion":4,
+      "category":"HISTORIA",
+      "answer":{
+         "answers":[
+            "1310",
+            "1410",
+            "1417",
+            "1313"
+         ],
+         "correctAnswers":[
+            false,
+            true,
+            false,
+            false
+         ]
+      },
+      "questionText":"W którym roku miała miejsce bitwa pod Grunwaldem?",
+      "score":1
+   },
+   {
+      "idQuestion":5,
+      "category":"BIOLOGIA",
+      "answer":{
+         "answers":[
+            "koszenila",
+            "spirulina",
+            "indygo",
+            "chlorofil"
+         ],
+         "correctAnswers":[
+            false,
+            false,
+            false,
+            true
+         ]
+      },
+      "questionText":"Jak nazywa sie zielony barwnik roślin?",
+      "score":1
+   },
+   {
+      "idQuestion":6,
+      "category":"BIOLOGIA",
+      "answer":{
+         "answers":[
+            "16",
+            "20",
+            "22",
+            "24"
+         ],
+         "correctAnswers":[
+            false,
+            true,
+            false,
+            false
+         ]
+      },
+      "questionText":"Ile zębów mlecznych ma człowiek?",
+      "score":1
+   },
+   {
+      "idQuestion":7,
+      "category":"BIOLOGIA",
+      "answer":{
+         "answers":[
+            "lew",
+            "tygrys",
+            "słoń",
+            "hipopotam"
+         ],
+         "correctAnswers":[
+            false,
+            false,
+            false,
+            true
+         ]
+      },
+      "questionText":"Który ssak jest najniebezpieczniejszy?",
+      "score":1
+   },
+   {
+      "idQuestion":8,
+      "category":"SZTUKA",
+      "answer":{
+         "answers":[
+            "Caravaggio",
+            "Matisse",
+            "Goya",
+            "Munch"
+         ],
+         "correctAnswers":[
+            false,
+            true,
+            true,
+            true
+         ]
+      },
+      "questionText":"Kto namalował obraz “Krzyk”?",
+      "score":1
+   },
+   {
+      "idQuestion":9,
+      "category":"BIOLOGIA",
+      "answer":{
+         "answers":[
+            "kłopoty z czytaniem",
+            "kłopoty z mówieniem",
+            "kłopoty z pisaniem",
+            "kłopoty z rozpoznawaniem twarzy"
+         ],
+         "correctAnswers":[
+            false,
+            false,
+            false,
+            true
+         ]
+      },
+      "questionText":"Na czym polega prozopagnozja?",
+      "score":1
+   },
+   {
+      "idQuestion":10,
+      "category":"SZTUKA",
+      "answer":{
+         "answers":[
+            "4",
+            "5",
+            "6",
+            "7"
+         ],
+         "correctAnswers":[
+            false,
+            true,
+            false,
+            false
+         ]
+      },
+      "questionText":"Ilu Polaków otrzymało nagrodę Nobla w dziedzinie literatury?",
+      "score":1
+   }
+]
