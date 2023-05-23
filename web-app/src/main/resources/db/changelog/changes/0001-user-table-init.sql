@@ -1,6 +1,6 @@
 CREATE TABLE users
 (
-    id    bigint PRIMARY KEY,
+    id    bigint PRIMARY KEY AUTO_INCREMENT,
     name  VARCHAR(50)  NOT NULL,
     password  VARCHAR(255)  NOT NULL,
     email VARCHAR(120) NOT NULL,
@@ -12,14 +12,14 @@ CREATE TABLE users
 
 CREATE TABLE role
 (
-    id   bigint PRIMARY KEY,
+    id   bigint PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     UNIQUE (name),
     CHECK (LENGTH(name) > 0)
 );
 CREATE TABLE privilege
 (
-    id   bigint PRIMARY KEY,
+    id   bigint PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     UNIQUE (name),
     CHECK (LENGTH(name) > 0)

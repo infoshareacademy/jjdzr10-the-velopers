@@ -4,7 +4,7 @@ INSERT INTO users(id,
                   password)
 VALUES ('1',
         'admin',
-        'admin@up@pl',
+        'admin@up.pl',
         '$2a$12$U3vsOIWLzCoTCcznHwoX0OBRKCRDNBk8Xx8yaLjGGO4pdih19Y5km');
 INSERT INTO users(id,
                   name,
@@ -12,7 +12,7 @@ INSERT INTO users(id,
                   password)
 VALUES ('2',
         'user',
-        'user@up@pl',
+        'user@up.pl',
         '$2a$12$n9e6Mk.0Y6SmoCd0R1xbYOpgPK.aBDHsy0eK2lkE467U87POFSsum');
 INSERT INTO privilege(id, name) VALUES ('1', 'READ');
 INSERT INTO privilege(id, name) VALUES ('2', 'WRITE');
