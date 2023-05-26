@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="https://www.thymeleaf.org">
 <th:block th:include="fragments/header :: header"></th:block>
-<body>
+<body class="gradient-custom">
 <th:block th:include="fragments/navigation :: navigation"></th:block>
-
-<div class="container">
-    <h1 class="text-center">Welcome</h1>
-    <p class="text-center">site description ...</p>
-    <img class="img-fluid" src="coder_cat.png"/>
-
+<div class="container p-5 bg-light border border-1 rounded-bottom shadow">
+    <h2 class="mb-3 text-center">Hello my friend!</h2>
+    <div class="row">
+    <p class="col d-flex justify-content-left">"I Know" is a trivia game application where users can test their knowledge in various
+        categories such as history, science, literature, and more. Players are presented with a series of
+        multiple-choice questions and have to select the correct answer within a set time limit. The app keeps track of
+        the player's score and progress, and provides feedback on areas where the player can improve their knowledge.
+        With a clean and intuitive interface, "I Know" is a fun and engaging way to challenge oneself and learn new
+        things.</p>
+    <img class="col img-fluid" src="coder_cat.png"/>
+    </div>
 </div>
 
 <th:block th:include="fragments/footer :: footer"></th:block>
