@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="https://www.thymeleaf.org">
 <th:block th:include="fragments/header :: header"></th:block>
-<body>
+<body class="gradient-custom">
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 
-<div class="container">
-    <h1 class="text-center">Edycja pytania <span th:text="${question.idQuestion}"></span></h1>
+<div class="container bg-light border border-1 border-top-0 rounded-bottom shadow-lg py-3">
+    <h1 class="text-center">Edit question #<span th:text="${question.idQuestion}"></span></h1>
     <form th:action="@{/questions/edit/{id}(id=${question.idQuestion})}  " method="post">
         <div class="row my-2">
             <div class="col-2">
-                <label for="QuestionText">Treść pytania:</label>
+                <label for="QuestionText">Question text:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="QuestionText" th:field="${question.questionText}" th:required="required">Treść pytania</textarea>
+                <textarea class="w-100" id="QuestionText" th:field="${question.questionText}" th:required="required">Content of the question</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-2">
-                <label for="AnswerA">Odpowiedź A:</label>
+                <label for="AnswerA">Answer A:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerA" th:field="${question.answers[0].answer}" th:required="required">Odpowiedź A</textarea>
+                <textarea class="w-100" id="AnswerA" th:field="${question.answers[0].answer}" th:required="required">Answer A</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-2">
-                <label for="AnswerB">Odpowiedź B:</label>
+                <label for="AnswerB">Answer B:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerB" th:field="${question.answers[1].answer}" th:required="required">Odpowiedź B</textarea>
+                <textarea class="w-100" id="AnswerB" th:field="${question.answers[1].answer}" th:required="required">Answer B</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-2">
-                <label for="AnswerC">Odpowiedź C:</label>
+                <label for="AnswerC">Answer C:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerC" th:field="${question.answers[2].answer}" th:required="required">Odpowiedź C</textarea>
+                <textarea class="w-100" id="AnswerC" th:field="${question.answers[2].answer}" th:required="required">Answer C</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-2">
-                <label for="AnswerD">Odpowiedź D:</label>
+                <label for="AnswerD">Answer D:</label>
             </div>
             <div class="col-10">
-                <textarea class="w-100" id="AnswerD" th:field="${question.answers[3].answer}" th:required="required">Odpowiedź D</textarea>
+                <textarea class="w-100" id="AnswerD" th:field="${question.answers[3].answer}" th:required="required">Answer D</textarea>
             </div>
         </div>
 
         <div class="row my-2">
             <div class="col-4 text-center">
-                <p><label for="QuestionPoints">Ilość punktów:</label></p>
+                <p><label for="QuestionPoints">Number of points:</label></p>
                 <input id="QuestionPoints" type="number" value="7" th:field="${question.score}" th:required="required" th:min="1" th:max="100">
             </div>
             <div class="col-4 text-center checkboxValidator">
-                <p>Prawidłowa odpowiedź:</p>
+                <p>Correct answer:</p>
                 <label for="CorrectAnserA">A</label>
                 <input id="CorrectAnserA" type="checkbox" th:field="${question.answers[0].correct}"
                        th:checked="${question.answers[0].correct}">
@@ -73,7 +73,7 @@
                        th:checked="${question.answers[3].correct}">
             </div>
             <div class="col-4 text-center">
-                <p><label for="GameCategory">Wybierz kategorię:</label></p>
+                <p><label for="GameCategory">Select a category:</label></p>
                 <select id="GameCategory" th:field="${question.category}">
                     <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
                 </select>
@@ -81,7 +81,8 @@
         </div>
         <div class="row my-3">
             <div class="col-12 text-center">
-                <button class="btn text-white bg-primary w-auto" type="submit">Zapisz zmiany</button>
+                <button class="btn text-white bg-primary w-auto" type="submit">Save</button>
+                <button class="btn btn-warning w-auto" onclick="history.back()">Back</button>
             </div>
         </div>
     </form>
