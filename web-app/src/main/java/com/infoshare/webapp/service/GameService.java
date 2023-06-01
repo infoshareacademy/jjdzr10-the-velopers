@@ -10,12 +10,14 @@ import java.util.*;
 public class GameService {
 
     private final Game game;
+    private final QuestionService questionService;
 
-    public GameService(Game game){
+    public GameService(Game game, QuestionService questionService){
         this.game = game;
+        this.questionService = questionService;
     }
     public List<Question> getAllQuestions() {
-        return game.getQuestions();
+        return questionService.getAllQuestions();
     }
     public long getFirstQuestionId() {
         long firstQuestionId = 0L;

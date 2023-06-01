@@ -1,6 +1,7 @@
 package com.infoshare.webapp.model;
 
 import com.infoshare.webapp.Dto.AnswerDto;
+import com.infoshare.webapp.service.QuestionService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class Game {
     public void setCategory(Category category) {
         this.category = category;
     }
+
     public List<Question> getQuestions() {
         return questions;
     }

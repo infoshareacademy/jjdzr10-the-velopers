@@ -5,13 +5,13 @@ import com.infoshare.webapp.model.Question;
 import com.infoshare.webapp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.*;
 
 @Service
 public class QuestionService {
 
-    private static List<Question> questions;
     private final ReadFileService readFileService;
 
     private final QuestionRepository questionRepository;
@@ -27,25 +27,13 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-    public long getLastQuestionId() {
-        long lastQuestionId = 0L;
-        if (!questions.isEmpty()) {
-            lastQuestionId = questions.stream().max(Comparator.comparing(Question::getIdQuestion)).get().getIdQuestion();
-        }
-        return lastQuestionId;
+    public void editQuestion(Question question) {
+        questionRepository.save(question);
     }
 
-    public void editQuestion(long id, Question question) {
-        Question questionToEdit = findById(id);
-        questionToEdit.setAnswers(question.getAnswers());
-        questionToEdit.setCategory(question.getCategory());
-        questionToEdit.setQuestionText(question.getQuestionText());
-        questionToEdit.setScore(question.getScore());
-        questionRepository.save(questionToEdit);
-    }
-    public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer){
+    public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer) {
         ArrayList<Boolean> booleans = new ArrayList<>(Collections.nCopies(answerToEdit.size(), false));
-        for (int i=0; i<userAnswer.size(); i++) {
+        for (int i = 0; i < userAnswer.size(); i++) {
             if (userAnswer.get(i) != null) {
                 booleans.set(i, userAnswer.get(i));
             }
@@ -54,10 +42,7 @@ public class QuestionService {
     }
 
     public Question findById(long id) {
-        return questions.stream()
-                .filter(question -> question.getIdQuestion() == id)
-                .findFirst()
-                .orElseThrow(() -> new QuestionsNotFoundException(String.format("Not found question with given Id:  %S", id)));
+        return questionRepository.findById(id).orElse(null);
     }
 
     public void removeQuestionById(long id) {

@@ -21,3 +21,13 @@ b
 2src/main/java/com/infoshareacademy/model/User.java,5/8/582a587498b9e0fe5f5575d1c1bba82f57a3c4f6
 o
 ?src/main/java/com/infoshareacademy/service/ReadFileService.java,0/b/0bb8d59e2b358f2a317750261ce1ea0c26f445bb
+k
+;web-app/src/main/java/com/infoshare/webapp/model/Score.java,7/f/7f8d54799bf7baa621584d36cca5ded08a825520
+n
+>web-app/src/main/java/com/infoshare/webapp/model/Question.java,7/1/71f5246c82a3a6246dd03008eac3b75f68e1cfd9
+l
+<web-app/src/main/java/com/infoshare/webapp/model/Answer.java,7/b/7b536cf0d0a36a7458a57615fd4f2700544886e4
+?
+web-app/pom.xml,c/c/cc58faceaf6b0500e03de6fc52cc242a50b79ab8
+q
+Aweb-app/src/main/java/com/infoshare/webapp/WebAppApplication.java,6/e/6e2d2f29f60e9a1e3ac07818744772d1c8ab924a
