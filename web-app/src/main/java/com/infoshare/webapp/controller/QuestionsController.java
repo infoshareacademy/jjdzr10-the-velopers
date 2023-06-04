@@ -82,6 +82,6 @@ public class QuestionsController {
         attributes.addFlashAttribute("messageType","success");
         question.setIdQuestion(questionID);
         questionService.addQuestion(question);
-        return "redirect:/questions/";
+        return "redirect:/questions";
     }
 }

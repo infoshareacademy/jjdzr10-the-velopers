@@ -6,10 +6,10 @@ import java.util.List;
 public class Question {
     private long idQuestion;
     private Category category;
+    private List<Answer> answers;
     @NotEmpty(message = "The question text cannot be empty")
     @NotBlank(message = "The question text cannot be blank")
     @Size(min=10, max=200, message = "The question text should contain between 10 and 200 characters")
-    private List<Answer> answers;
     private String questionText;
     @Positive(message = "You can't enter a negative value")
     @Max(value = 20, message = "The maximum number of points you can enter is 20")
