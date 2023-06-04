@@ -35,15 +35,17 @@
             <div sec:authorize="isAuthenticated()">
                 <span class="fw-bold text-light">Welcome: </span>
                 <span class="text-light" sec:authentication="name"></span>
-            <a class="ms-2 btn btn-outline-light" href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+            <a class="ms-2 btn btn-outline-light" href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                 <input hidden type="submit" value="Sign Out"/>
             </form>
             </div>
 
+            <div sec:authorize="isAnonymous()">
             <form class="d-flex" role="none">
                 <button type="button" class="ms-2 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalLogin">Login</button>
             </form>
+            </div>
 
         </div>
     </div>
