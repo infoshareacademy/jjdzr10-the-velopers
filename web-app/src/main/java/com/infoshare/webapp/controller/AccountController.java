@@ -35,4 +35,9 @@ public class AccountController {
         model.addAttribute("user",user);
         return "register_form";
     }
+
+    @GetMapping("/login")
+    public String loginForm(Model model) {
+        return "login";
+    }
 }

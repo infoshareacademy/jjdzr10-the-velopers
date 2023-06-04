@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:include="fragments/header :: header"></th:block>
-<body>
+<body class="gradient-custom">
 <th:block th:include="fragments/navigation :: navigation"></th:block>
-<div class="container">
+<div class="container bg-light border border-1 border-top-0 rounded-bottom shadow-lg py-3">
     <a th:href="@{/questions/question}" class="btn btn-success">
         CREATE NEW QUESTION
     </a>
