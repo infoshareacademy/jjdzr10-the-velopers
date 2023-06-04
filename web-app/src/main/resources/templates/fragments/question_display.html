@@ -13,7 +13,7 @@
                             <input type="radio" class="btn-check" th:id="'answer_'+${itemStat.index}"
                                    th:field="*{answers[__${itemStat.index}__].correct}"
                                    th:value=true>
-                            <label class="btn btn-outline-success" th:for="'answer_'+${itemStat.index}"
+                            <label class="btn btn-outline-answer" th:for="'answer_'+${itemStat.index}"
                                    th:text="${question.answers[__${itemStat.index}__].answer}">answer</label>
                         </td>
                     </tr>
@@ -25,8 +25,7 @@
             </div>
         </div>
         <div class="col-3 row text-start">
-            <a class="col" href="https://wikipedia.pl">(?)</a>
-            <p class="col text-end">timer_placeholder</p>
+            <p class="col text-end disable" >timer_placeholder</p>
         </div>
     </div>
 </th:block>

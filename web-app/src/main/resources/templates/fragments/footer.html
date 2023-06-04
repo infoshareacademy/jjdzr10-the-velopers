@@ -14,7 +14,7 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
 
-            $(".btn.btn-outline-success").on("click", function (event) {
+            $(".btn.btn-outline-answer").on("click", function (event) {
                 if ($("#" + $(this).attr("for")).is(':checked')) {
                     event.preventDefault();
                     $("#" + $(this).attr("for")).prop('checked', false);

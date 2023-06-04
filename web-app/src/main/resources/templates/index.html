@@ -1,16 +1,91 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="https://www.thymeleaf.org">
 <th:block th:include="fragments/header :: header"></th:block>
-<body>
+<body class="gradient-custom">
+
 <th:block th:include="fragments/navigation :: navigation"></th:block>
-
-<div class="container">
-    <h1 class="text-center">Welcome</h1>
-    <p class="text-center">site description ...</p>
-    <img class="img-fluid" src="/images/coder_cat.png"/>
-
+<div class="position-relative">
+    <div class="position-fixed">
+        <nav id="navbar-spy" class="m-5 h-100 flex-column align-items-stretch pe-4">
+            <nav class="nav nav-pills nav-fill flex-column">
+                <a class="nav-link active" href="#description">Welcome</a>
+                <a class="nav-link" href="#about_us">About us</a>
+            </nav>
+        </nav>
+    </div>
 </div>
+<div class="container p-5 bg-light border border-1 rounded-bottom shadow">
+    <div data-bs-spy="scroll" data-bs-target="#spy-list" data-bs-smooth-scroll="true" class="scrollspy-example"
+         tabindex="0">
+        <section id="description">
+            <h2 class="mb-4 fs-2 text-center">Hello my friend!</h2>
+            <div class="row">
+                <p style="line-height: 3em;" class="col fs-5">
+                    &emsp; <strong>"I Know"</strong> <i class="bi bi-lightbulb-fill"></i> is a trivia game application where users can test their knowledge
+                    in various
+                    categories such as history, science, literature, and more.
+                    <br>
+                    &emsp; Players are presented with a series of multiple-choice questions and have to select the
+                    correct
+                    answer within a set time limit. The app keeps track of the player's score and progress, and provides
+                    feedback on areas where the player can improve their knowledge. With a clean and intuitive
+                    interface,
+                    "I Know" is a fun and engaging way to challenge oneself and learn new things. <i class="bi bi-hand-thumbs-up"></i></p>
+                <img style="opacity: 0.8; border-radius: 50%;" class="col img-fluid" src="/images/IKnow_index.jpg"/>
+            </div>
+        </section>
+        <hr class="m-5 solid">
+        <section id="about_us">
+            <h2 class="mb-4 fs-2 text-center">About us <i class="bi bi-file-person"></i></h2>
+            <p style="line-height: 3em;" class="col fs-5">
+                &emsp; Welcome to our young and dynamic team of Java programmers at <strong>The Velopers</strong>!
+                <br>
+                &emsp; At <strong>The Velopers</strong>, we are a close-knit group of passionate Java developers who are
+                dedicated to delivering
+                high-quality software solutions. With our expertise in Java programming, we strive to create innovative
+                and
+                efficient applications that meet the unique needs of our clients.
+                <br>
+                &emsp; Our team consists of talented individuals who are not only proficient in Java, but also
+                constantly strive to
+                stay up-to-date with the latest industry trends and technologies. We believe in continuous learning and
+                professional growth, which allows us to bring fresh ideas and cutting-edge solutions to every project we
+                undertake.
+                <br>
+                &emsp; Collaboration is at the heart of our work culture. We believe in the power of teamwork and
+                leverage our
+                collective skills to solve complex problems and deliver outstanding results. Our team members are not
+                only
+                skilled programmers but also effective communicators, ensuring smooth collaboration with clients and
+                stakeholders throughout the development process.
+                <br>
+                &emsp; We take pride in our attention to detail and commitment to delivering robust, scalable, and
+                maintainable
+                Java applications. Our goal is to exceed client expectations by providing them with reliable software
+                solutions that help them achieve their business objectives.
+                <br>
+                &emsp; At <strong>The Velopers</strong>, we understand that each project is unique, and we tailor our
+                approach to meet the
+                specific requirements of our clients. Whether it's developing a new Java application, optimizing
+                existing
+                code, or providing technical consultations, we are dedicated to delivering solutions that drive success.
+                <br>
+                &emsp; We are excited to be part of the ever-evolving Java ecosystem and look forward to tackling new
+                challenges
+                and opportunities. If you are seeking a dedicated team of Java experts who are passionate about
+                delivering
+                top-notch solutions, look no further than <strong>The Velopers</strong>.
+                <br>
+                &emsp; Get in touch with us today and let's embark on a collaborative journey to turn your ideas into
+                reality using
+                the power of Java!
+                <br>
+                &emsp; <strong>The Velopers</strong> - Empowering Innovation through Java Excellence <i class="bi bi-cup-hot-fill"></i>
+            </p>
 
+        </section>
+    </div>
+</div>
 <th:block th:include="fragments/footer :: footer"></th:block>
 </body>
 </html>
