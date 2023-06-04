@@ -1,4 +1,4 @@
-<th:block th:fragment="navigation">
+<th:block th:fragment="navigation" xmlns:sec="http://www.w3.org/1999/xhtml">
 <nav class="navbar sticky-top navbar-expand-lg bg-white shadow-sm" data-bs-theme="light">
     <div class="container-fluid">
         <a class="ms-3 navbar-brand">
@@ -16,7 +16,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/new_game"><i class="bi bi-controller"></i> New game</a>
                 </li>
-                <li class="nav-item">
+
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
                     <a class="nav-link" href="/questions"><i class="bi bi-question-diamond"></i> Modify quizzes</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -33,10 +34,21 @@
                     <a class="nav-link disabled"><i class="bi bi-bar-chart-line"></i> Scoreboard</a>
                 </li>
             </ul>
+            <div sec:authorize="isAuthenticated()">
+                <span class="fw-bold text-light">Welcome: </span>
+                <span class="text-light" sec:authentication="name"></span>
+            <a class="ms-2 btn btn-outline-light" href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
+            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                <input hidden type="submit" value="Sign Out"/>
+            </form>
+            </div>
 
+            <div sec:authorize="isAnonymous()">
             <form class="d-flex" role="none">
+                <button type="button" class="ms-2 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalLogin">Login</button>
                 <button type="button" class="me-3 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalLogin"><i class="bi bi-box-arrow-in-right"></i> Login</button>
             </form>
+            </div>
 
         </div>
     </div>

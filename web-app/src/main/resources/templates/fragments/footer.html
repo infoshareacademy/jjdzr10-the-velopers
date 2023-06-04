@@ -1,5 +1,6 @@
 <th:block th:fragment="footer">
     <footer>
+        <th:block th:include="fragments/alerts :: alert"></th:block>
         <th:block th:include="fragments/modals :: modal_login"></th:block>
         <th:block th:include="fragments/modals :: modal_upload_file"></th:block>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

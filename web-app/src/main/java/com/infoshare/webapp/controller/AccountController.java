@@ -1,43 +1,77 @@
 package com.infoshare.webapp.controller;
 
-import com.infoshare.webapp.model.User;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
+import com.infoshare.webapp.Dto.UserDto;
+import com.infoshare.webapp.exception.UserAlreadyExistException;
+import com.infoshare.webapp.exception.UserNotCompareToEmailException;
+import com.infoshare.webapp.exception.UserNotExistException;
+import com.infoshare.webapp.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
 @Controller
 public class AccountController {
-    @GetMapping("/reset_pass")
-    public String resetPass(Model model) {
-        User user = new User();
-        model.addAttribute("user",user);
+    private final UserService userService;
+    private static final Logger LOGGER = LogManager.getLogger(AccountController.class);
+
+    public AccountController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/reset_password")
+    public String resetPasswordForm(Model model) {
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
         return "reset_password";
     }
 
-    @PostMapping("/register")
-    public String submitForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "register_form";
+    @PostMapping("/reset_password")
+    public String resetPassword(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) {
+        try {
+            userService.resetPassword(userDto);
+            redirectAttributes.addFlashAttribute("message", "We send e-mail to reset your password. Check your mail.");
+            redirectAttributes.addFlashAttribute("messageType","success");
+            return "redirect:/";
         }
-        // TODO add UserService adding new User
+        catch (UserNotExistException e){
+            redirectAttributes.addFlashAttribute("message", "Used e-mail do not exist!");
+            redirectAttributes.addFlashAttribute("messageType","danger");
+            return "redirect:/reset_password";
+        }
+        catch (UserNotCompareToEmailException e){
+            redirectAttributes.addFlashAttribute("message", "This email address: "+ userDto.getEmail() + " does not match to user name!");
+            redirectAttributes.addFlashAttribute("messageType","warning");
+            return "redirect:/reset_password";
+        }
+    }
+
+    @PostMapping("/register")
+    public String registrationUserAccount(@ModelAttribute("user") @Valid UserDto userDto, RedirectAttributes redirectAttributes) {
+        try {
+            userService.registerNewUserAccount(userDto);
+            LOGGER.info("Register new user: {}", userDto.getUsername());
+        } catch (UserAlreadyExistException e) {
+            redirectAttributes.addFlashAttribute("message", "Used e-mail already exist!");
+            redirectAttributes.addFlashAttribute("messageType", "danger");
+            return "redirect:/register";
+        }
         return "index";
     }
 
     @GetMapping("/register")
-    public String showForm(Model model) {
-        User user = new User();
-        model.addAttribute("user",user);
+    public String showRegisterForm(Model model) {
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
         return "register_form";
     }
 
     @GetMapping("/login")
-    public String loginForm(Model model) {
+    public String login() {
         return "login";
     }
 }
