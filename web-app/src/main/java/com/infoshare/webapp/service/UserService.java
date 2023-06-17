@@ -40,8 +40,9 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         Role role = roleRepository.findByName("USER");
         user.setRoles(Set.of(role));
-        role.getUsers().add(user);
-        return userRepository.save(user);
+        User userNew = userRepository.save(user);
+        role.getUsers().add(userNew);
+        return userNew;
     }
 
     public User resetPassword(UserDto userDto){
