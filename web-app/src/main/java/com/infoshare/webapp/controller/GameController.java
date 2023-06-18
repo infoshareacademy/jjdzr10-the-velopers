@@ -68,5 +68,12 @@ public class GameController {
 
         return "redirect:/game/{id}";
     }
-
+    @GetMapping("/game/result")
+    public String gameResult(Model model) {
+        model.addAttribute("questions", gameService.getAllQuestions());
+        model.addAttribute("userAnswer", gameService.getAllUserAnswer());
+        model.addAttribute("isCorrect", gameService.getUserCorrect());
+        model.addAttribute("score", gameService.calculateScore());
+        return "/result";
+    }
 }

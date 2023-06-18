@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<th:block th:include="fragments/header :: header"></th:block>
+<body class="gradient-custom">
+<th:block th:include="fragments/navigation :: navigation"></th:block>
+
+<div class="container bg-light border border-1 border-top-0 rounded-bottom shadow-lg py-3">
+    <div class="row">
+        <h3 class="text-center">Results</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Category</th>
+            <th>Question Text</th>
+            <th>Correct Answers</th>
+            <th>User answer</th>
+            <th>Score</th>
+            <th>Correct</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question,iterStat: ${questions}">
+            <td class="col-0.5" th:text="${iterStat.count}"></td>
+            <td class="col-1" th:switch="${question.category.name()}">
+                <p th:case="'HISTORIA'">HISTORIA</p>
+                <p th:case="'BIOLOGIA'">BIOLOGIA</p>
+                <p th:case="'SZTUKA'">SZTUKA</p>
+                <p th:case="*">NIEZNANA</p>
+            </td>
+            <td th:text="${question.questionText}"></td>
+
+
+            <td class="col-1">
+                <i th:if="${question.answers[0].correct}" aria-hidden="true">A</i>
+                <i th:if="${question.answers[1].correct}" aria-hidden="true">B</i>
+                <i th:if="${question.answers[2].correct}" aria-hidden="true">C</i>
+                <i th:if="${question.answers[3].correct}" aria-hidden="true">D</i>
+            </td>
+
+            <td class="col-1">
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[0].correct}" aria-hidden="true">A</i>
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[1].correct}" aria-hidden="true">B</i>
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[2].correct}" aria-hidden="true">C</i>
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[3].correct}" aria-hidden="true">D</i>
+<!--                <p th:text="${userAnswer[__${iterStat.index}__].answer}"></p>-->
+            </td>
+
+            <td class="col-1" th:text="${question.score}"></td>
+
+            <td class="col-1" th:text="${isCorrect[__${iterStat.index}__].booleanValue()}"></td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <h5 class="text-center">Congrats! You earn : <span th:text="${score}"></span> points</h5>
+</div>
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+</body>
+</html>
