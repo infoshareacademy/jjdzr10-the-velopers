@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.*;
@@ -19,6 +20,7 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Component
 public class User {
 
     @Id
@@ -39,8 +41,8 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Result> results = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserGame> results = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
