@@ -1,11 +1,22 @@
 package com.infoshare.webapp.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
-
+@Entity
+@NoArgsConstructor
+@Setter
+@Getter
 public class Question {
-    private long idQuestion;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long id;
     private Category category;
+    @OneToMany(mappedBy = "idAnswer", fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
     @NotEmpty(message = "The question text cannot be empty")
     @NotBlank(message = "The question text cannot be blank")
@@ -15,12 +26,12 @@ public class Question {
     @Max(value = 20, message = "The maximum number of points you can enter is 20")
     private int score;
 
-    public long getIdQuestion() {
-        return idQuestion;
+    public long getId() {
+        return id;
     }
 
-    public void setIdQuestion(long idQuestion) {
-        this.idQuestion = idQuestion;
+    public void setId(long idQuestion) {
+        this.id = idQuestion;
     }
 
     public Category getCategory() {
@@ -58,7 +69,7 @@ public class Question {
     @Override
     public String toString() {
         return "Question{" +
-                "idQuestion=" + idQuestion +
+                "idQuestion=" + id +
                 ", category=" + category +
                 ", answers=" + answers +
                 ", questionText='" + questionText + '\'' +

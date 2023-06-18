@@ -50,14 +50,14 @@
             <td class="col-1" th:text="${question.score}"></td>
 
             <td class="col-1">
-                <a th:href="@{questions/delete/{id}(id=${question.idQuestion})}" class="btn btn-danger">
+                <a th:href="@{questions/delete/{id}(id=${question.id})}" class="btn btn-danger">
                     DELETE
                 </a>
-                <a th:href="@{questions/edit/{id}(id=${question.idQuestion})}" class="btn btn-primary">
+                <a th:href="@{questions/edit/{id}(id=${question.id})}" class="btn btn-primary">
                     EDIT
                 </a>
 
-                <a th:href="@{questions/{id}(id=${question.idQuestion})}" class="btn btn-light">
+                <a th:href="@{questions/{id}(id=${question.id})}" class="btn btn-light">
                     SINGLE QUESTION
                 </a>
             </td>

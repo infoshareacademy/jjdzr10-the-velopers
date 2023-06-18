@@ -25,7 +25,7 @@ public class QuestionService {
     public long getLastQuestionId() {
         long lastQuestionId = 0L;
         if (!questions.isEmpty()) {
-            lastQuestionId = questions.stream().max(Comparator.comparing(Question::getIdQuestion)).get().getIdQuestion();
+            lastQuestionId = questions.stream().max(Comparator.comparing(Question::getId)).get().getId();
         }
         return lastQuestionId;
     }
@@ -49,7 +49,7 @@ public class QuestionService {
 
     public Question findById(long id) {
         return questions.stream()
-                .filter(question -> question.getIdQuestion() == id)
+                .filter(question -> question.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new QuestionsNotFoundException(String.format("Not found question with given Id:  %S", id)));
     }

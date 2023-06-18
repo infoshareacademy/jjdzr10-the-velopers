@@ -80,7 +80,7 @@ public class QuestionsController {
         long questionID = questionService.getLastQuestionId() + 1;
         attributes.addFlashAttribute("message", "You added new question! (Question Id: " + questionID + " )");
         attributes.addFlashAttribute("messageType","success");
-        question.setIdQuestion(questionID);
+        question.setId(questionID);
         questionService.addQuestion(question);
         return "redirect:/questions";
     }

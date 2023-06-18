@@ -18,7 +18,7 @@
     <ul th:if="${questions.size() > 0}" class="pagination justify-content-center">
 
       <li th:each="quest,iterStat: ${questions}">
-        <a class="page-link" th:href="@{/game/{id}(id=${quest.idQuestion})}" th:text="${iterStat.count}">page_number</a>
+        <a class="page-link" th:href="@{/game/{id}(id=${quest.id})}" th:text="${iterStat.count}">page_number</a>
       </li>
 
     </ul>
@@ -27,7 +27,7 @@
   <div class="row">
     <div class="col">
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-danger">Exit_quiz</button>
+        <a th:href="@{/game/result}" class="btn btn-danger">Exit_quiz</a>
       </div>
     </div>
   </div>

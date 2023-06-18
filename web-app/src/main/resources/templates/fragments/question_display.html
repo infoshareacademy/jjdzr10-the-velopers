@@ -1,12 +1,12 @@
 <th:block th:fragment="question">
     <h4 class="col text-start" th:text="${question.category.name()}">category_name_default</h4>
     <div class="row pt-4 pb-4">
-        <div class="col-3 text-end" th:text="'# '+${question.idQuestion}"></div>
+        <div class="col-3 text-end" th:text="'# '+${question.id}"></div>
 
         <div class="col-6 border border-bottom-0 border-1 rounded-top shadow-sm">
             <p class="row p-3 overflow-auto" style="text-align: justify;" th:text="${question.questionText}"></p>
             <div class="d-grid gap-2 d-md-flex justify-content-center pb-2">
-                <form action="#" th:action="@{/game/{idQuestion}(idQuestion=${question.idQuestion})}"
+                <form action="#" th:action="@{/game/{id}(id=${question.id})}"
                       th:object="${userAnswer}" method="post">
                     <tr class="col" th:each="answer,itemStat: ${userAnswer.answers}">
                         <td>
