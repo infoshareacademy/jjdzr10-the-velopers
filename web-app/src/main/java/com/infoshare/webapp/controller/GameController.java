@@ -1,8 +1,8 @@
 package com.infoshare.webapp.controller;
 
 import com.infoshare.webapp.Dto.AnswerDto;
-import com.infoshare.webapp.model.Game;
 import com.infoshare.webapp.model.Question;
+import com.infoshare.webapp.model.UserGame;
 import com.infoshare.webapp.service.GameService;
 import com.infoshare.webapp.service.QuestionService;
 import org.apache.logging.log4j.LogManager;
@@ -28,9 +28,9 @@ public class GameController {
         this.questionService = questionService;
         this.gameService = gameService;
     }
-    @PostMapping("/create_new_game")
-    public String createNewGame(@ModelAttribute Game game, Model model, RedirectAttributes redirectAttributes){
-        game.setQuestions(questionService.getAllQuestions());
+    @PostMapping("/game/create")
+    public String createNewGame(@ModelAttribute UserGame game, Model model, RedirectAttributes redirectAttributes){
+        game.setGameQuestions(questionService.getAllQuestions());
         gameService.settingsGame(game);
         LOGGER.info("Loaded game settings: {}", game);
         long idQuestion = gameService.getFirstQuestionId();
@@ -39,16 +39,16 @@ public class GameController {
             redirectAttributes.addFlashAttribute("messageType","danger");
             return "redirect:/new_game";
         }
-        redirectAttributes.addAttribute("idQuestion",idQuestion);
-        return "redirect:/game/{idQuestion}";
+        redirectAttributes.addAttribute("id",idQuestion);
+        return "redirect:/game/{id}";
     }
 
-    @GetMapping("/game/{idQuestion}")
-    public String showQuestion(@PathVariable("idQuestion") long idQuestion, Model model){
+    @GetMapping("/game/{id}")
+    public String showQuestion(@PathVariable("id") long id, Model model){
         List<Question> questions = gameService.getAllQuestions();
         model.addAttribute("questions", questions);
 
-        Question question = questionService.findById(idQuestion);
+        Question question = questionService.findById(id);
         LOGGER.info("Loaded question : {} ", question);
         model.addAttribute("question", question);
 
@@ -60,13 +60,13 @@ public class GameController {
         model.addAttribute("correction", correction);
         return "/game_play";
     }
-    @PostMapping("/game/{idQuestion}")
-    public String sendAnswer(@ModelAttribute AnswerDto userAnswer, @PathVariable long idQuestion){
-        Question question = questionService.findById(idQuestion);
+    @PostMapping("/game/{id}")
+    public String sendAnswer(@ModelAttribute AnswerDto userAnswer, @PathVariable long id){
+        Question question = questionService.findById(id);
         LOGGER.info("GET User input: {}", userAnswer.getAnswers());
         gameService.setUserAnswer(question, userAnswer);
 
-        return "redirect:/game/{idQuestion}";
+        return "redirect:/game/{id}";
     }
 
 }
