@@ -27,6 +27,14 @@ public class GameService {
         }
         return firstQuestionId;
     }
+    public Question getQuestionByIndex(int index) throws Exception {
+        try {
+            return game.getGameQuestions().get(index);
+        }
+        catch (Exception e){
+            throw new Exception("Question index out of bound: {value: "+index+" }");
+        }
+    }
     public AnswerDto getUserAnswer(Question question) {
         int questionIndex = game.getGameQuestions().indexOf(question);
         return game.getUserAnswers().get(questionIndex);
@@ -92,7 +100,7 @@ public class GameService {
 
         for (Question question : game.getGameQuestions()) {
             AnswerDto answerDto = new AnswerDto();
-            for (int i = 0; i < question.getAnswers().size(); i++) {
+            while (answerDto.getAnswers().size() != question.getAnswers().size()) {
                 answerDto.addAnswer(clearAnswer);
             }
             game.getUserAnswers().add(answerDto);
@@ -103,7 +111,19 @@ public class GameService {
         return game.getUserAnswers();
     }
 
-    public List<Boolean> getUserCorrect() {
+    public List<Boolean> userAnsweredList() {
+        List<Boolean> booleans = new ArrayList<>();
+        boolean flag = false;
+        for (int i = 0; i < game.getUserAnswers().size(); i++) {
+            for (int j = 0; j < game.getUserAnswers().get(i).getAnswers().size(); j++) {
+                flag = game.getUserAnswers().get(i).getAnswers().get(j).getCorrect();
+                if (flag) { break;}
+            }
+            booleans.add(flag);
+        }
+        return booleans;
+    }
+    public List<Boolean> userAnsweredCorrectList() {
         List<Boolean> booleans = new ArrayList<>();
         boolean flag = false;
         for (int i = 0; i < game.getGameQuestions().size(); i++) {
@@ -118,7 +138,7 @@ public class GameService {
 
     public int calculateScore() {
         int score = 0;
-        List<Boolean> booleans = getUserCorrect();
+        List<Boolean> booleans = userAnsweredCorrectList();
         for (int i=0 ; i<game.getGameQuestions().size(); i++){
             if (booleans.get(i)) {
                 score += game.getGameQuestions().get(i).getScore();

@@ -6,26 +6,59 @@
         <div class="col-6 border border-bottom-0 border-1 rounded-top shadow-sm">
             <p class="row p-3 overflow-auto" style="text-align: justify;" th:text="${question.questionText}"></p>
             <div class="d-grid gap-2 d-md-flex justify-content-center pb-2">
-                <form action="#" th:action="@{/game/{id}(id=${question.id})}"
+                <form id="formId" action="#" th:action="@{/game/{index}(index=${currentQuestionIndex})}"
                       th:object="${userAnswer}" method="post">
                     <tr class="col" th:each="answer,itemStat: ${userAnswer.answers}">
                         <td>
                             <input type="radio" class="btn-check" th:id="'answer_'+${itemStat.index}"
                                    th:field="*{answers[__${itemStat.index}__].correct}"
-                                   th:value=true>
+                                   th:value=true onclick="save()">
                             <label class="btn btn-outline-answer" th:for="'answer_'+${itemStat.index}"
                                    th:text="${question.answers[__${itemStat.index}__].answer}">answer</label>
                         </td>
                     </tr>
 
                     <div id="button-group" class="col pt-3 btn-group d-md-flex justify-content-md-center" role="group">
-                        <input type="submit" class="btn btn-outline-primary" value="Save answer"/>
+<!--                        <input type="submit" class="btn btn-outline-primary" value="Save answer"/>-->
+<!--                        <input type="button" class="btn btn-outline-primary" value="Previous answer" onclick="previousAnswer()"/>-->
+<!--                        <input type="button" class="btn btn-outline-primary" value="Next answer" onclick="nextAnswer()"/>-->
                     </div>
                 </form>
             </div>
         </div>
-        <div class="col-3 row text-start">
-            <p class="col text-end disable" >timer_placeholder</p>
-        </div>
+<!--        <div class="col-3 row text-start">-->
+<!--            <p class="col text-end disable" >timer_placeholder</p>-->
+<!--        </div>-->
     </div>
+
+    <script th:inline="javascript">
+        var currentQuestionIndex = /*[[${currentQuestionIndex}]]*/ 0;
+        var questionCount = /*[[${questionCount}]]*/ 0;
+
+        function previousAnswer() {
+            if (currentQuestionIndex >= 1) {
+                currentQuestionIndex--;
+            }
+            submitForm();
+        }
+
+        function nextAnswer() {
+            if (currentQuestionIndex < questionCount -1) {
+                currentQuestionIndex++;
+            }
+            submitForm();
+        }
+        function saveAnswer(index) {
+            currentQuestionIndex = index;
+            submitForm()
+        }
+        function save() {
+            submitForm()
+        }
+        function submitForm() {
+            var form = document.getElementById('formId');
+            form.action = '/game/' + currentQuestionIndex;
+            form.submit();
+        }
+    </script>
 </th:block>
