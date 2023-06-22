@@ -1,5 +1,5 @@
 package com.infoshare.webapp.model;
-
+import javax.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +18,12 @@ public class Question {
     private Category category;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
+    @NotEmpty(message = "The question text cannot be empty")
+    @NotBlank(message = "The question text cannot be blank")
+    @Size(min=10, max=200, message = "The question text should contain between 10 and 200 characters")
     private String questionText;
+    @Positive(message = "You can't enter a negative value")
+    @Max(value = 20, message = "The maximum number of points you can enter is 20")
     private int score;
 
     public long getIdQuestion() {

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: user-table-init
+      author: Mateusz Jakowczyk
+      changes:
+        - sqlFile:
+            path: /changes/0001-user-table-init.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: test-users-data
+      author: Mateusz Jakowczyk
+#      contextFilter: test,customer
+      changes:
+        - sqlFile:
+            path: /changes/0002-test-user-data.sql
+            relativeToChangelogFile: true
+

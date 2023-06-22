@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:include="fragments/header :: header"></th:block>
 
-<body>
+<body class="gradient-custom">
 <th:block th:include="fragments/navigation :: navigation"></th:block>
-<div class="container">
-  <h2 class="text-left">Pytanie <td th:text="${question.idQuestion}"></td></h2>
+<div class="container bg-light border border-1 border-top-0 rounded-bottom shadow-lg py-3">
+  <h2 class="text-left">Question #<td th:text="${question.idQuestion}"></td></h2>
   <tr>
     <h5 class="text-left">
       <td class="col-1" th:switch="${question.category.name()}">
@@ -31,6 +31,9 @@
       <p class="btn btn-outline-primary btn-lg" th:text="'D: '+${question.answers[3].answer}"></p>
     </td>
   </tr>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button class="btn btn-warning w-auto" onclick="history.back()">Back</button>
+  </div>
 </div>
 
 

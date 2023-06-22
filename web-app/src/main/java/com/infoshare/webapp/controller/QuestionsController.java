@@ -7,11 +7,12 @@ import com.infoshare.webapp.service.CategoryService;
 import com.infoshare.webapp.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
-
 
 @Controller
 public class QuestionsController {
@@ -72,7 +73,10 @@ public class QuestionsController {
     }
 
     @PostMapping("/questions/question")
-    public String addQuestion(@ModelAttribute Question question, RedirectAttributes attributes) {
+    public String addQuestion(@Valid @ModelAttribute("question") Question question, BindingResult bindingResult, RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
+            return "add_question";
+        }
         attributes.addFlashAttribute("message", "You added new question! (Question Id: ");
         attributes.addFlashAttribute("messageType","success");
         questionService.addQuestion(question);
