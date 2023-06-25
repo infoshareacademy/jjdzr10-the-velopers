@@ -1,11 +1,22 @@
 package com.infoshare.webapp.model;
-
 import javax.validation.constraints.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@NoArgsConstructor
+@Setter
+@Getter
 public class Question {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long idQuestion;
     private Category category;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
     @NotEmpty(message = "The question text cannot be empty")
     @NotBlank(message = "The question text cannot be blank")

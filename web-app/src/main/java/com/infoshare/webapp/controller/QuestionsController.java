@@ -65,10 +65,10 @@ public class QuestionsController {
     }
 
     @PostMapping("/questions/edit/{idQuestion}")
-    public String editQuestion(@PathVariable("idQuestion") long idQuestion, Question question, RedirectAttributes attributes) {
-        attributes.addFlashAttribute("message", "You edit question! (Question Id: " + idQuestion + " )");
+    public String editQuestion(Question question, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("message", "You edit question! (Question Id: " + question.getIdQuestion() + " )");
         attributes.addFlashAttribute("messageType","success");
-        questionService.editQuestion(idQuestion, question);
+        questionService.editQuestion(question);
         return "redirect:/questions";
     }
 
@@ -77,10 +77,8 @@ public class QuestionsController {
         if (bindingResult.hasErrors()) {
             return "add_question";
         }
-        long questionID = questionService.getLastQuestionId() + 1;
-        attributes.addFlashAttribute("message", "You added new question! (Question Id: " + questionID + " )");
+        attributes.addFlashAttribute("message", "You added new question! (Question Id: ");
         attributes.addFlashAttribute("messageType","success");
-        question.setIdQuestion(questionID);
         questionService.addQuestion(question);
         return "redirect:/questions";
     }

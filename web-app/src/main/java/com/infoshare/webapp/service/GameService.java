@@ -5,6 +5,7 @@ import com.infoshare.webapp.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 @Service
 public class GameService {
@@ -25,7 +26,13 @@ public class GameService {
         return firstQuestionId;
     }
     public AnswerDto getUserAnswer(Question question) {
-        int questionIndex = game.getQuestions().indexOf(question);
+        int questionIndex = -1;
+        for (Question q : game.getQuestions()){
+            if (q.getIdQuestion() == question.getIdQuestion()){
+                questionIndex = game.getQuestions().indexOf(q);
+            }
+        }
+
         return game.getAllUserAnswers().get(questionIndex);
     }
     public boolean isTimer(){
@@ -35,7 +42,12 @@ public class GameService {
             while (question.getAnswers().size() != userAnswer.getAnswers().size()){
                 userAnswer.addAnswer(new Answer());
             }
-        int questionIndex = game.getQuestions().indexOf(question);
+        int questionIndex = -1;
+        for (Question q : game.getQuestions()){
+            if (q.getIdQuestion() == question.getIdQuestion()){
+                questionIndex = game.getQuestions().indexOf(q);
+            }
+        }
         game.getAllUserAnswers().set(questionIndex, userAnswer);
     }
     public Boolean compareAnswers(Answer answer, Answer userAnswer) {
