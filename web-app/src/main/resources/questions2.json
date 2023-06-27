@@ -1,6 +1,6 @@
 [
    {
-      "idQuestion":1,
+      "id":1,
       "category":"HISTORIA",
       "answers":
       [
@@ -25,7 +25,7 @@
       "score":1
    },
    {
-      "idQuestion":2,
+      "id":2,
       "category":"HISTORIA",
       "answers":
       [

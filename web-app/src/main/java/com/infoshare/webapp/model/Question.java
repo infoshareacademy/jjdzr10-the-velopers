@@ -14,7 +14,7 @@ import java.util.List;
 public class Question {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long idQuestion;
+    private long id;
     private Category category;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
@@ -26,12 +26,12 @@ public class Question {
     @Max(value = 20, message = "The maximum number of points you can enter is 20")
     private int score;
 
-    public long getIdQuestion() {
-        return idQuestion;
+    public long getId() {
+        return id;
     }
 
-    public void setIdQuestion(long idQuestion) {
-        this.idQuestion = idQuestion;
+    public void setId(long idQuestion) {
+        this.id = idQuestion;
     }
 
     public Category getCategory() {
@@ -69,7 +69,7 @@ public class Question {
     @Override
     public String toString() {
         return "Question{" +
-                "idQuestion=" + idQuestion +
+                "idQuestion=" + id +
                 ", category=" + category +
                 ", answers=" + answers +
                 ", questionText='" + questionText + '\'' +

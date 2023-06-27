@@ -5,7 +5,7 @@
 <body class="gradient-custom">
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 <div class="container bg-light border border-1 border-top-0 rounded-bottom shadow-lg py-3">
-  <h2 class="text-left">Question #<td th:text="${question.idQuestion}"></td></h2>
+  <h2 class="text-left">Question #<td th:text="${question.id}"></td></h2>
   <tr>
     <h5 class="text-left">
       <td class="col-1" th:switch="${question.category.name()}">

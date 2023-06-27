@@ -16,18 +16,19 @@
   <div class="row">
   <nav aria-label="Questions navigation">
     <ul th:if="${questions.size() > 0}" class="pagination justify-content-center">
-
-      <li th:each="quest,iterStat: ${questions}">
-        <a class="page-link" th:href="@{/game/{id}(id=${quest.idQuestion})}" th:text="${iterStat.count}">page_number</a>
+      <input type="button" class="btn btn-outline-primary" value="Previous" onclick="previousAnswer()"/>
+      <li th:each="quest,iterStat: ${questions}" th:class="${quest.id == question.id} ? 'page-item active' : 'page-item'">
+<!--        <a class="page-link" th:href="@{/game/{index}(index=${iterStat.index})}" th:text="${iterStat.count}" th:onclick="'saveAnswer('+${iterStat.index}+')'">page_number</a>-->
+        <button th:class="${userAnswered[__${iterStat.index}__]} ? 'btn btn-primary active' : 'btn btn-outline-primary'" th:href="@{/game/{index}(index=${iterStat.index})}" th:text="${iterStat.count}" th:onclick="'saveAnswer('+${iterStat.index}+')'">page_number</button>
       </li>
-
+      <input type="button" class="btn btn-outline-primary" value="Next" onclick="nextAnswer()"/>
     </ul>
   </nav>
-</div>
+  </div>
   <div class="row">
     <div class="col">
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-danger">Exit_quiz</button>
+        <a th:href="@{/game/result}" class="btn btn-danger">End quiz</a>
       </div>
     </div>
   </div>

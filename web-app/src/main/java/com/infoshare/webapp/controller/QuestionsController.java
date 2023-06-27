@@ -65,10 +65,10 @@ public class QuestionsController {
     }
 
     @PostMapping("/questions/edit/{idQuestion}")
-    public String editQuestion(Question question, RedirectAttributes attributes) {
-        attributes.addFlashAttribute("message", "You edit question! (Question Id: " + question.getIdQuestion() + " )");
+    public String editQuestion(@PathVariable("idQuestion") long idQuestion, Question question, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("message", "You edit question! (Question Id: " + idQuestion + " )");
         attributes.addFlashAttribute("messageType","success");
-        questionService.editQuestion(question);
+        questionService.editQuestion(idQuestion, question);
         return "redirect:/questions";
     }
 

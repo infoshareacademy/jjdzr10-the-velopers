@@ -1,202 +1,242 @@
 [
    {
-      "idQuestion":1,
-      "category":"HISTORIA",
-      "answer":{
-         "answers":[
-            "966",
-            "578",
-            "1021",
-            "1350"
+      "id": 1,
+      "category": "HISTORIA",
+         "answers": [
+            {
+               "answer": "966",
+               "correct": true
+            },
+            {
+               "answer": "578",
+               "correct": false
+            },
+            {
+               "answer": "1021",
+               "correct": false
+            },
+            {
+               "answer": "1350",
+               "correct": false
+            }
          ],
-         "correctAnswers":[
-            true,
-            false,
-            false,
-            false
-         ]
-      },
-      "questionText":"W którym roku był chrzest Polski?",
-      "score":1
+      "questionText": "W którym roku był chrzest Polski?",
+      "score": 1
    },
    {
-      "idQuestion":2,
-      "category":"HISTORIA",
-      "answer":{
-         "answers":[
-            "Mieszko I",
-            "Bolesław Chrobry",
-            "Zygmunt Stary",
-            "Zygmunt August"
+      "id": 2,
+      "category": "HISTORIA",
+         "answers": [
+            {
+               "answer": "Mieszko I",
+               "correct": false
+            },
+            {
+               "answer": "Bolesław Chrobry",
+               "correct": true
+            },
+            {
+               "answer": "Zygmunt Stary",
+               "correct": false
+            },
+            {
+               "answer": "Zygmunt August",
+               "correct": false
+            }
          ],
-         "correctAnswers":[
-            false,
-            true,
-            false,
-            false
-         ]
-      },
-      "questionText":"Jak nazywał się pierwszy król Polski?",
-      "score":1
+      "questionText": "Jak nazywał się pierwszy król Polski?",
+      "score": 1
    },
    {
-      "idQuestion":3,
-      "category":"HISTORIA",
-      "answer":{
-         "answers":[
-            "XII",
-            "XIII",
-            "XIV",
-            "XV"
+      "id": 3,
+      "category": "HISTORIA",
+         "answers": [
+            {
+               "answer": "XII",
+               "correct": false
+            },
+            {
+               "answer": "XIII",
+               "correct": false
+            },
+            {
+               "answer": "XIV",
+               "correct": true
+            },
+            {
+               "answer": "XV",
+               "correct": false
+            }
          ],
-         "correctAnswers":[
-            false,
-            false,
-            true,
-            false
-         ]
-      },
-      "questionText":"W którym wieku powstał Uniwersytet Jagielloński?",
-      "score":1
+      "questionText": "W którym wieku powstał Uniwersytet Jagielloński?",
+      "score": 1
    },
    {
-      "idQuestion":4,
-      "category":"HISTORIA",
-      "answer":{
-         "answers":[
-            "1310",
-            "1410",
-            "1417",
-            "1313"
+      "id": 4,
+      "category": "HISTORIA",
+         "answers": [
+            {
+               "answer": "1310",
+               "correct": false
+            },
+            {
+               "answer": "1410",
+               "correct": true
+            },
+            {
+               "answer": "1417",
+               "correct": false
+            },
+            {
+               "answer": "1313",
+               "correct": false
+            }
          ],
-         "correctAnswers":[
-            false,
-            true,
-            false,
-            false
-         ]
-      },
-      "questionText":"W którym roku miała miejsce bitwa pod Grunwaldem?",
-      "score":1
+      "questionText": "W którym roku miała miejsce bitwa pod Grunwaldem?",
+      "score": 1
    },
    {
-      "idQuestion":5,
-      "category":"BIOLOGIA",
-      "answer":{
-         "answers":[
-            "koszenila",
-            "spirulina",
-            "indygo",
-            "chlorofil"
+      "id": 5,
+      "category": "BIOLOGIA",
+         "answers": [
+            {
+               "answer": "koszenila",
+               "correct": false
+            },
+            {
+               "answer": "spirulina",
+               "correct": false
+            },
+            {
+               "answer": "indygo",
+               "correct": false
+            },
+            {
+               "answer": "chlorofil",
+               "correct": true
+            }
          ],
-         "correctAnswers":[
-            false,
-            false,
-            false,
-            true
-         ]
-      },
-      "questionText":"Jak nazywa sie zielony barwnik roślin?",
-      "score":1
+      "questionText": "Jak nazywa się zielony barwnik roślin?",
+      "score": 1
    },
    {
-      "idQuestion":6,
-      "category":"BIOLOGIA",
-      "answer":{
-         "answers":[
-            "16",
-            "20",
-            "22",
-            "24"
+      "id": 6,
+      "category": "BIOLOGIA",
+         "answers": [
+            {
+               "answer": "16",
+               "correct": false
+            },
+            {
+               "answer": "20",
+               "correct": true
+            },
+            {
+               "answer": "22",
+               "correct": false
+            },
+            {
+               "answer": "24",
+               "correct": false
+            }
          ],
-         "correctAnswers":[
-            false,
-            true,
-            false,
-            false
-         ]
-      },
-      "questionText":"Ile zębów mlecznych ma człowiek?",
-      "score":1
+      "questionText": "Ile zębów mlecznych ma człowiek?",
+      "score": 1
    },
    {
-      "idQuestion":7,
-      "category":"BIOLOGIA",
-      "answer":{
-         "answers":[
-            "lew",
-            "tygrys",
-            "słoń",
-            "hipopotam"
+      "id": 7,
+      "category": "BIOLOGIA",
+         "answers": [
+            {
+               "answer": "lew",
+               "correct": false
+            },
+            {
+               "answer": "tygrys",
+               "correct": false
+            },
+            {
+               "answer": "słoń",
+               "correct": false
+            },
+            {
+               "answer": "hipopotam",
+               "correct": true
+            }
          ],
-         "correctAnswers":[
-            false,
-            false,
-            false,
-            true
-         ]
-      },
-      "questionText":"Który ssak jest najniebezpieczniejszy?",
-      "score":1
+      "questionText": "Który ssak jest najniebezpieczniejszy?",
+      "score": 1
    },
    {
-      "idQuestion":8,
-      "category":"SZTUKA",
-      "answer":{
-         "answers":[
-            "Caravaggio",
-            "Matisse",
-            "Goya",
-            "Munch"
+      "id": 8,
+      "category": "SZTUKA",
+         "answers": [
+            {
+               "answer": "Caravaggio",
+               "correct": false
+            },
+            {
+               "answer": "Matisse",
+               "correct": true
+            },
+            {
+               "answer": "Goya",
+               "correct": true
+            },
+            {
+               "answer": "Munch",
+               "correct": true
+            }
          ],
-         "correctAnswers":[
-            false,
-            true,
-            true,
-            true
-         ]
-      },
-      "questionText":"Kto namalował obraz “Krzyk”?",
-      "score":1
+      "questionText": "Kto namalował obraz “Krzyk”?",
+      "score": 1
    },
    {
-      "idQuestion":9,
-      "category":"BIOLOGIA",
-      "answer":{
-         "answers":[
-            "kłopoty z czytaniem",
-            "kłopoty z mówieniem",
-            "kłopoty z pisaniem",
-            "kłopoty z rozpoznawaniem twarzy"
+      "id": 9,
+      "category": "BIOLOGIA",
+         "answers": [
+            {
+               "answer": "kłopoty z czytaniem",
+               "correct": false
+            },
+            {
+               "answer": "kłopoty z mówieniem",
+               "correct": false
+            },
+            {
+               "answer": "kłopoty z pisaniem",
+               "correct": false
+            },
+            {
+               "answer": "kłopoty z rozpoznawaniem twarzy",
+               "correct": true
+            }
          ],
-         "correctAnswers":[
-            false,
-            false,
-            false,
-            true
-         ]
-      },
-      "questionText":"Na czym polega prozopagnozja?",
-      "score":1
+      "questionText": "Na czym polega prozopagnozja?",
+      "score": 1
    },
    {
-      "idQuestion":10,
-      "category":"SZTUKA",
-      "answer":{
-         "answers":[
-            "4",
-            "5",
-            "6",
-            "7"
+      "id": 10,
+      "category": "SZTUKA",
+         "answers": [
+            {
+               "answer": "4",
+               "correct": false
+            },
+            {
+               "answer": "5",
+               "correct": true
+            },
+            {
+               "answer": "6",
+               "correct": false
+            },
+            {
+               "answer": "7",
+               "correct": false
+            }
          ],
-         "correctAnswers":[
-            false,
-            true,
-            false,
-            false
-         ]
-      },
-      "questionText":"Ilu Polaków otrzymało nagrodę Nobla w dziedzinie literatury?",
-      "score":1
+      "questionText": "Ilu Polaków otrzymało nagrodę Nobla w dziedzinie literatury?",
+      "score": 1
    }
 ]

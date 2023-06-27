@@ -5,7 +5,7 @@
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 <div class="container rounded-bottom bg-light shadow-lg">
     <h1 class="pt-2 text-center">New game</h1>
-    <form action="#" th:action="@{/create_new_game}" th:object="${game}" method="post">
+    <form action="#" th:action="@{/game/create}" th:object="${game}" method="post">
         <div class="row my-3">
             <div class="col-12 text-center">
                 <label for="GameCategory">Choose category:</label>

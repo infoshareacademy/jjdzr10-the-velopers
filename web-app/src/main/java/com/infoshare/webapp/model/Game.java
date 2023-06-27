@@ -1,30 +1,17 @@
 package com.infoshare.webapp.model;
 
-import com.infoshare.webapp.Dto.AnswerDto;
-import com.infoshare.webapp.service.QuestionService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class Game {
-    private User user;
-    private List<Question> questions;
     private Category category;
-    private List<AnswerDto> allUserAnswers;
     private Integer amountQuestions;
     private boolean mixQuestions;
     private boolean mixAnswers;
     private boolean isTimer;
     private Integer level;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Category getCategory() {
         return category;
@@ -33,23 +20,6 @@ public class Game {
     public void setCategory(Category category) {
         this.category = category;
     }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    public List<AnswerDto> getAllUserAnswers() {
-        return allUserAnswers;
-    }
-
-    public void setAllUserAnswers(List<AnswerDto> allUserAnswers) {
-        this.allUserAnswers = allUserAnswers;
-    }
-
     public Integer getAmountQuestions() {
         return amountQuestions;
     }
@@ -85,10 +55,7 @@ public class Game {
     @Override
     public String toString() {
         return "Game{" +
-                "user=" + user +
-                ", questions=" + questions +
-                ", category=" + category +
-                ", allUserAnswers=" + allUserAnswers +
+                "category=" + category +
                 ", amountQuestions=" + amountQuestions +
                 ", mixQuestions=" + mixQuestions +
                 ", mixAnswers=" + mixAnswers +

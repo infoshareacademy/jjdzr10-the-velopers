@@ -1,11 +1,9 @@
 package com.infoshare.webapp.service;
 
-import com.infoshare.webapp.exception.QuestionsNotFoundException;
 import com.infoshare.webapp.model.Question;
 import com.infoshare.webapp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.*;
 
@@ -27,7 +25,8 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-    public void editQuestion(Question question) {
+    public void editQuestion(long id, Question question) {
+        question.setId(id);
         questionRepository.save(question);
     }
 

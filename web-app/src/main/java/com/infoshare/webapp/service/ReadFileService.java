@@ -15,10 +15,8 @@ import java.util.List;
 @Service
 public class ReadFileService {
 
-    private static final URL questionResource = WebAppApplication.class.getClassLoader().getResource("questions2.json");
+    private static final URL questionResource = WebAppApplication.class.getClassLoader().getResource("questions.json");
 
-    public ReadFileService() {
-    }
 
     public static List<Question> loadQuestions() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();

@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
 <th:block th:include="fragments/header :: header"></th:block>
 <body class="gradient-custom">
 <th:block th:include="fragments/navigation :: navigation"></th:block>
+
 <div class="container bg-light border border-1 border-top-0 rounded-bottom shadow-lg py-3">
-    <a th:href="@{/questions/question}" class="btn btn-success">
-        CREATE NEW QUESTION
-    </a>
+    <div class="row">
+        <h3 class="text-center">Results</h3>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>#</th>
             <th>Category</th>
             <th>Question Text</th>
-            <th>Answers</th>
-            <th>CorrectAnswers</th>
+            <th>Correct Answers</th>
+            <th>User answer</th>
             <th>Score</th>
-            <th>Actions</th>
+            <th>Correct</th>
         </tr>
         </thead>
         <tbody>
@@ -31,39 +32,33 @@
             <td th:text="${question.questionText}"></td>
 
 
-            <td class="col-3 container">
-                <div class="row">
-                    <p class="col" th:text="'A: '+${question.answers[0].answer}"></p>
-                    <p class="col" th:text="'B: '+${question.answers[1].answer}"></p>
-                </div>
-                <div class="row">
-                    <p class="col" th:text="'C: '+${question.answers[2].answer}"></p>
-                    <p class="col" th:text="'D: '+${question.answers[3].answer}"></p>
-                </div>
-            </td>
             <td class="col-1">
                 <i th:if="${question.answers[0].correct}" aria-hidden="true">A</i>
                 <i th:if="${question.answers[1].correct}" aria-hidden="true">B</i>
                 <i th:if="${question.answers[2].correct}" aria-hidden="true">C</i>
                 <i th:if="${question.answers[3].correct}" aria-hidden="true">D</i>
             </td>
-            <td class="col-1" th:text="${question.score}"></td>
 
             <td class="col-1">
-                <a th:href="@{questions/delete/{id}(id=${question.id})}" class="btn btn-danger">
-                    DELETE
-                </a>
-                <a th:href="@{questions/edit/{id}(id=${question.id})}" class="btn btn-primary">
-                    EDIT
-                </a>
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[0].correct}" aria-hidden="true">A</i>
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[1].correct}" aria-hidden="true">B</i>
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[2].correct}" aria-hidden="true">C</i>
+                <i th:if="${userAnswer[__${iterStat.index}__].answers[3].correct}" aria-hidden="true">D</i>
+<!--                <p th:text="${userAnswer[__${iterStat.index}__].answer}"></p>-->
+            </td>
 
-                <a th:href="@{questions/{id}(id=${question.id})}" class="btn btn-light">
-                    SINGLE QUESTION
-                </a>
+            <td class="col-1" th:text="${question.score}"></td>
+
+            <td class="col-1" th:if="${isCorrect[__${iterStat.index}__].booleanValue()}"><i class="bi bi-check-circle-fill" style="font-size: 1.3rem; color: green;"></i></td>
+            <td class="col-1" th:unless="${isCorrect[__${iterStat.index}__].booleanValue()}"><i class="bi bi-dash-circle-fill" style="font-size: 1.3rem; color: crimson;"></i></td>
             </td>
         </tr>
         </tbody>
     </table>
+</div>
+
+<div class="row">
+    <h5 class="text-center">Congrats! You earn : <span th:text="${score}"></span> points</h5>
 </div>
 
 <th:block th:include="fragments/footer :: footer"></th:block>

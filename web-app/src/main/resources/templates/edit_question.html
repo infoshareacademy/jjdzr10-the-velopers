@@ -5,8 +5,8 @@
 <th:block th:include="fragments/navigation :: navigation"></th:block>
 
 <div class="container bg-light border border-1 border-top-0 rounded-bottom shadow-lg py-3">
-    <h1 class="text-center">Edit question #<span th:text="${question.idQuestion}"></span></h1>
-    <form th:action="@{/questions/edit/{id}(id=${question.idQuestion})}  " method="post">
+    <h1 class="text-center">Edit question #<span th:text="${question.id}"></span></h1>
+    <form th:action="@{/questions/edit/{id}(id=${question.id})}  " method="post">
         <div class="row my-2">
             <div class="col-2">
                 <label for="QuestionText">Question text:</label>
