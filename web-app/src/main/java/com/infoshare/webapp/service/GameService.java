@@ -39,7 +39,7 @@ public class GameService {
         int questionIndex = game.getGameQuestions().indexOf(question);
         return game.getUserAnswers().get(questionIndex);
     }
-    public boolean isTimer() {
+    public boolean isTimer(){
         return game.isTimer();
     }
     public void setUserAnswer(Question question, AnswerDto userAnswer) {

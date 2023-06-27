@@ -1,7 +1,7 @@
 package com.infoshare.webapp.service;
 
-import com.infoshare.webapp.exception.QuestionsNotFoundException;
 import com.infoshare.webapp.model.Question;
+import com.infoshare.webapp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -10,36 +10,29 @@ import java.util.*;
 @Service
 public class QuestionService {
 
-    private static List<Question> questions;
     private final ReadFileService readFileService;
 
-    public QuestionService(ReadFileService readFileService) throws IOException {
+    private final QuestionRepository questionRepository;
+
+    public QuestionService(ReadFileService readFileService, QuestionRepository questionRepository) throws IOException {
         this.readFileService = readFileService;
-        questions = this.readFileService.loadQuestions();
+        this.questionRepository = questionRepository;
+        List<Question> questionsFromFile = readFileService.loadQuestions();
+        questionRepository.saveAll(questionsFromFile);
     }
 
     public List<Question> getAllQuestions() {
-        return questions;
-    }
-
-    public long getLastQuestionId() {
-        long lastQuestionId = 0L;
-        if (!questions.isEmpty()) {
-            lastQuestionId = questions.stream().max(Comparator.comparing(Question::getId)).get().getId();
-        }
-        return lastQuestionId;
+        return questionRepository.findAll();
     }
 
     public void editQuestion(long id, Question question) {
-        Question questionToEdit = findById(id);
-        questionToEdit.setAnswers(question.getAnswers());
-        questionToEdit.setCategory(question.getCategory());
-        questionToEdit.setQuestionText(question.getQuestionText());
-        questionToEdit.setScore(question.getScore());
+        question.setId(id);
+        questionRepository.save(question);
     }
-    public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer){
+
+    public List<Boolean> editAnswer(List<Boolean> answerToEdit, List<Boolean> userAnswer) {
         ArrayList<Boolean> booleans = new ArrayList<>(Collections.nCopies(answerToEdit.size(), false));
-        for (int i=0; i<userAnswer.size(); i++) {
+        for (int i = 0; i < userAnswer.size(); i++) {
             if (userAnswer.get(i) != null) {
                 booleans.set(i, userAnswer.get(i));
             }
@@ -48,19 +41,15 @@ public class QuestionService {
     }
 
     public Question findById(long id) {
-        return questions.stream()
-                .filter(question -> question.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new QuestionsNotFoundException(String.format("Not found question with given Id:  %S", id)));
+        return questionRepository.findById(id).orElse(null);
     }
 
     public void removeQuestionById(long id) {
-        Question foundQuestion = findById(id);
-        questions.remove(foundQuestion);
+        questionRepository.deleteById(id);
     }
 
     public void addQuestion(Question question) {
-        questions.add(question);
+        questionRepository.save(question);
     }
 }
 

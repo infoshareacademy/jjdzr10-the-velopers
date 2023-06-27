@@ -1,6 +1,5 @@
 package com.infoshare.webapp.model;
 
-import com.infoshare.webapp.Dto.AnswerDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

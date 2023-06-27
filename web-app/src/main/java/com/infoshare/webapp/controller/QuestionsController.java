@@ -77,10 +77,8 @@ public class QuestionsController {
         if (bindingResult.hasErrors()) {
             return "add_question";
         }
-        long questionID = questionService.getLastQuestionId() + 1;
-        attributes.addFlashAttribute("message", "You added new question! (Question Id: " + questionID + " )");
+        attributes.addFlashAttribute("message", "You added new question! (Question Id: ");
         attributes.addFlashAttribute("messageType","success");
-        question.setId(questionID);
         questionService.addQuestion(question);
         return "redirect:/questions";
     }
