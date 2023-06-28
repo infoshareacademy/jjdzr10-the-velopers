@@ -2,6 +2,8 @@ package com.infoshare.webapp.service;
 
 import com.infoshare.webapp.model.Question;
 import com.infoshare.webapp.repository.QuestionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -50,6 +52,10 @@ public class QuestionService {
 
     public void addQuestion(Question question) {
         questionRepository.save(question);
+    }
+
+    public Page<Question> getPagedQuestions(Pageable pageable) {
+        return questionRepository.findAll(pageable);
     }
 }
 
