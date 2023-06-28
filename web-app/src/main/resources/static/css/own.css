@@ -217,3 +217,7 @@
 .sorted:after, .sorted:before {
     position: absolute;
 }
+
+.sortable-th a {
+    color: rgb(33, 37, 41)
+}
