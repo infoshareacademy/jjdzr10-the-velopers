@@ -5,6 +5,9 @@ import com.infoshare.webapp.model.Category;
 import com.infoshare.webapp.model.Question;
 import com.infoshare.webapp.service.CategoryService;
 import com.infoshare.webapp.service.QuestionService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +27,9 @@ public class QuestionsController {
     }
 
     @GetMapping("/questions")
-    public String getQuestions(Model model) {
+    public String getQuestions(Model model,@PageableDefault(value = 5) @SortDefault("id") Pageable pageable) {
         model.addAttribute("pageTitle", "Questions List");
-        model.addAttribute("questions", questionService.getAllQuestions());
+        model.addAttribute("questions", questionService.getPagedQuestions(pageable));
         return "questions_list";
     }
 
