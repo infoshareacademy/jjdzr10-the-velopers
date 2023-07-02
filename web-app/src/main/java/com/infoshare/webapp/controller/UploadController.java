@@ -1,6 +1,8 @@
 package com.infoshare.webapp.controller;
 
 import com.infoshare.webapp.service.FileJSONService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,7 @@ import java.util.Objects;
 public class UploadController {
 
     private final FileJSONService fileJSONService;
+    private static final Logger LOGGER = LogManager.getLogger(UploadController.class);
 
     public UploadController(FileJSONService fileJSONService) {
         this.fileJSONService = fileJSONService;
@@ -26,12 +29,15 @@ public class UploadController {
         if (file == null || file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
             attributes.addFlashAttribute("messageType","danger");
+            LOGGER.warn("No file to upload");
             return "redirect:/";
         }
         final String JSON_CONTENT_TYPE = "application/json";
+
         if (!Objects.equals(file.getContentType(), JSON_CONTENT_TYPE)) {
             attributes.addFlashAttribute("message", "Please select a file type JSON.");
             attributes.addFlashAttribute("messageType","warning");
+            LOGGER.warn("Tried to upload different file than json");
             return "redirect:/";
         }
         fileJSONService.loadFile(file);

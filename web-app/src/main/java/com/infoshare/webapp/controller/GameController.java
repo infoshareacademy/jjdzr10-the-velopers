@@ -31,6 +31,7 @@ public class GameController {
     @PostMapping("/create_new_game")
     public String createNewGame(@ModelAttribute Game game, Model model, RedirectAttributes redirectAttributes){
         game.setQuestions(questionService.getAllQuestions());
+
         gameService.settingsGame(game);
         LOGGER.info("Loaded game settings: {}", game);
         long idQuestion = gameService.getFirstQuestionId();

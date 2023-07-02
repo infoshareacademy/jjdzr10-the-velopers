@@ -24,3 +24,7 @@ spring:
     console:
       enabled: true
       path: /console
+logging:
+  level:
+    com.infoshare.webapp: DEBUG
+    org.hibernate.*: WARN

@@ -7,6 +7,7 @@ import com.infoshare.webapp.exception.UserNotExistException;
 import com.infoshare.webapp.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.slf4j.event.Level;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,7 @@ public class AccountController {
             return "redirect:/";
         }
         catch (UserNotExistException e){
+            LOGGER.error("wystapil blad", e);
             redirectAttributes.addFlashAttribute("message", "Used e-mail do not exist!");
             redirectAttributes.addFlashAttribute("messageType","danger");
             return "redirect:/reset_password";
@@ -58,6 +60,7 @@ public class AccountController {
         } catch (UserAlreadyExistException e) {
             redirectAttributes.addFlashAttribute("message", "Used e-mail already exist!");
             redirectAttributes.addFlashAttribute("messageType", "danger");
+            LOGGER.info("Registration of new user has failed - e-mail already exists.");
             return "redirect:/register";
         }
         return "index";
@@ -65,6 +68,8 @@ public class AccountController {
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
+        LOGGER.info("register");
+        LOGGER.debug("Model: " + model);
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "register_form";
@@ -72,6 +77,7 @@ public class AccountController {
 
     @GetMapping("/login")
     public String login() {
+        LOGGER.info("logging in...");
         return "login";
     }
 }
