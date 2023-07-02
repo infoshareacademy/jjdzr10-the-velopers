@@ -221,3 +221,5 @@
 .sortable-th a {
     color: rgb(33, 37, 41)
 }
+
+.question-list tr td:last-child a{display:block}

@@ -7,7 +7,7 @@
     <a th:href="@{/questions/question}" class="btn btn-success">
         CREATE NEW QUESTION
     </a>
-    <table class="table table-striped">
+    <table class="table table-striped question-list">
         <thead>
         <tr>
             <th class="sortable-th"><a class="sorted" sd:pagination-sort="id" >Id</a></th>
@@ -57,9 +57,9 @@
                     EDIT
                 </a>
 
-                <a th:href="@{questions/{id}(id=${question.id})}" class="btn btn-light">
-                    SINGLE QUESTION
-                </a>
+<!--                <a th:href="@{questions/{id}(id=${question.id})}" class="btn btn-light">-->
+<!--                    SINGLE QUESTION-->
+<!--                </a>-->
             </td>
         </tr>
         </tbody>
