@@ -27,7 +27,7 @@ public class QuestionsController {
     }
 
     @GetMapping("/questions")
-    public String getQuestions(Model model,@PageableDefault(value = 5) @SortDefault("category") Pageable pageable) {
+    public String getQuestions(Model model,@PageableDefault(value = 5) @SortDefault("id") Pageable pageable) {
         model.addAttribute("pageTitle", "Questions List");
         model.addAttribute("questions", questionService.getPagedQuestions(pageable));
         return "questions_list";

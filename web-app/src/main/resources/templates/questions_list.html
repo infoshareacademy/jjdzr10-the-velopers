@@ -10,7 +10,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>#</th>
+            <th class="sortable-th"><a class="sorted" sd:pagination-sort="id" >Id</a></th>
             <th class="sortable-th"><a class="sorted" sd:pagination-sort="category" >Category</a></th>
             <th class="sortable-th"><a class="sorted" sd:pagination-sort="questionText" >Question Text</a></th>
             <th>Answers</th>
@@ -20,8 +20,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="question,iterStat: ${questions}">
-            <td class="col-0.5" th:text="${iterStat.count}"></td>
+        <tr th:each="question:${questions}">
+            <td class="col-0.5" th:text="${question.id}"></td>
             <td class="col-1" th:switch="${question.category.name()}">
                 <p th:case="'HISTORIA'">HISTORIA</p>
                 <p th:case="'BIOLOGIA'">BIOLOGIA</p>
