@@ -1,14 +1,15 @@
 package com.infoshareacademy.service;
 
 import com.google.gson.Gson;
-
 import com.google.gson.reflect.TypeToken;
+import com.infoshareacademy.App;
 import com.infoshareacademy.model.Category;
 import com.infoshareacademy.model.Questions;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,15 +17,15 @@ import java.util.List;
 
 
 public class ReadFileService {
-
-    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"src","main","resources","questions.json");
+    private static final URL pathQuestions = App.class.getClassLoader().getResource("questions.json");
+//    private static Path pathQuestions = Path.of(System.getProperty("user.dir"),"src","main","resources","questions.json");
     static Gson gson = new Gson();
 
     public static List<Questions> loadQuestions(Category category) throws IOException {
         List<Questions> allQuestions = new ArrayList<>();
         try {
             // create Reader
-            Reader reader = Files.newBufferedReader(pathQuestions);
+            Reader reader = Files.newBufferedReader(Path.of(pathQuestions.toURI()));
             System.out.println(pathQuestions);
             System.out.println(reader);
 
@@ -44,7 +45,7 @@ public class ReadFileService {
         List<Questions> allQuestions = new ArrayList<>();
         try {
             // create Reader
-            Reader reader = Files.newBufferedReader(pathQuestions);
+            Reader reader = Files.newBufferedReader(Path.of(pathQuestions.toURI()));
             System.out.println(pathQuestions);
             // create Gson instance
             Gson gson = new Gson();
