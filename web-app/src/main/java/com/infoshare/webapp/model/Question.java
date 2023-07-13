@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 public class Question {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Category category;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)

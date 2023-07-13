@@ -1,6 +1,5 @@
 [
    {
-      "id":1,
       "category":"HISTORIA",
       "answers":
       [
@@ -21,11 +20,10 @@
       	"correct": false
       	}
       	],
-      "questionText":"W którym roku był chrzest Polski?",
+      "questionText":"TEST W którym roku był chrzest Polski?",
       "score":1
    },
    {
-      "id":2,
       "category":"HISTORIA",
       "answers":
       [
@@ -46,7 +44,7 @@
       	"correct": false
       	}
       	],
-      "questionText":"Jak nazywał się pierwszy król Polski?",
+      "questionText":"TEST Jak nazywał się pierwszy król Polski?",
       "score":1
    }
 ]
