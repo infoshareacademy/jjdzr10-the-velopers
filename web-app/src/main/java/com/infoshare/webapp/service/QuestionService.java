@@ -12,12 +12,10 @@ import java.util.*;
 @Service
 public class QuestionService {
 
-    private final ReadFileService readFileService;
 
     private final QuestionRepository questionRepository;
 
     public QuestionService(ReadFileService readFileService, QuestionRepository questionRepository) throws IOException {
-        this.readFileService = readFileService;
         this.questionRepository = questionRepository;
         List<Question> questionsFromFile = readFileService.loadQuestions();
         questionRepository.saveAll(questionsFromFile);
